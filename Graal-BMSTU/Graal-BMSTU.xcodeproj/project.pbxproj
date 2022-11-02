@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7057642229131EB9006555E2 /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7057642129131EB9006555E2 /* AuthView.swift */; };
+		7057642529131FEE006555E2 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 7057642429131FEE006555E2 /* SnapKit */; };
+		7057642729131FEE006555E2 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 7057642629131FEE006555E2 /* SnapKit-Dynamic */; };
+		70576429291322B7006555E2 /* LoggedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70576428291322B7006555E2 /* LoggedView.swift */; };
+		7057642B29132A27006555E2 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7057642A29132A27006555E2 /* TabBarViewController.swift */; };
 		708E76CB29005E4A00D23E70 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708E76CA29005E4A00D23E70 /* AppDelegate.swift */; };
 		708E76CD29005E4A00D23E70 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708E76CC29005E4A00D23E70 /* SceneDelegate.swift */; };
 		708E76CF29005E4A00D23E70 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708E76CE29005E4A00D23E70 /* ViewController.swift */; };
@@ -15,6 +20,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7057642129131EB9006555E2 /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
+		70576428291322B7006555E2 /* LoggedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggedView.swift; sourceTree = "<group>"; };
+		7057642A29132A27006555E2 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		708E76C729005E4A00D23E70 /* Graal-BMSTU.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Graal-BMSTU.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		708E76CA29005E4A00D23E70 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		708E76CC29005E4A00D23E70 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -29,12 +37,24 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7057642529131FEE006555E2 /* SnapKit in Frameworks */,
+				7057642729131FEE006555E2 /* SnapKit-Dynamic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7057642029131E9C006555E2 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				7057642129131EB9006555E2 /* AuthView.swift */,
+				70576428291322B7006555E2 /* LoggedView.swift */,
+				7057642A29132A27006555E2 /* TabBarViewController.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		708E76BE29005E4A00D23E70 = {
 			isa = PBXGroup;
 			children = (
@@ -54,6 +74,7 @@
 		708E76C929005E4A00D23E70 /* Graal-BMSTU */ = {
 			isa = PBXGroup;
 			children = (
+				7057642029131E9C006555E2 /* Views */,
 				708E76CA29005E4A00D23E70 /* AppDelegate.swift */,
 				708E76CC29005E4A00D23E70 /* SceneDelegate.swift */,
 				708E76CE29005E4A00D23E70 /* ViewController.swift */,
@@ -80,6 +101,10 @@
 			dependencies = (
 			);
 			name = "Graal-BMSTU";
+			packageProductDependencies = (
+				7057642429131FEE006555E2 /* SnapKit */,
+				7057642629131FEE006555E2 /* SnapKit-Dynamic */,
+			);
 			productName = "Graal-BMSTU";
 			productReference = 708E76C729005E4A00D23E70 /* Graal-BMSTU.app */;
 			productType = "com.apple.product-type.application";
@@ -108,6 +133,9 @@
 				Base,
 			);
 			mainGroup = 708E76BE29005E4A00D23E70;
+			packageReferences = (
+				7057642329131FEE006555E2 /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = 708E76C829005E4A00D23E70 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -134,8 +162,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				70576429291322B7006555E2 /* LoggedView.swift in Sources */,
 				708E76CF29005E4A00D23E70 /* ViewController.swift in Sources */,
 				708E76CB29005E4A00D23E70 /* AppDelegate.swift in Sources */,
+				7057642229131EB9006555E2 /* AuthView.swift in Sources */,
+				7057642B29132A27006555E2 /* TabBarViewController.swift in Sources */,
 				708E76CD29005E4A00D23E70 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -342,6 +373,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		7057642329131FEE006555E2 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 5.6.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		7057642429131FEE006555E2 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7057642329131FEE006555E2 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		7057642629131FEE006555E2 /* SnapKit-Dynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7057642329131FEE006555E2 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = "SnapKit-Dynamic";
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 708E76BF29005E4A00D23E70 /* Project object */;
 }
