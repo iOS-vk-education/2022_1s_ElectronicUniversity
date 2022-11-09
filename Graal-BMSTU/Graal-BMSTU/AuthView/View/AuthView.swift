@@ -7,7 +7,7 @@
 
 import UIKit
 import SnapKit
-
+import Rswift
 
 protocol AuthViewDelegate: NSObjectProtocol
 {
@@ -44,6 +44,7 @@ class AuthViewController: UIViewController, AuthViewDelegate {
         [bmstuImage, loginField, passwordField, loginButton, continueWithoutLoginButton].forEach { box in
             view.addSubview(box)
         }
+        loginField.placeholder = R.string.localizable.welcome()
         self.setupConstraints()
     }
     
