@@ -28,7 +28,7 @@ class AuthViewController: UIViewController, AuthViewDelegate {
     
     private let continueWithoutLoginButton = UIButton(frame: .zero) // только при первом запуске есть такая кнопка!
     
-    private let authViewPresenter = AuthViewPresenter(authServie: AuthService())
+    private let authViewPresenter = AuthViewPresenter(authService: AuthService())
 
     override func viewDidLoad()
     {
