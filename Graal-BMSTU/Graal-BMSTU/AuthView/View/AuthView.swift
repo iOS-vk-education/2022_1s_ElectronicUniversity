@@ -13,7 +13,7 @@ protocol AuthViewDelegate: NSObjectProtocol
 {
     func displaySuccessNotification(user: User?)
     func displayErrorNotification()
-    func onViewDidLoad(titleImageSrc: String)
+    func onViewDidLoad()
 }
 
 // Вьюконтроллер, показываемый на первом запуске + на вкладке "аккаунт", если человек не вошел в аккаунт
@@ -38,28 +38,38 @@ class AuthViewController: UIViewController, AuthViewDelegate {
     }
     
     
-    func onViewDidLoad(titleImageSrc: String)
+    func onViewDidLoad()
     {
-        bmstuImage.image = UIImage(imageLiteralResourceName: titleImageSrc)
+        bmstuImage.image = R.image.bmstuLogo()
+        loginField.placeholder = R.string.localizable.welcome()
         [bmstuImage, loginField, passwordField, loginButton, continueWithoutLoginButton].forEach { box in
             view.addSubview(box)
         }
-        loginField.placeholder = R.string.localizable.welcome()
         self.setupConstraints()
     }
     
     func displaySuccessNotification(user: User?)
     {
-        // ... 
+        // ...
+        print("successfull auth")
     }
     
     func displayErrorNotification()
     {
         // ...
+        print("unsuccessfull auth")
     }
     
     func setupConstraints()
     {
+        bmstuImage.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.size.equalTo(CGSize(width: 300, height: 300))
+            make.top.equalTo(self.view.snp.top).offset(0)
+        }
+        loginField.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
         // ...
     }
     

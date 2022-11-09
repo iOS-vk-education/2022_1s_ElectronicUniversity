@@ -19,7 +19,7 @@ class AuthViewPresenter
     
     func setup()
     {
-        authViewDelegate?.onViewDidLoad(titleImageSrc: "BMSTU Logo")
+        authViewDelegate?.onViewDidLoad()
     }
     
     func setViewDelegate(authViewDelegate: AuthViewDelegate)

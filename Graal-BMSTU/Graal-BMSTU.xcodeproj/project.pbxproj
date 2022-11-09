@@ -12,6 +12,7 @@
 		7057642B29132A27006555E2 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7057642A29132A27006555E2 /* TabBarView.swift */; };
 		708CF773291C480A0036AEA2 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708CF772291C480A0036AEA2 /* R.generated.swift */; };
 		708CF77A291C4A3F0036AEA2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 708CF77C291C4A3F0036AEA2 /* Localizable.strings */; };
+		708CF780291C550A0036AEA2 /* SFSafeSymbols in Frameworks */ = {isa = PBXBuildFile; productRef = 708CF77F291C550A0036AEA2 /* SFSafeSymbols */; };
 		708E76CB29005E4A00D23E70 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708E76CA29005E4A00D23E70 /* AppDelegate.swift */; };
 		708E76CD29005E4A00D23E70 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708E76CC29005E4A00D23E70 /* SceneDelegate.swift */; };
 		708E76D429005E4D00D23E70 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 708E76D329005E4D00D23E70 /* Assets.xcassets */; };
@@ -76,6 +77,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				708CF780291C550A0036AEA2 /* SFSafeSymbols in Frameworks */,
 				7092B9BF291C447F000D8D3C /* Rswift in Frameworks */,
 				70F653AF2915F3DC0024EA1D /* SnapKit in Frameworks */,
 			);
@@ -87,7 +89,6 @@
 		7057642029131E9C006555E2 /* BaseComponents */ = {
 			isa = PBXGroup;
 			children = (
-				7092B9A6291C2B17000D8D3C /* TabBar */,
 				7092B99C291C2AC7000D8D3C /* InappNotification */,
 			);
 			path = BaseComponents;
@@ -114,6 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				708CF77C291C4A3F0036AEA2 /* Localizable.strings */,
+				7092B9A6291C2B17000D8D3C /* TabBar */,
 				7092B992291C2A61000D8D3C /* TrainingView */,
 				7092B987291C29FF000D8D3C /* ScheduleView */,
 				7092B97D291C299E000D8D3C /* MainMenuView */,
@@ -387,6 +389,7 @@
 			packageProductDependencies = (
 				70F653AE2915F3DC0024EA1D /* SnapKit */,
 				7092B9BE291C447F000D8D3C /* Rswift */,
+				708CF77F291C550A0036AEA2 /* SFSafeSymbols */,
 			);
 			productName = "Graal-BMSTU";
 			productReference = 708E76C729005E4A00D23E70 /* Graal-BMSTU.app */;
@@ -420,6 +423,7 @@
 			packageReferences = (
 				70F653AD2915F3DC0024EA1D /* XCRemoteSwiftPackageReference "SnapKit" */,
 				7092B9BD291C447F000D8D3C /* XCRemoteSwiftPackageReference "R.swift" */,
+				708CF77E291C550A0036AEA2 /* XCRemoteSwiftPackageReference "SFSafeSymbols" */,
 			);
 			productRefGroup = 708E76C829005E4A00D23E70 /* Products */;
 			projectDirPath = "";
@@ -712,6 +716,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		708CF77E291C550A0036AEA2 /* XCRemoteSwiftPackageReference "SFSafeSymbols" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SFSafeSymbols/SFSafeSymbols";
+			requirement = {
+				branch = stable;
+				kind = branch;
+			};
+		};
 		7092B9BD291C447F000D8D3C /* XCRemoteSwiftPackageReference "R.swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/mac-cain13/R.swift.Library";
@@ -731,6 +743,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		708CF77F291C550A0036AEA2 /* SFSafeSymbols */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 708CF77E291C550A0036AEA2 /* XCRemoteSwiftPackageReference "SFSafeSymbols" */;
+			productName = SFSafeSymbols;
+		};
 		7092B9BE291C447F000D8D3C /* Rswift */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 7092B9BD291C447F000D8D3C /* XCRemoteSwiftPackageReference "R.swift" */;
