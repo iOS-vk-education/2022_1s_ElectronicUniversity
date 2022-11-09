@@ -10,6 +10,6 @@ import SnapKit
 
 // экран, показываемый пользователю в аккаунте (твой профиль, успеваемость...)
 // кажется, он должен быть ScrollView из двух компонент: фотка пользователя и имя + список кнопок меню (твой профиль, успеваемость...)
-class LoggedView: UIViewController {
+class ProfileView: UIViewController {
     
 }
