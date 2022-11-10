@@ -8,6 +8,7 @@
 import UIKit
 import SnapKit
 import Rswift
+import SFSafeSymbols
 
 protocol AuthPresenter
 {
@@ -46,6 +47,7 @@ final class AuthViewController: UIViewController, AuthViewControllerPr
         authView = AuthView()
         setupActions()
         authView?.setupUI()
+        authViewPresenter.onViewDidLoad()
         loadView()
     }
     
@@ -86,7 +88,6 @@ final class AuthView: UIView
     private let loginField = UITextField(frame: .zero)
     private let passwordField = UITextField(frame: .zero)
     private let loginButton = UIButton(frame: .zero)
-    private let loadingIndicator = UIActivityIndicatorView(frame: .zero)
     //    private let notificationView = GraalNotification(frame: .zero)
     
     private let continueWithoutLoginButton = UIButton(frame: .zero) // только при первом запуске есть такая кнопка!
@@ -111,10 +112,33 @@ extension AuthView
 extension AuthView
 {
     // UI
+    private func createLoginButtonConfig() -> UIButton.Configuration {
+        var loginButtonConfig = UIButton.Configuration.filled()
+        loginButtonConfig.buttonSize = .large
+        loginButtonConfig.cornerStyle = .medium
+        loginButtonConfig.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer
+        { incoming in
+            var outgoing = incoming
+            outgoing.font = UIFont.preferredFont(forTextStyle: .headline)
+            return outgoing
+        }
+        loginButtonConfig.title = R.string.localizable.login_button_text()
+        loginButtonConfig.titlePadding = 5
+        loginButtonConfig.image = UIImage(systemSymbol: .chevronRight)
+        loginButtonConfig.imagePadding = 5
+        loginButtonConfig.imagePlacement = .trailing
+        loginButtonConfig.preferredSymbolConfigurationForImage = UIImage.SymbolConfiguration(scale: .medium)
+        return loginButtonConfig
+    }
+    
     func setupUI()
     {
         bmstuImage.image = R.image.bmstuLogo()
-        loginField.placeholder = R.string.localizable.welcome()
+        loginField.placeholder = R.string.localizable.login_field_placeholder()
+        passwordField.placeholder = R.string.localizable.password_field_placeholder()
+        
+        loginButton.configuration = createLoginButtonConfig()
+        loginButton.addTarget(self, action: #selector(self.loginButtonPressed), for: .touchUpInside)
         [bmstuImage, loginField, passwordField, loginButton, continueWithoutLoginButton].forEach
         { box in
             self.addSubview(box)
@@ -127,21 +151,22 @@ extension AuthView
         bmstuImage.snp.makeConstraints
         { make in
             make.centerX.equalToSuperview()
-            make.size.equalTo(CGSize(width: 300, height: 300))
-            make.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(50)
+            make.size.equalTo(CGSize(width: 100, height: 100))
+            make.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(20)
         }
         loginField.snp.makeConstraints
         { make in
-            make.top.equalTo(bmstuImage.snp.top).offset(50)
-            make.center.equalToSuperview()
+            make.top.equalTo(bmstuImage.snp.bottom).offset(20)
+            make.centerX.equalToSuperview()
         }
         passwordField.snp.makeConstraints
         { make in
-            make.top.equalTo(loginField.snp.bottom).offset(50)
+            make.top.equalTo(loginField.snp.bottom).offset(20)
             make.centerX.equalToSuperview()
         }
         loginButton.snp.makeConstraints { make in
-            make.top.equalTo(passwordField.snp.bottom).offset(50)
+            make.size.equalTo(50)
+            make.top.equalTo(passwordField.snp.bottom).offset(20)
             make.centerX.equalToSuperview()
         }
     }

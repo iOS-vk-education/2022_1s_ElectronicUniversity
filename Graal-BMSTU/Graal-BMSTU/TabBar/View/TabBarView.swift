@@ -28,6 +28,7 @@ class TabBarViewController: UITabBarController
             createNavController(for: AuthViewController(authViewPresenter: authPr), title: R.string.localizable.account_tab(), image: UIImage(systemSymbol: .personCircle)),
             createNavController(for: UIViewController(), title: "Test", image: UIImage(systemSymbol: .command))
         ]
+        authPr.viewController = (viewControllers?[0] as? UINavigationController)?.viewControllers[0] as? AuthViewController
     }
     
     fileprivate func createNavController(for rootViewController: UIViewController, title: String, image: UIImage) -> UIViewController

@@ -134,9 +134,9 @@
 		7092B96D291C28C6000D8D3C /* AuthView */ = {
 			isa = PBXGroup;
 			children = (
+				7092B96E291C28D7000D8D3C /* View */,
 				7092B970291C28EB000D8D3C /* Presenter */,
 				7092B96F291C28DE000D8D3C /* Model */,
-				7092B96E291C28D7000D8D3C /* View */,
 			);
 			path = AuthView;
 			sourceTree = "<group>";
