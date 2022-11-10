@@ -165,9 +165,9 @@ extension AuthView
             make.centerX.equalToSuperview()
         }
         loginButton.snp.makeConstraints { make in
-            make.size.equalTo(50)
+            make.left.equalTo(self.safeAreaLayoutGuide.snp.left).offset(20)
+            make.right.equalTo(self.safeAreaLayoutGuide.snp.right).inset(20)
             make.top.equalTo(passwordField.snp.bottom).offset(20)
-            make.centerX.equalToSuperview()
         }
     }
 }
