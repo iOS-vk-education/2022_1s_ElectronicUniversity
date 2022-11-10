@@ -5,41 +5,36 @@
 //  Created by Артём on 09.11.2022.
 //
 
-import UIKit
+import Foundation
 
-class AuthViewPresenter
+
+final class AuthViewPresenterImpl: AuthPresenter
 {
+        
     private let authService: AuthService
-    weak private var authViewDelegate: AuthViewDelegate?
-    
+    weak var viewController: AuthViewControllerPr?
     init(authService: AuthService)
     {
         self.authService = authService
     }
-    
-    func setup()
+
+    func authenticate(login username: String?, password: String?)
     {
-        authViewDelegate?.onViewDidLoad()
-    }
-    
-    func setViewDelegate(authViewDelegate: AuthViewDelegate)
-    {
-        self.authViewDelegate = authViewDelegate
-    }
-    
-    func authenticate(username: String, password: String)
-    {
-        authService.authenticate(login: username, password: password)
+        authService.authenticate(login: username ?? "", password: password ?? "")
         {
             [weak self] user in
-            if let user
+            if user != nil
             {
-                self?.authViewDelegate?.displaySuccessNotification(user: user)
+                self?.viewController?.displaySuccessNotification()
             }
             else
             {
-                self?.authViewDelegate?.displayErrorNotification()
+                self?.viewController?.displayErrorNotification()
             }
         }
+    }
+    
+    func onViewDidLoad() {
+        return
     }
 }

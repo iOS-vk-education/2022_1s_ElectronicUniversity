@@ -23,8 +23,9 @@ class TabBarViewController: UITabBarController
     
     func setupVCs()
     {
+        let authPr = AuthViewPresenterImpl(authService: AuthService())
         viewControllers = [
-            createNavController(for: AuthViewController(), title: R.string.localizable.accountTab(), image: UIImage(systemSymbol: .personCircle)),
+            createNavController(for: AuthViewController(authViewPresenter: authPr), title: R.string.localizable.account_tab(), image: UIImage(systemSymbol: .personCircle)),
             createNavController(for: UIViewController(), title: "Test", image: UIImage(systemSymbol: .command))
         ]
     }

@@ -6,4 +6,7 @@
   
 */
 "Welcome" = "Здравствуйте";
-"accountTab" = "Аккаунт";
+"account_tab" = "Аккаунт";
+"login_field_placeholder" = "Ваш логин";
+"password_field_placeholder" = "Ваш пароль";
+"login_button_text" = "Войти!";

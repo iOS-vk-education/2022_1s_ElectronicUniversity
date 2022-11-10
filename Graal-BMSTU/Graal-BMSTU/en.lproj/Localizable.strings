@@ -6,4 +6,7 @@
   
 */
 "Welcome" = "Welcome";
-"accountTab" = "Account";
+"account_tab" = "Account";
+"login_field_placeholder" = "Your login";
+"password_field_placeholder" = "Your password";
+"login_button_text" = "Login!";
