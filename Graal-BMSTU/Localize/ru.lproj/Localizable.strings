@@ -1,0 +1,17 @@
+/* 
+  Localizable.strings
+  Graal-BMSTU
+
+  Created by Артём on 09.11.2022.
+  
+*/
+"Welcome" = "Здравствуйте";
+
+"mainmenu_tabname" = "Главная";
+"schedule_tabname" = "Расписание";
+"training_tabname" = "Тренировка";
+"profile_tabname" = "Профиль";
+
+"login_field_placeholder" = "Ваш логин";
+"password_field_placeholder" = "Ваш пароль";
+"login_button_text" = "Войти!";
