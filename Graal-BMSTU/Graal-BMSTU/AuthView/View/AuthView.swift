@@ -88,7 +88,7 @@ final class AuthView: UIView
     private let bmstuImage = UIImageView(frame: .zero)
     private let loginField = UITextField(frame: .zero)
     private let passwordField = UITextField(frame: .zero)
-    private let loginButton = UIButton(frame: .zero)
+    private var loginButton = UIButton(frame: .zero)
     //    private let notificationView = GraalNotification(frame: .zero)
     
     private let continueWithoutLoginButton = UIButton(frame: .zero) // только при первом запуске есть такая кнопка!
@@ -115,7 +115,7 @@ extension AuthView
     // UI
     private func createLoginButton() -> UIButton {
         var loginButton = UIButton(type: .system)
-        loginButton.backgroundColor = UIColor.blue
+        loginButton.backgroundColor = UIColor.systemBlue
         loginButton.setTitleColor(.white, for: .normal)
         loginButton.layer.cornerRadius = 20
         loginButton.setTitle("Войти", for: .normal)
@@ -149,7 +149,7 @@ extension AuthView
         loginField.placeholder = R.string.localizable.login_field_placeholder()
         passwordField.placeholder = R.string.localizable.password_field_placeholder()
         
-     //   loginButton.configuration = createLoginButtonConfig()
+       loginButton = createLoginButton()
        // loginButton.addTarget(self, action: #selector(self.loginButtonPressed), for: .touchUpInside)
         [bmstuImage, loginField, passwordField, loginButton, continueWithoutLoginButton].forEach
         { box in
@@ -179,8 +179,8 @@ extension AuthView
         loginButton.snp.makeConstraints { make in
             make.left.equalTo(self.safeAreaLayoutGuide.snp.left).offset(30)
             make.right.equalTo(self.safeAreaLayoutGuide.snp.right).inset(30)
-            make.top.equalTo(passwordField.snp.bottom).offset(160)
-            make.height.equalTo(40)
+            make.top.equalTo(passwordField.snp.bottom).offset(140)
+            make.height.equalTo(50)
         }
     }
 }
