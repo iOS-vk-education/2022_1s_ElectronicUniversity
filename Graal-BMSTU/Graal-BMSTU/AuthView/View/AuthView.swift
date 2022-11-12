@@ -59,6 +59,7 @@ final class AuthViewController: UIViewController, AuthViewControllerPr
     override func loadView()
     {
         view = authView
+       // view.backgroundColor = UIColor.gray
     }
     
     
@@ -112,33 +113,44 @@ extension AuthView
 extension AuthView
 {
     // UI
-    private func createLoginButtonConfig() -> UIButton.Configuration {
-        var loginButtonConfig = UIButton.Configuration.filled()
-        loginButtonConfig.buttonSize = .large
-        loginButtonConfig.cornerStyle = .medium
-        loginButtonConfig.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer
-        { incoming in
-            var outgoing = incoming
-            outgoing.font = UIFont.preferredFont(forTextStyle: .headline)
-            return outgoing
-        }
-        loginButtonConfig.title = R.string.localizable.login_button_text()
-        loginButtonConfig.titlePadding = 5
-        loginButtonConfig.image = UIImage(systemSymbol: .chevronRight)
-        loginButtonConfig.imagePadding = 5
-        loginButtonConfig.imagePlacement = .trailing
-        loginButtonConfig.preferredSymbolConfigurationForImage = UIImage.SymbolConfiguration(scale: .medium)
-        return loginButtonConfig
+    private func createLoginButton() -> UIButton {
+        var loginButton = UIButton(type: .system)
+        loginButton.backgroundColor = UIColor.blue
+        loginButton.setTitleColor(.white, for: .normal)
+        loginButton.layer.cornerRadius = 20
+        loginButton.setTitle("Войти", for: .normal)
+        
+        loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
+        
+        
+           /*loginButtonConfig.buttonSize = .large
+           loginButtonConfig.cornerStyle = .medium
+           loginButtonConfig.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer
+           { incoming in
+               var outgoing = incoming
+               outgoing.font = UIFont.preferredFont(forTextStyle: .headline)
+               return outgoing
+           }
+           loginButtonConfig.title = R.string.localizable.login_button_text()
+           loginButtonConfig.titlePadding = 5
+           loginButtonConfig.image = UIImage(systemSymbol: .chevronRight)
+           loginButtonConfig.imagePadding = 5
+           loginButtonConfig.imagePlacement = .trailing
+           loginButtonConfig.preferredSymbolConfigurationForImage = UIImage.SymbolConfiguration(scale: .medium)*/
+           return loginButton    }
+    @objc private func loginButtonTapped() {
+        print("unsuccessfull auth")
     }
     
     func setupUI()
     {
+        
         bmstuImage.image = R.image.bmstuLogo()
         loginField.placeholder = R.string.localizable.login_field_placeholder()
         passwordField.placeholder = R.string.localizable.password_field_placeholder()
         
-        loginButton.configuration = createLoginButtonConfig()
-        loginButton.addTarget(self, action: #selector(self.loginButtonPressed), for: .touchUpInside)
+     //   loginButton.configuration = createLoginButtonConfig()
+       // loginButton.addTarget(self, action: #selector(self.loginButtonPressed), for: .touchUpInside)
         [bmstuImage, loginField, passwordField, loginButton, continueWithoutLoginButton].forEach
         { box in
             self.addSubview(box)
@@ -151,23 +163,24 @@ extension AuthView
         bmstuImage.snp.makeConstraints
         { make in
             make.centerX.equalToSuperview()
-            make.size.equalTo(CGSize(width: 100, height: 100))
+            make.size.equalTo(CGSize(width: 230, height: 230))
             make.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(20)
         }
         loginField.snp.makeConstraints
         { make in
-            make.top.equalTo(bmstuImage.snp.bottom).offset(20)
+            make.top.equalTo(bmstuImage.snp.bottom).offset(120)
             make.centerX.equalToSuperview()
         }
         passwordField.snp.makeConstraints
         { make in
-            make.top.equalTo(loginField.snp.bottom).offset(20)
+            make.top.equalTo(loginField.snp.bottom).offset(30)
             make.centerX.equalToSuperview()
         }
         loginButton.snp.makeConstraints { make in
-            make.left.equalTo(self.safeAreaLayoutGuide.snp.left).offset(20)
-            make.right.equalTo(self.safeAreaLayoutGuide.snp.right).inset(20)
-            make.top.equalTo(passwordField.snp.bottom).offset(20)
+            make.left.equalTo(self.safeAreaLayoutGuide.snp.left).offset(30)
+            make.right.equalTo(self.safeAreaLayoutGuide.snp.right).inset(30)
+            make.top.equalTo(passwordField.snp.bottom).offset(160)
+            make.height.equalTo(40)
         }
     }
 }
