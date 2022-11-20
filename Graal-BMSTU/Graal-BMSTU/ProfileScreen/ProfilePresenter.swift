@@ -12,20 +12,13 @@ final class ProfilePresenterImpl: ProfilePresenter
 {
     
     weak var view: ProfileViewController?
-    
     private var service: ProfileService?
-    private let router: ProfileRouter
+    private let coordinator: ProfileCoordinator
     
-    init(router: ProfileRouter, service: ProfileService, view: ProfileViewController)
+    init(coordinator: ProfileCoordinator, service: ProfileService)
     {
-        self.router = router
+        self.coordinator = coordinator
         self.service = service
-        self.view = view
-    }
-    
-    func load()
-    {
-        update()
     }
     
     func authenticate(username: String?, password: String?)

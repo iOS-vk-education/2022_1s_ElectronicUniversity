@@ -10,15 +10,22 @@ import Rswift
 import SFSafeSymbols
 
 
-final class MainFlowCoordinator: CoordinatorProtocol
+final class MainFlowCoordinator: Coordinator
 {
+    weak var parentCoordinator: Coordinator?
+    var childCoordinators: [Coordinator]
+
+    var navigationController: UINavigationController
+
     private let window: UIWindow
     private let tabBarController = UITabBarController()
     private lazy var navigationControllers = MainFlowCoordinator.makeNavigationControllers()
-    
-    init(window: UIWindow) {
+
+    required init(window: UIWindow, navigationController: UINavigationController = UINavigationController()) {
         self.window = window
-        setupAppearance()
+        self.navigationController = navigationController
+        self.window.rootViewController = self.navigationController
+        self.window.makeKeyAndVisible()
     }
     
     

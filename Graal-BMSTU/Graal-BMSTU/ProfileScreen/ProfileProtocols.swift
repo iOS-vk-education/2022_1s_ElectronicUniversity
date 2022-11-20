@@ -10,25 +10,24 @@ import Foundation
 
 protocol ProfilePresenter
 {
-    init(router: ProfileRouter, service: ProfileService, view: ProfileViewController)
+    init(router: ProfileRouter, service: ProfileService)
     func update()
-    // MARK: - связка с сервисом
+
+    // MARK: - связка с сервисом, функции для вьюшки
     func authenticate(username: String?, password: String?)
     func logout()
 }
 
-protocol ProfileRouter: AnyObject
+protocol ProfileCoordinator: Coordinator
 {
-    func continueWithAccount()
-    func continueWithoutAccount()
-    
+
 }
 
 protocol ProfileViewController: AnyObject
 {
     func switchToProfile()
     func switchToAuth()
-    func showAuthError()
+    func showAuthError(description: String?)
     func setUserName(str: String)
     func setUserGroup(str: String)
 }
