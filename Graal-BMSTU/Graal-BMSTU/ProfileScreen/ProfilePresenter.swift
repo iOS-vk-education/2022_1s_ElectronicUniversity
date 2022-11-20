@@ -8,51 +8,47 @@
 import UIKit
 
 
-final class ProfilePresenterImpl: ProfilePresenter
-{
-    
-    weak var view: ProfileViewController?
+final class ProfilePresenterImpl: ProfilePresenter {
+
+    weak var vc: ProfileViewController?
     private var service: ProfileService?
     private let coordinator: ProfileCoordinator
-    
-    init(coordinator: ProfileCoordinator, service: ProfileService)
-    {
+
+    init(coordinator: ProfileCoordinator, service: ProfileService) {
         self.coordinator = coordinator
         self.service = service
     }
-    
-    func authenticate(username: String?, password: String?)
-    {
-        guard let username = username, let password = password else { return }
-        if let _ = service?.authenticate(login: username, password: password)
-        {
-            view?.switchToProfile()
-        }
-        else
-        {
-            view?.showAuthError()
 
+    func authenticate(username: String?, password: String?) {
+        if let username = username, let password = password {
+            if let _ = service?.authenticate(login: username, password: password) {
+                vc?.switchToProfile()
+            } else {
+                vc?.showAuthError(description: "Auth error")
+            }
+        } else {
+            vc?.showAuthError(description: "Incorrect input")
         }
     }
-    
-    func update()
-    {
+
+    func update() {
         let user: User? = service?.getUserData()
-        if let user = user
-        {
-            view?.switchToProfile()
-            view?.setUserName(str: user.name + " " + user.familyName)
-            view?.setUserGroup(str: user.group)
-        }
-        else
-        {
-            view?.switchToAuth()
+        if let user = user {
+            vc?.setState(to: .profile)
+            vc?.setUserName(str: user.name + " " + user.familyName)
+            vc?.setUserGroup(str: user.group)
+        } else {
+            vc?.setState(to: .auth)
         }
     }
-    
-    func logout()
-    {
+
+    func logout() {
         service?.logout()
-        updateUserdataFields()
+        update()
+    }
+
+    func navigateToProfileDetails()
+    {
+        coordinator.navigateToProfileDetails()
     }
 }

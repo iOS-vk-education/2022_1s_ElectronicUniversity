@@ -30,7 +30,7 @@ final class ProfileBuilderImpl: ProfileBuilder
         let presenter = ProfilePresenterImpl(coordinator: coordinator, service: AuthServiceMockup())
         let viewController = ProfileViewControllerImpl(presenter: presenter)
 
-        presenter.view = viewController
+        presenter.vc = viewController
         coordinator.viewController = viewController
         
         return ProfileBuilderImpl(viewController: viewController, presenter: presenter, coordinator: coordinator)

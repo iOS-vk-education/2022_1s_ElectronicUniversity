@@ -17,14 +17,14 @@ struct User
 class AuthServiceMockup: ProfileService
 {
     static var loggedUser: User? = nil
-    
+    static let validTestUsersCredentials = [("Artem", "12345"), ("Maria", "54321"), ("Egor", "Bmstu")] // test data
+
     func authenticate(login: String, password: String) -> User?
     {
-        let validTestUsersCredetials = [("Artem", "12345"), ("Maria", "54321"), ("Egor", "Bmstu")] // test data
-        
-        if let validCredetials = validTestUsersCredetials.first(where: {$0.0 == login && $0.1 == password})
+
+        if let validCredentials = AuthServiceMockup.validTestUsersCredentials.first(where: {$0.0 == login && $0.1 == password})
         {
-            AuthServiceMockup.loggedUser = User(name: validCredetials.0, familyName: "Tikhonenko")
+            AuthServiceMockup.loggedUser = User(name: validCredentials.0, familyName: "Tikhonenko")
         }
         return AuthServiceMockup.loggedUser
     }

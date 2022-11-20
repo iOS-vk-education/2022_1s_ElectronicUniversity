@@ -19,13 +19,13 @@ enum ProfileActionButtons: CaseIterable
     {
         switch self {
         case .yourProfile:
-            R.string.localizable.your_profile_button_title
+            return R.string.localizable.your_profile_button_title()
         case .performance:
-            R.string.localizable.performance_button_title
+            return R.string.localizable.performance_button_title()
         case .tutorsSchedule:
-            R.string.localizable.tutors_schedule_button_title
+            return R.string.localizable.tutors_schedule_button_title()
         case .settings:
-            R.string.localizable.your_profile_button_title
+            return R.string.localizable.your_profile_button_title()
         }
     }
 }
@@ -83,11 +83,9 @@ extension ProfileView
 
 extension ProfileView
 {
-    func setActions(_ actions: [() -> Void])
+    func setupActions(_ actions: [ProfileActionButtons: () -> Void])
     {
-        ProfileActionButtons.allCases.enumerated().forEach { num, button in
-            self.actions?[button] = actions[num]
-        }
+        self.actions = actions
     }
 }
 
@@ -110,7 +108,7 @@ final class AuthView: UIView
 extension AuthView
 {
     // actions
-    func setLoginAction(_ action: @escaping LoginAction)
+    func setupActions(_ action: @escaping LoginAction)
     {
         self.loginAction = action
     }
