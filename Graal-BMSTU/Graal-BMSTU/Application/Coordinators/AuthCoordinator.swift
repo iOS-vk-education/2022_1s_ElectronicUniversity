@@ -19,6 +19,8 @@ final class AuthCoordinator: CoordinatorProtocol
     
     func start()
     {
-        // ...
+        let vc: UIViewController = ProfileBuilder.assemble(window: window).vc
+        window.rootViewController = vc
+        window.makeKeyAndVisible()
     }
 }

@@ -8,10 +8,10 @@
 import UIKit
 
 
-final class ProfileRouterImpl
+final class ProfileRouterImpl: ProfileRouter
 {
     let window: UIWindow
-    private(set) var viewController: UIViewController?
+    private weak var viewController: UIViewController?
     
     init(window: UIWindow)
     {
@@ -26,6 +26,7 @@ final class ProfileRouterImpl
 
 extension ProfileRouterImpl: ProfileRouter
 {
+    
     func continueWithAccount()
     {
         // пользователь при старте вошел в аккаунт
@@ -38,15 +39,4 @@ extension ProfileRouterImpl: ProfileRouter
         BaseCoordinator(window: self.window).startMainScenario()
         
     }
-    
-    func switchToLogged()
-    {
-        // пользователь уже внутри приложения успешно вошел в аккаунт
-    }
-    
-    func switchToUnlogged()
-    {
-        // пользователь вышел из аккаунта
-    }
-    
 }

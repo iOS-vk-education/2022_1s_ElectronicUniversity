@@ -9,24 +9,32 @@ import Foundation
 
 struct User
 {
-    let name: String?
-    let familyName: String?
-    let group: String? = "IU7-35B"
+    let name: String
+    let familyName: String
+    let group: String = "ИУ7-35Б"
 }
 
-class AuthService
+class AuthServiceMockup: ProfileService
 {
-    func authenticate(login: String, password: String, callback: (User?) -> Void)
+    static var loggedUser: User? = nil
+    
+    func authenticate(login: String, password: String) -> User?
     {
         let validTestUsersCredetials = [("Artem", "12345"), ("Maria", "54321"), ("Egor", "Bmstu")] // test data
         
         if let validCredetials = validTestUsersCredetials.first(where: {$0.0 == login && $0.1 == password})
         {
-            callback(User(name: validCredetials.0, familyName: nil))
+            AuthServiceMockup.loggedUser = User(name: validCredetials.0, familyName: "Tikhonenko")
         }
-        else
-        {
-            callback(nil)
-        }
+        return AuthServiceMockup.loggedUser
+    }
+    
+    func getUserData() -> User?
+    {
+        return AuthServiceMockup.loggedUser
+    }
+    
+    func logout() {
+        AuthServiceMockup.loggedUser = nil
     }
 }

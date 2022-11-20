@@ -7,12 +7,6 @@
 
 import Foundation
 
-protocol AppCoordinatorProtocol
-{
-    func startAuthScenario()
-    func startMainScenario()
-}
-
 protocol CoordinatorProtocol
 {
     func start()

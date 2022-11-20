@@ -1,20 +1,20 @@
+////
+////  AuthScreenProtocols.swift
+////  Graal-BMSTU
+////
+////  Created by Артём on 11.11.2022.
+////
 //
-//  AuthScreenProtocols.swift
-//  Graal-BMSTU
+//import Foundation
 //
-//  Created by Артём on 11.11.2022.
+//protocol AuthPresenter
+//{
+//    func authenticate(login: String?, password: String?)
+//    func onViewDidLoad()
+//}
 //
-
-import Foundation
-
-protocol AuthPresenter
-{
-    func authenticate(login: String?, password: String?)
-    func onViewDidLoad()
-}
-
-protocol AuthViewControllerPr: AnyObject
-{
-    func displaySuccessNotification()
-    func displayErrorNotification()
-}
+//protocol AuthViewControllerPr: AnyObject
+//{
+//    func displaySuccessNotification()
+//    func displayErrorNotification()
+//}

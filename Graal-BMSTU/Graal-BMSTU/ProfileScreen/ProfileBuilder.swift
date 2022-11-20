@@ -9,7 +9,7 @@ import UIKit
 
 
 
-final class ProfileBuilder
+final class ProfileBuilderImpl: ProfileBuilder
 {
     let presenter: ProfilePresenter
     let vc: UIViewController
@@ -24,16 +24,16 @@ final class ProfileBuilder
     }
     
     
-    static func assemble(context: ProfileContext) -> ProfileBuilder
+    static func assemble(window: UIWindow) -> ProfileBuilder
     {
-        let router = ProfileRouterImpl(window: context.window)
-        let presenter = ProfilePresenterImpl(router: router)
-        let vc = ProfileViewController(presenter: presenter)
+        let router = ProfileRouterImpl(window: window)
+        let presenter = ProfilePresenterImpl(router: router, dataService: AuthServiceMockup())
+        let vc = ProfileViewControllerImpl(presenter: presenter)
         
         presenter.view = vc
         router.setViewController(viewController: vc)
         
-        return ProfileBuilder(vc: vc, presenter: presenter, router: router)
+        return ProfileBuilderImpl(vc: vc, presenter: presenter, router: router)
     }
 }
 

@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		7057642229131EB9006555E2 /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7057642129131EB9006555E2 /* AuthView.swift */; };
 		70576429291322B7006555E2 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70576428291322B7006555E2 /* ProfileView.swift */; };
-		7057642B29132A27006555E2 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7057642A29132A27006555E2 /* TabBarView.swift */; };
 		705B6A55291E88A500C5FB63 /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 705B6A54291E88A500C5FB63 /* AuthCoordinator.swift */; };
 		705B6A57291E8AAF00C5FB63 /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 705B6A56291E8AAF00C5FB63 /* BaseCoordinator.swift */; };
 		705B6A5E291EA96800C5FB63 /* ProfileBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 705B6A5D291EA96800C5FB63 /* ProfileBuilder.swift */; };
@@ -37,8 +36,6 @@
 		7092B9A1291C2AEF000D8D3C /* InappNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7092B9A0291C2AEF000D8D3C /* InappNotificationView.swift */; };
 		7092B9A3291C2B01000D8D3C /* InappNotificationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7092B9A2291C2B01000D8D3C /* InappNotificationPresenter.swift */; };
 		7092B9A5291C2B10000D8D3C /* InappNotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7092B9A4291C2B10000D8D3C /* InappNotificationModel.swift */; };
-		7092B9AB291C2B4E000D8D3C /* TabBarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7092B9AA291C2B4E000D8D3C /* TabBarModel.swift */; };
-		7092B9AD291C2B6D000D8D3C /* TabBarPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7092B9AC291C2B6D000D8D3C /* TabBarPresenter.swift */; };
 		7092B9BF291C447F000D8D3C /* Rswift in Frameworks */ = {isa = PBXBuildFile; productRef = 7092B9BE291C447F000D8D3C /* Rswift */; };
 		70F653AF2915F3DC0024EA1D /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 70F653AE2915F3DC0024EA1D /* SnapKit */; };
 		70F83A5B291E813D0087CC01 /* AuthScreenProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F83A5A291E813D0087CC01 /* AuthScreenProtocols.swift */; };
@@ -49,9 +46,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		70198EBA2926976700B45C3A /* Graal-BMSTU.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Graal-BMSTU.entitlements"; sourceTree = "<group>"; };
 		7057642129131EB9006555E2 /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
 		70576428291322B7006555E2 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
-		7057642A29132A27006555E2 /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		705B6A54291E88A500C5FB63 /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
 		705B6A56291E8AAF00C5FB63 /* BaseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
 		705B6A58291E8D7200C5FB63 /* Codestyle.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Codestyle.md; sourceTree = "<group>"; };
@@ -82,8 +79,6 @@
 		7092B9A0291C2AEF000D8D3C /* InappNotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InappNotificationView.swift; sourceTree = "<group>"; };
 		7092B9A2291C2B01000D8D3C /* InappNotificationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InappNotificationPresenter.swift; sourceTree = "<group>"; };
 		7092B9A4291C2B10000D8D3C /* InappNotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InappNotificationModel.swift; sourceTree = "<group>"; };
-		7092B9AA291C2B4E000D8D3C /* TabBarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarModel.swift; sourceTree = "<group>"; };
-		7092B9AC291C2B6D000D8D3C /* TabBarPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarPresenter.swift; sourceTree = "<group>"; };
 		70F83A5A291E813D0087CC01 /* AuthScreenProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthScreenProtocols.swift; sourceTree = "<group>"; };
 		70F83A5C291E819C0087CC01 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		70F83A5E291E81F90087CC01 /* MainFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFlowCoordinator.swift; sourceTree = "<group>"; };
@@ -171,8 +166,8 @@
 		708E76C929005E4A00D23E70 /* Graal-BMSTU */ = {
 			isa = PBXGroup;
 			children = (
+				70198EBA2926976700B45C3A /* Graal-BMSTU.entitlements */,
 				708E76D829005E4D00D23E70 /* Info.plist */,
-				70F83A57291E7FE60087CC01 /* TabBarScreen */,
 				7092B9A6291C2B17000D8D3C /* Application */,
 				7092B992291C2A61000D8D3C /* TrainingScreen */,
 				7092B987291C29FF000D8D3C /* ScheduleScreen */,
@@ -188,12 +183,12 @@
 			isa = PBXGroup;
 			children = (
 				70576428291322B7006555E2 /* ProfileView.swift */,
+				7080CD28291EAE4800F1BBA0 /* ProfileViewController.swift */,
 				7092B979291C295E000D8D3C /* ProfilePresenter.swift */,
 				7092B97B291C2967000D8D3C /* ProfileModel.swift */,
 				705B6A5D291EA96800C5FB63 /* ProfileBuilder.swift */,
 				7080CD24291EAB1A00F1BBA0 /* ProfileRouter.swift */,
 				7080CD26291EAD3600F1BBA0 /* ProfileProtocols.swift */,
-				7080CD28291EAE4800F1BBA0 /* ProfileViewController.swift */,
 			);
 			path = ProfileScreen;
 			sourceTree = "<group>";
@@ -282,16 +277,6 @@
 				705B6A56291E8AAF00C5FB63 /* BaseCoordinator.swift */,
 			);
 			path = Coordinators;
-			sourceTree = "<group>";
-		};
-		70F83A57291E7FE60087CC01 /* TabBarScreen */ = {
-			isa = PBXGroup;
-			children = (
-				7092B9AC291C2B6D000D8D3C /* TabBarPresenter.swift */,
-				7057642A29132A27006555E2 /* TabBarView.swift */,
-				7092B9AA291C2B4E000D8D3C /* TabBarModel.swift */,
-			);
-			path = TabBarScreen;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -425,11 +410,8 @@
 				7080CD29291EAE4800F1BBA0 /* ProfileViewController.swift in Sources */,
 				7092B97A291C295E000D8D3C /* ProfilePresenter.swift in Sources */,
 				7092B984291C29CF000D8D3C /* MainMenuPresenter.swift in Sources */,
-				7092B9AB291C2B4E000D8D3C /* TabBarModel.swift in Sources */,
 				7092B991291C2A5A000D8D3C /* ScheduleModel.swift in Sources */,
-				7092B9AD291C2B6D000D8D3C /* TabBarPresenter.swift in Sources */,
 				7057642229131EB9006555E2 /* AuthView.swift in Sources */,
-				7057642B29132A27006555E2 /* TabBarView.swift in Sources */,
 				70F83A5F291E81F90087CC01 /* MainFlowCoordinator.swift in Sources */,
 				708E76CD29005E4A00D23E70 /* SceneDelegate.swift in Sources */,
 			);
@@ -579,8 +561,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Graal-BMSTU/Graal-BMSTU.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = V88X9S6G23;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Graal-BMSTU/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -605,8 +589,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Graal-BMSTU/Graal-BMSTU.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = V88X9S6G23;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Graal-BMSTU/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

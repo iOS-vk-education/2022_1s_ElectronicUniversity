@@ -8,23 +8,36 @@
 import UIKit
 
 
-class BaseCoordinator: AppCoordinatorProtocol
+class BaseCoordinator: CoordinatorProtocol
 {
     private let window: UIWindow
-    private var authFlow: CoordinatorProtocol?
-    private var mainFlow: CoordinatorProtocol?
+    private let navigationController: UINavigationController
+    private var coordinator: CoordinatorProtocol?
     
-    init(window: UIWindow) {
+    init(window: UIWindow, navigationController: UINavigationController = UINavigationController()) {
         self.window = window
+        self.navigationController = navigationController
+        setupWindow()
     }
     
-    func startAuthScenario() {
-        authFlow = AuthCoordinator(window: window)
-        authFlow?.start()
+    func setupWindow() {
+        self.window.rootViewController = navigationController
+        self.window.makeKeyAndVisible()
     }
     
-    func startMainScenario() {
-        mainFlow = MainFlowCoordinator(window: window)
-        mainFlow?.start()
+    func start() {
+        let defaults = UserDefaults.standard
+        if defaults.value(forKey: "NotFirstLaunch") == nil
+        {
+            defaults.set(true, forKey: "NotFirstLaunch")
+            coordinator = AuthCoordinator(window: window)
+        }
+        else
+        {
+            coordinator = MainFlowCoordinator(window: window)
+        }
+        coordinator?.start()
     }
+    
+    
 }

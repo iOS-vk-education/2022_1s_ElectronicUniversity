@@ -13,7 +13,7 @@ import SFSafeSymbols
 final class MainFlowCoordinator: CoordinatorProtocol
 {
     private let window: UIWindow
-    private lazy var tabBarController = UITabBarController()
+    private let tabBarController = UITabBarController()
     private lazy var navigationControllers = MainFlowCoordinator.makeNavigationControllers()
     
     init(window: UIWindow) {
@@ -45,7 +45,10 @@ private extension MainFlowCoordinator
 {
     func setupAppearance()
     {
-        
+        tabBarController.tabBar.isTranslucent = false
+        tabBarController.tabBar.barTintColor = .white
+        tabBarController.tabBar.backgroundColor = .white
+        tabBarController.tabBar.shadowImage = nil
     }
     
     
@@ -93,7 +96,7 @@ private extension MainFlowCoordinator
         guard let navController = navigationControllers[.profile] else {
             fatalError("No navigation controller for profile tab!")
         }
-        let built = ProfileBuilder.assemble()
+        let built = ProfileBuilder.assemble(window: window)
         navController.setViewControllers([built.vc], animated: false)
     }
     
