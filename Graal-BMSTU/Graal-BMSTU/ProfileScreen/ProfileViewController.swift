@@ -29,8 +29,6 @@ final class ProfileViewControllerImpl: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.update()
-        setupActions()
-        setupUI()
     }
 
     required init?(coder: NSCoder) {

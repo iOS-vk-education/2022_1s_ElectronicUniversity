@@ -22,7 +22,7 @@ final class ProfilePresenterImpl: ProfilePresenter {
     func authenticate(username: String?, password: String?) {
         if let username = username, let password = password {
             if let _ = service?.authenticate(login: username, password: password) {
-                vc?.switchToProfile()
+                update()
             } else {
                 vc?.showAuthError(description: "Auth error")
             }

@@ -7,126 +7,135 @@
 
 import UIKit
 import SnapKit
+import SFSafeSymbols
 
-enum ProfileActionButtons: CaseIterable
-{
-    case yourProfile
-    case performance
-    case tutorsSchedule
-    case settings
-    
-    var title: () -> String
-    {
-        switch self {
-        case .yourProfile:
-            return R.string.localizable.your_profile_button_title()
-        case .performance:
-            return R.string.localizable.performance_button_title()
-        case .tutorsSchedule:
-            return R.string.localizable.tutors_schedule_button_title()
-        case .settings:
-            return R.string.localizable.your_profile_button_title()
-        }
-    }
-}
+typealias ProfileDetailAction = () -> Void
+typealias SettingsAction = () -> Void
 
-final class ProfileView: UIView
-{
+final class ProfileView: UIView {
     private let userLogo = UIImageView(frame: .zero)
     private let userNameLabel = UILabel(frame: .zero)
     private let userGroupLabel = UILabel(frame: .zero)
-    private lazy var buttons: [ProfileActionButtons: UIButton]? = ProfileView.makeButtons()
-    private var actions: [ProfileActionButtons: () -> Void]?
-    func setupUI()
-    {
-        
-    }
-    
-    func setupContraints()
-    {
-        
-    }
+    private let profileDetailButton = UIButton(frame: .zero)
+    private let settingsButton = UIButton(frame: .zero)
+
+    private var profileDetailAction: ProfileDetailAction?
+    private var settingsAction: SettingsAction?
 }
 
-extension ProfileView
-{
-    func updateUserGroup(with: String)
-    {
+extension ProfileView {
+    func updateUserGroup(with: String) {
         self.userGroupLabel.text = with
     }
-    
-    func updateUserName(with: String)
-    {
+
+    func updateUserName(with: String) {
         self.userNameLabel.text = with
     }
-    
-    func updateUserLogo(with: UIImage)
-    {
+
+    func updateUserLogo(with: UIImage) {
         self.userLogo.image = with
     }
 
 }
 
-extension ProfileView
-{
-    static func makeButtons() -> [ProfileActionButtons: UIButton]
-    {
-        var result: [ProfileActionButtons: UIButton] = [:]
-        ProfileActionButtons.allCases.forEach { button in
-            var tmp = UIButton()
-            tmp.setTitle(button.title(), for: .normal)
-            result[button] = tmp
+extension ProfileView {
+    func setupUI() {
+        userLogo.image = UIImage(systemSymbol: .personCircle)
+        profileDetailButton.configuration = profileDetailButtonConf()
+        settingsButton.configuration = settingsButtonConf()
+        userGroupLabel.text = "Placeholder"
+        userNameLabel.text = "Placeholder"
+        [userLogo, userNameLabel, userGroupLabel, profileDetailButton, settingsButton].forEach {
+            box in
+            self.addSubview(box)
         }
-        return result
+        setupConstraints()
+    }
+
+    private func setupConstraints() {
+
+    }
+
+    private func profileDetailButtonConf() -> UIButton.Configuration {
+        var config = UIButton.Configuration.filled()
+        config.title = R.string.localizable.your_profile_button_title()
+        // ...
+        return config
+    }
+
+    private func settingsButtonConf() -> UIButton.Configuration {
+        var config = UIButton.Configuration.filled()
+        config.title = R.string.localizable.setting_button_title()
+        // ...
+        return config
     }
 }
 
-extension ProfileView
-{
-    func setupActions(_ actions: [ProfileActionButtons: () -> Void])
-    {
-        self.actions = actions
+extension ProfileView {
+    // buttons
+    func setupProfileDetailButton() {
+
     }
+
+    func setupSettingsButton() {
+
+    }
+
+    func setProfileDetailButtonAction() {
+
+    }
+
+    func setSettingsButtonAction() {
+
+    }
+
+    @objc private func profileDetailButtonPressed() {
+
+    }
+
+    @objc private func settingsButtonPressed() {
+
+    }
+}
+
+extension ProfileView {
+
 }
 
 
 typealias LoginAction = (String?, String?) -> Void
 
-final class AuthView: UIView
-{
+final class AuthView: UIView {
     private let bmstuImage = UIImageView(frame: .zero)
     private let loginField = UITextField(frame: .zero)
     private let passwordField = UITextField(frame: .zero)
     private let loginButton = UIButton(frame: .zero)
-    
+
     private let continueWithoutLoginButton = UIButton(frame: .zero) // только при первом запуске есть такая кнопка!
-    
+
     private var loginAction: LoginAction?
 }
 
 
-extension AuthView
-{
+extension AuthView {
     // actions
-    func setupActions(_ action: @escaping LoginAction)
-    {
+    func setupActions(_ action: @escaping LoginAction) {
         self.loginAction = action
     }
-    
-    @objc private func loginButtonPressed()
-    {
-        if let action = self.loginAction { action(loginField.text, passwordField.text) }
+
+    @objc private func loginButtonPressed() {
+        if let action = self.loginAction {
+            action(loginField.text, passwordField.text)
+        }
     }
 }
 
-extension AuthView
-{
+extension AuthView {
     private func createLoginButtonConfig() -> UIButton.Configuration {
         var loginButtonConfig = UIButton.Configuration.filled()
         loginButtonConfig.buttonSize = .large
         loginButtonConfig.cornerStyle = .medium
-        loginButtonConfig.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer
-        { incoming in
+        loginButtonConfig.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { incoming in
             var outgoing = incoming
             outgoing.font = UIFont.preferredFont(forTextStyle: .headline)
             return outgoing
@@ -139,37 +148,30 @@ extension AuthView
         loginButtonConfig.preferredSymbolConfigurationForImage = UIImage.SymbolConfiguration(scale: .medium)
         return loginButtonConfig
     }
-    
-    func setupUI()
-    {
+
+    func setupUI() {
         bmstuImage.image = R.image.bmstuLogo()
         loginField.placeholder = R.string.localizable.login_field_placeholder()
         passwordField.placeholder = R.string.localizable.password_field_placeholder()
-        
         loginButton.configuration = createLoginButtonConfig()
         loginButton.addTarget(self, action: #selector(self.loginButtonPressed), for: .touchUpInside)
-        [bmstuImage, loginField, passwordField, loginButton, continueWithoutLoginButton].forEach
-        { box in
+        [bmstuImage, loginField, passwordField, loginButton, continueWithoutLoginButton].forEach { box in
             self.addSubview(box)
         }
         self.setupConstraints()
     }
-    
-    private func setupConstraints()
-    {
-        bmstuImage.snp.makeConstraints
-        { make in
+
+    private func setupConstraints() {
+        bmstuImage.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.size.equalTo(CGSize(width: 100, height: 100))
             make.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(20)
         }
-        loginField.snp.makeConstraints
-        { make in
+        loginField.snp.makeConstraints { make in
             make.top.equalTo(bmstuImage.snp.bottom).offset(20)
             make.centerX.equalToSuperview()
         }
-        passwordField.snp.makeConstraints
-        { make in
+        passwordField.snp.makeConstraints { make in
             make.top.equalTo(loginField.snp.bottom).offset(20)
             make.centerX.equalToSuperview()
         }
