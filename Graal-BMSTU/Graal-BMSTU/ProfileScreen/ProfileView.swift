@@ -43,8 +43,6 @@ extension ProfileView {
         userLogo.image = UIImage(systemSymbol: .personCircle)
         profileDetailButton.configuration = profileDetailButtonConf()
         settingsButton.configuration = settingsButtonConf()
-        userGroupLabel.text = "Placeholder"
-        userNameLabel.text = "Placeholder"
         [userLogo, userNameLabel, userGroupLabel, profileDetailButton, settingsButton].forEach {
             box in
             self.addSubview(box)
@@ -72,34 +70,21 @@ extension ProfileView {
 }
 
 extension ProfileView {
-    // buttons
-    func setupProfileDetailButton() {
-
+    func setProfileDetailButtonAction(_ action: @escaping ProfileDetailAction) {
+        self.profileDetailAction = action
     }
 
-    func setupSettingsButton() {
-
-    }
-
-    func setProfileDetailButtonAction() {
-
-    }
-
-    func setSettingsButtonAction() {
-
+    func setSettingsButtonAction(_ action: @escaping SettingsAction) {
+        self.settingsAction = action
     }
 
     @objc private func profileDetailButtonPressed() {
-
+        self.profileDetailAction?()
     }
 
     @objc private func settingsButtonPressed() {
-
+        self.settingsAction?()
     }
-}
-
-extension ProfileView {
-
 }
 
 

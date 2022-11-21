@@ -5,7 +5,7 @@
 //  Created by Артём on 09.11.2022.
 //
 
-import UIKit
+import Foundation
 
 
 final class ProfilePresenterImpl: ProfilePresenter {
@@ -34,9 +34,9 @@ final class ProfilePresenterImpl: ProfilePresenter {
     func update() {
         let user: User? = service?.getUserData()
         if let user = user {
-            vc?.setState(to: .profile)
             vc?.setUserName(str: user.name + " " + user.familyName)
             vc?.setUserGroup(str: user.group)
+            vc?.setState(to: .profile)
         } else {
             vc?.setState(to: .auth)
         }
@@ -47,8 +47,7 @@ final class ProfilePresenterImpl: ProfilePresenter {
         update()
     }
 
-    func navigateToProfileDetails()
-    {
+    func navigateToProfileDetails() {
         coordinator.navigateToProfileDetails()
     }
 }
