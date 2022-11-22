@@ -171,6 +171,7 @@ extension AuthView {
     }
 
     func setupUI() {
+        self.backgroundColor = .white
         bmstuImage.image = R.image.bmstuLogo()
         loginField.placeholder = R.string.localizable.login_field_placeholder()
         passwordField.placeholder = R.string.localizable.password_field_placeholder()
