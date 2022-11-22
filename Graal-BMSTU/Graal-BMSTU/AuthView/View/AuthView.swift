@@ -78,10 +78,10 @@ final class AuthViewController: UIViewController, AuthViewControllerPr {
 final class AuthView: UIView {
 
     private let bmstuImage = UIImageView(frame: .zero)
-    private let loginField = UITextField(frame: .zero)
-    private let passwordField = UITextField(frame: .zero)
-    private var loginButton = UIButton(frame: .zero)
+    private let loginField = UITextField(frame: CGRect(x: 5, y:70, width: 300, height: 70))
+    private let passwordField = UITextField(frame: CGRect(x: 5, y:70, width: 300, height: 70))
     private var logoutButton = UIButton(frame: .zero)
+    private var loginButton = UIButton(frame: .zero)
     private let label = UILabel()
 
 
@@ -146,7 +146,7 @@ extension AuthView {
 
     private func createLogoutButton() -> UIButton {
         let logoutButton = UIButton(type: .system)
-        logoutButton.backgroundColor = UIColor.systemBlue
+        logoutButton.backgroundColor = UIColor.lightGray
         logoutButton.setTitleColor(.white, for: .normal)
         logoutButton.layer.cornerRadius = 20
         logoutButton.setTitle("Продолжить без входа", for: .normal)
@@ -166,7 +166,9 @@ extension AuthView {
         bmstuImage.image = R.image.bmstuLogo()
         loginField.placeholder = R.string.localizable.login_field_placeholder()
         passwordField.placeholder = R.string.localizable.password_field_placeholder()
-
+        //loginField.borderStyle = UITextField.BorderStyle.roundedRect
+        //passwordField.borderStyle = UITextField.BorderStyle.roundedRect
+        
         loginButton = createLoginButton()
         logoutButton = createLogoutButton()
         // loginButton.addTarget(self, action: #selector(self.loginButtonPressed), for: .touchUpInside)
@@ -196,14 +198,14 @@ extension AuthView {
         loginButton.snp.makeConstraints { make in
             make.left.equalTo(safeAreaLayoutGuide.snp.left).offset(30)
             make.right.equalTo(safeAreaLayoutGuide.snp.right).inset(30)
-            make.top.equalTo(passwordField.snp.bottom).offset(30)
+            make.top.equalTo(passwordField.snp.bottom).offset(80)
             make.height.equalTo(50)
         }
 
         logoutButton.snp.makeConstraints { make in
             make.left.equalTo(safeAreaLayoutGuide.snp.left).offset(30)
             make.right.equalTo(safeAreaLayoutGuide.snp.right).inset(30)
-            make.top.equalTo(loginButton.snp.bottom).offset(30)
+            make.top.equalTo(loginButton.snp.bottom).offset(25 )
             make.height.equalTo(50)
         }
     }
