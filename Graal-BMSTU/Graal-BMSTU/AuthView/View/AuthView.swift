@@ -151,7 +151,7 @@ extension AuthView {
         logoutButton.layer.cornerRadius = 20
         logoutButton.setTitle("Продолжить без входа", for: .normal)
 
-        logoutButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
+        logoutButton.addTarget(self, action: #selector(logoutButtonTapped), for: .touchUpInside)
 
 
         return logoutButton
@@ -168,11 +168,12 @@ extension AuthView {
         passwordField.placeholder = R.string.localizable.password_field_placeholder()
 
         loginButton = createLoginButton()
+        logoutButton = createLogoutButton()
         // loginButton.addTarget(self, action: #selector(self.loginButtonPressed), for: .touchUpInside)
         [bmstuImage, loginField, passwordField, loginButton, continueWithoutLoginButton, logoutButton].forEach { box in
             self.addSubview(box)
         }
-        self.setupConstraints()
+        setupConstraints()
     }
 
     private func setupConstraints() {
