@@ -78,7 +78,7 @@ final class AuthViewController: UIViewController, AuthViewControllerPr {
 final class AuthView: UIView {
 
     private let bmstuImage = UIImageView(frame: .zero)
-    private let loginField = UITextField(frame: CGRect(x: 5, y:70, width: 300, height: 70))
+    private let loginField = UITextField(frame: .zero)
     private let passwordField = UITextField(frame: CGRect(x: 5, y:70, width: 300, height: 70))
     private var logoutButton = UIButton(frame: .zero)
     private var loginButton = UIButton(frame: .zero)
