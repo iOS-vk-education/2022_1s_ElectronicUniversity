@@ -5,6 +5,7 @@
 //  Created by Артём on 03.11.2022.
 //
 
+
 import UIKit
 import SnapKit
 import Rswift
@@ -49,7 +50,8 @@ final class AuthViewController: UIViewController, AuthViewControllerPr
         authView?.setupUI()
         authViewPresenter.onViewDidLoad()
         loadView()
-    }
+        view.backgroundColor = UIColor.clear
+                 }
     
     private func setupActions()
     {
@@ -59,7 +61,7 @@ final class AuthViewController: UIViewController, AuthViewControllerPr
     override func loadView()
     {
         view = authView
-       // view.backgroundColor = UIColor.gray
+     
     }
     
     
@@ -85,13 +87,19 @@ final class AuthViewController: UIViewController, AuthViewControllerPr
 
 final class AuthView: UIView
 {
+   
     private let bmstuImage = UIImageView(frame: .zero)
     private let loginField = UITextField(frame: .zero)
     private let passwordField = UITextField(frame: .zero)
     private var loginButton = UIButton(frame: .zero)
+    private var logoutButton = UIButton(frame: .zero)
+   private let label = UILabel()
+
+    
     //    private let notificationView = GraalNotification(frame: .zero)
     
     private let continueWithoutLoginButton = UIButton(frame: .zero) // только при первом запуске есть такая кнопка!
+    private let continueWithoutLogoutButton = UIButton(frame: .zero)
     
     private var loginAction: LoginAction?
 }
@@ -108,11 +116,17 @@ extension AuthView
     {
         if let action = self.loginAction { action(loginField.text, passwordField.text) }
     }
+    
+    @objc private func logoutButtonPressed()
+    {
+
+    }
 }
 
 extension AuthView
 {
     // UI
+
     private func createLoginButton() -> UIButton {
         var loginButton = UIButton(type: .system)
         loginButton.backgroundColor = UIColor.systemBlue
@@ -142,9 +156,24 @@ extension AuthView
         print("unsuccessfull auth")
     }
     
+    private func createLogoutButton() -> UIButton {
+        var loginButton = UIButton(type: .system)
+        logoutButton.backgroundColor = UIColor.systemBlue
+        logoutButton.setTitleColor(.white, for: .normal)
+        logoutButton.layer.cornerRadius = 20
+        logoutButton.setTitle("Продолжить без вхда" , for: .normal)
+        
+        logoutButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
+        
+
+           return logoutButton    }
+    @objc private func logoutButtonTapped() {
+        print("successfull auth")
+    }
+  
+    
     func setupUI()
     {
-        
         bmstuImage.image = R.image.bmstuLogo()
         loginField.placeholder = R.string.localizable.login_field_placeholder()
         passwordField.placeholder = R.string.localizable.password_field_placeholder()
@@ -166,21 +195,30 @@ extension AuthView
             make.size.equalTo(CGSize(width: 230, height: 230))
             make.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(20)
         }
+        
         loginField.snp.makeConstraints
         { make in
             make.top.equalTo(bmstuImage.snp.bottom).offset(120)
             make.centerX.equalToSuperview()
         }
+        
         passwordField.snp.makeConstraints
         { make in
             make.top.equalTo(loginField.snp.bottom).offset(30)
             make.centerX.equalToSuperview()
         }
+        
         loginButton.snp.makeConstraints { make in
             make.left.equalTo(self.safeAreaLayoutGuide.snp.left).offset(30)
             make.right.equalTo(self.safeAreaLayoutGuide.snp.right).inset(30)
             make.top.equalTo(passwordField.snp.bottom).offset(140)
             make.height.equalTo(50)
         }
-    }
+        
+        logoutButton.snp.makeConstraints { make in
+            make.left.equalTo(self.safeAreaLayoutGuide.snp.left).offset(30)
+            make.right.equalTo(self.safeAreaLayoutGuide.snp.right).inset(30)
+            make.top.equalTo(loginButton.snp.bottom).offset(30)
+            make.height.equalTo(50)
+        }    }
 }
