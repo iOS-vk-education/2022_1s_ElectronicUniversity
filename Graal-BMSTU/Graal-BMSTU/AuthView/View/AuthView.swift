@@ -145,11 +145,11 @@ extension AuthView {
     }
 
     private func createLogoutButton() -> UIButton {
-        var loginButton = UIButton(type: .system)
+        let logoutButton = UIButton(type: .system)
         logoutButton.backgroundColor = UIColor.systemBlue
         logoutButton.setTitleColor(.white, for: .normal)
         logoutButton.layer.cornerRadius = 20
-        logoutButton.setTitle("Продолжить без вхда", for: .normal)
+        logoutButton.setTitle("Продолжить без входа", for: .normal)
 
         logoutButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
 
