@@ -59,30 +59,35 @@ private extension MainFlowCoordinator {
 
 
     func setupMainMenuTab() {
-//        guard let navController = navigationControllers[.mainMenu] else {
-//            fatalError("No navigation controller for main menu tab!")
-//        }
+        guard let navController = navigationControllers[.mainMenu] else {
+            fatalError("No navigation controller for main menu tab!")
+        }
 //        let built = MainMenuBuilder.assemble()
-//        navController.setViewControllers([built.vc], animated: false)
+        let built = UIViewController()
+        built.view.backgroundColor = .white
+        navController.setViewControllers([built], animated: false)
     }
 
 
     func setupScheduleTab() {
-//        guard let navController = navigationControllers[.schedule] else {
-//            fatalError("No navigation controller for schedule tab!")
-//        }
+        guard let navController = navigationControllers[.schedule] else {
+            fatalError("No navigation controller for schedule tab!")
+        }
 //        let built = ScheduleBuilder.assemble()
-//        navController.setViewControllers([built.vc], animated: false)
+        let built = UIViewController()
+        built.view.backgroundColor = .white
+        navController.setViewControllers([built], animated: false)
     }
 
 
     func setupTrainingTab() {
-//        guard let navController = navigationControllers[.training] else {
-//            fatalError("No navigation controller for training tab!")
-//        }
+        guard let navController = navigationControllers[.training] else {
+            fatalError("No navigation controller for training tab!")
+        }
 //        let built = TrainingBuilder.assemble()
-//        navController.setViewControllers([built.vc], animated: false)
-    }
+        let built = UIViewController()
+        built.view.backgroundColor = .white
+        navController.setViewControllers([built], animated: false)    }
 
 
     func setupProfileTab() {
