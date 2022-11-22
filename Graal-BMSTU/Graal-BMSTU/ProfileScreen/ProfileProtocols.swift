@@ -8,8 +8,7 @@
 import UIKit
 
 
-protocol ProfilePresenter
-{
+protocol ProfilePresenter {
     init(coordinator: ProfileCoordinator, service: ProfileService)
     func update()
 
@@ -19,28 +18,24 @@ protocol ProfilePresenter
     func navigateToProfileDetails()
 }
 
-protocol ProfileCoordinator: Coordinator
-{
+protocol ProfileCoordinator: Coordinator {
     func navigateToProfileDetails()
 }
 
-protocol ProfileViewController: AnyObject
-{
+protocol ProfileViewController: AnyObject, UIViewController {
     func showAuthError(description: String?)
     func setUserName(str: String)
     func setUserGroup(str: String)
     func setState(to: ProfileViewState)
 }
 
-protocol ProfileService
-{
+protocol ProfileService {
     func authenticate(login: String, password: String) -> User?
     func getUserData() -> User?
     func logout()
 }
 
-protocol ProfileBuilder
-{
+protocol ProfileBuilder {
     var presenter: ProfilePresenter { get }
     var viewController: ProfileViewController { get }
     var coordinator: ProfileCoordinator { get }

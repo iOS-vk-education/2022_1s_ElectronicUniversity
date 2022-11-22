@@ -20,21 +20,21 @@ final class ProfileCoordinatorImpl: ProfileCoordinator
     init(window: UIWindow, navigationController: UINavigationController) {
         self.window = window
         self.navigationController = navigationController
-        self.window.rootViewController = self.navigationController
-        self.window.makeKeyAndVisible()
     }
     
     func start() {
-        if let viewController = viewController as? UIViewController {
+        if let viewController = viewController {
             navigationController.pushViewController(viewController, animated: true)
         }
+        self.window.makeKeyAndVisible()
     }
 
-// MARK: - called from ViewController
+// MARK: - called from Presenter (точнее в презентере прокладка, так-то из вьюшки)
     func navigateToProfileDetails() {
-        let child = DetailProfileBuilder.assemble(window: window, navigationController: navigationController)
-        childCoordinators.append(child.coordinator)
-        child.coordinator.parentCoordinator = self
-        child.coordinator.start()
+        print("navigate")
+//        let child = DetailProfileBuilder.assemble(window: window, navigationController: navigationController)
+//        childCoordinators.append(child.coordinator)
+//        child.coordinator.parentCoordinator = self
+//        child.coordinator.start()
     }
 }

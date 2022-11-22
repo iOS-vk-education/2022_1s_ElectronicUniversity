@@ -12,6 +12,12 @@
 "training_tabname" = "Training";
 "profile_tabname" = "Account";
 
+"your_profile_button_title" = "Your profile";
+"performance_button_title" = "Your performance";
+"tutors_schedule_button_title" = "Tutrors' shedule";
+"setting_button_title" = "Settings";
+
 "login_field_placeholder" = "Your login";
 "password_field_placeholder" = "Your password";
 "login_button_text" = "Login!";
+"skip_auth_button_text" = "Skip authentication";

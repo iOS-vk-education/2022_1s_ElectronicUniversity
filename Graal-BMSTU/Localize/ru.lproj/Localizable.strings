@@ -12,6 +12,12 @@
 "training_tabname" = "Тренировка";
 "profile_tabname" = "Профиль";
 
+"your_profile_button_title" = "Ваш профиль";
+"performance_button_title" = "Успеваемость";
+"tutors_schedule_button_title" = "Расписание преподавателей";
+"setting_button_title" = "Настройки";
+
 "login_field_placeholder" = "Ваш логин";
 "password_field_placeholder" = "Ваш пароль";
 "login_button_text" = "Войти!";
+"skip_auth_button_text" = "Продолжить без входа";

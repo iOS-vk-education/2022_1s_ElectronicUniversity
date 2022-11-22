@@ -26,3 +26,23 @@ extension Coordinator {
         }
     }
 }
+
+//protocol ScenarioCoordinator: AnyObject {
+//    var parentCoordinator: Coordinator? { get set }
+//    var childCoordinators: [Coordinator] { get set }
+//
+//    init(window: UIWindow)
+//    func start()
+//    func childDidFinish(_ child: Coordinator?)
+//}
+//
+//extension ScenarioCoordinator {
+//    func childDidFinish(_ child: Coordinator?) {
+//        for (index, coordinator) in childCoordinators.enumerated() {
+//            if coordinator === child {
+//                childCoordinators.remove(at: index)
+//                break
+//            }
+//        }
+//    }
+//}

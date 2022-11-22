@@ -48,11 +48,11 @@ extension ProfileViewControllerImpl: ProfileViewController {
     }
 
     func setUserName(str: String) {
-            profileView.updateUserName(with: str)
+        profileView.updateUserName(with: str)
     }
 
     func setUserGroup(str: String) {
-            profileView.updateUserGroup(with: str)
+        profileView.updateUserGroup(with: str)
     }
 
     func setupUI() {
@@ -67,7 +67,7 @@ extension ProfileViewControllerImpl: ProfileViewController {
         if state == .profile {
             profileView.setProfileDetailButtonAction(self.presenter.navigateToProfileDetails)
         } else {
-            authView.setLoginAction(self.presenter.authenticate)
+            authView.setupLoginAction(self.presenter.authenticate)
         }
     }
 

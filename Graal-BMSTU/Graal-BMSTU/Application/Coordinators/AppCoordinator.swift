@@ -44,6 +44,8 @@ class AppCoordinator: Coordinator {
     }
 
     private func isFirstLaunch() -> Bool {
-        return UserDefaults.standard.value(forKey: "NotFirstLaunch") == nil
+        UserDefaults.standard.value(forKey: "NotFirstLaunch") == nil
     }
+
+// Где-то тут должна быть подписка на notification center
 }

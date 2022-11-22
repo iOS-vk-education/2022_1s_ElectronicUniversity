@@ -10,112 +10,96 @@ import Rswift
 import SFSafeSymbols
 
 
-final class MainFlowCoordinator: Coordinator
-{
-    weak var parentCoordinator: Coordinator?
-    var childCoordinators: [Coordinator]
+final class MainFlowCoordinator: Coordinator {
 
+    weak var parentCoordinator: Coordinator?
+    var childCoordinators: [Coordinator] = []
+    private let window: UIWindow
     var navigationController: UINavigationController
 
-    private let window: UIWindow
     private let tabBarController = UITabBarController()
     private lazy var navigationControllers = MainFlowCoordinator.makeNavigationControllers()
 
-    required init(window: UIWindow, navigationController: UINavigationController = UINavigationController()) {
+    required init(window: UIWindow, navigationController: UINavigationController) {
         self.window = window
         self.navigationController = navigationController
-        self.window.rootViewController = self.navigationController
-        self.window.makeKeyAndVisible()
     }
-    
-    
-    func start()
-    {
+
+
+    func start() {
         setupAllTabs()
-        
+
         let navigationControllers = TabType.allCases.compactMap { // достаем вьюконтроллеры из словаря
             self.navigationControllers[$0]
         }
         tabBarController.setViewControllers(navigationControllers, animated: true)
         window.rootViewController = tabBarController
         window.makeKeyAndVisible()
-        
-        UIView.transition(with: window, duration: 0.5, options: .transitionCrossDissolve, animations: {})
+//        UIView.transition(with: window, duration: 0.5, options: .transitionCrossDissolve, animations: {})
     }
-    
-    
-    
-    
+
+
 }
 
-private extension MainFlowCoordinator
-{
-    func setupAppearance()
-    {
+private extension MainFlowCoordinator {
+    func setupAppearance() {
         tabBarController.tabBar.isTranslucent = false
         tabBarController.tabBar.barTintColor = .white
         tabBarController.tabBar.backgroundColor = .white
         tabBarController.tabBar.shadowImage = nil
     }
-    
-    
-    func setupAllTabs()
-    {
+
+
+    func setupAllTabs() {
         setupMainMenuTab()
         setupScheduleTab()
         setupTrainingTab()
         setupProfileTab()
     }
-    
-    
-    func setupMainMenuTab()
-    {
+
+
+    func setupMainMenuTab() {
 //        guard let navController = navigationControllers[.mainMenu] else {
 //            fatalError("No navigation controller for main menu tab!")
 //        }
 //        let built = MainMenuBuilder.assemble()
 //        navController.setViewControllers([built.vc], animated: false)
     }
-    
-    
-    func setupScheduleTab()
-    {
+
+
+    func setupScheduleTab() {
 //        guard let navController = navigationControllers[.schedule] else {
 //            fatalError("No navigation controller for schedule tab!")
 //        }
 //        let built = ScheduleBuilder.assemble()
 //        navController.setViewControllers([built.vc], animated: false)
     }
-    
-    
-    func setupTrainingTab()
-    {
+
+
+    func setupTrainingTab() {
 //        guard let navController = navigationControllers[.training] else {
 //            fatalError("No navigation controller for training tab!")
 //        }
 //        let built = TrainingBuilder.assemble()
 //        navController.setViewControllers([built.vc], animated: false)
     }
-    
-    
-    func setupProfileTab()
-    {
+
+
+    func setupProfileTab() {
         guard let navController = navigationControllers[.profile] else {
             fatalError("No navigation controller for profile tab!")
         }
-        let built = ProfileBuilder.assemble(window: window)
-        navController.setViewControllers([built.vc], animated: false)
+        let built = ProfileBuilderImpl.assemble(window: window, navigationController: navigationController)
+        navController.setViewControllers([built.viewController], animated: false)
     }
-    
+
 }
 
 
-fileprivate extension MainFlowCoordinator
-{
-    static func makeNavigationControllers() -> [TabType: UINavigationController]
-    {
+fileprivate extension MainFlowCoordinator {
+    static func makeNavigationControllers() -> [TabType: UINavigationController] {
         var result: [TabType: UINavigationController] = [:] // dictionary
-        
+
         TabType.allCases.forEach { tab in
             let navController = UINavigationController()
             let tabBarItem = UITabBarItem(title: tab.title, image: tab.unselectedImage, selectedImage: tab.image)
@@ -127,14 +111,11 @@ fileprivate extension MainFlowCoordinator
 }
 
 
-fileprivate enum TabType: Int, CaseIterable
-{
+fileprivate enum TabType: Int, CaseIterable {
     case mainMenu, schedule, training, profile
-    
-    var title: String
-    {
-        switch self
-        {
+
+    var title: String {
+        switch self {
         case .mainMenu:
             return R.string.localizable.mainmenu_tabname()
         case .schedule:
@@ -145,11 +126,9 @@ fileprivate enum TabType: Int, CaseIterable
             return R.string.localizable.profile_tabname()
         }
     }
-    
-    var image: UIImage
-    {
-        switch self
-        {
+
+    var image: UIImage {
+        switch self {
         case .mainMenu:
             return UIImage(systemSymbol: .houseFill)
         case .schedule:
@@ -160,11 +139,9 @@ fileprivate enum TabType: Int, CaseIterable
             return UIImage(systemSymbol: .personFill)
         }
     }
-    
-    var unselectedImage: UIImage
-    {
-        switch self
-        {
+
+    var unselectedImage: UIImage {
+        switch self {
         case .mainMenu:
             return UIImage(systemSymbol: .house)
         case .schedule:
