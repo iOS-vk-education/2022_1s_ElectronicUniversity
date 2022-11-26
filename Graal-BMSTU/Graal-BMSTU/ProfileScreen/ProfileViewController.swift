@@ -13,8 +13,8 @@ enum ProfileViewState {
 }
 
 final class ProfileViewControllerImpl: UIViewController {
-    private var authView: AuthView = AuthView()
-    private var profileView: ProfileView = ProfileView()
+    private var authView: AuthView = AuthView(frame: .zero)
+    private var profileView: ProfileView = ProfileView(frame: .zero)
 
     private let presenter: ProfilePresenter
     private var state: ProfileViewState
@@ -23,16 +23,12 @@ final class ProfileViewControllerImpl: UIViewController {
         self.presenter = presenter
         state = .auth
         super.init(nibName: nil, bundle: nil)
-        presenter.update()
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
+        setupActions()
         presenter.update()
     }
 
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        return nil
     }
 
 }
@@ -40,6 +36,7 @@ final class ProfileViewControllerImpl: UIViewController {
 extension ProfileViewControllerImpl: ProfileViewController {
 
     func showAuthError(description: String?) {
+        // placeholder
         if let desc = description {
             print(desc)
         } else {
@@ -55,17 +52,11 @@ extension ProfileViewControllerImpl: ProfileViewController {
         profileView.updateUserGroup(with: str)
     }
 
-    func setupUI() {
-        if state == .profile {
-            profileView.setupUI()
-        } else {
-            authView.setupUI()
-        }
-    }
-
     func setupActions() {
         if state == .profile {
             profileView.setProfileDetailButtonAction(self.presenter.navigateToProfileDetails)
+            profileView.setLogoutAction(self.presenter.logout)
+//            profileView.setSettingsButtonAction(self.presenter.navigateToSettings)
         } else {
             authView.setupLoginAction(self.presenter.authenticate)
         }
@@ -73,8 +64,6 @@ extension ProfileViewControllerImpl: ProfileViewController {
 
     func setState(to: ProfileViewState) {
         self.state = to
-        setupUI()
-        setupActions()
         if to == .profile {
             self.view = profileView
         } else {

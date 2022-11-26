@@ -7,16 +7,19 @@
 
 import Foundation
 
-
 final class ProfilePresenterImpl: ProfilePresenter {
 
-    weak var vc: ProfileViewController?
+    private weak var vc: ProfileViewController?
     private var service: ProfileService?
     private let coordinator: ProfileCoordinator
 
     init(coordinator: ProfileCoordinator, service: ProfileService) {
         self.coordinator = coordinator
         self.service = service
+    }
+    
+    func setVC(vc: ProfileViewController) {
+        self.vc = vc
     }
 
     func authenticate(username: String?, password: String?) {
@@ -32,7 +35,7 @@ final class ProfilePresenterImpl: ProfilePresenter {
     }
 
     func update() {
-        let user: User? = service?.getUserData()
+        let user = service?.getUserData()
         if let user = user {
             vc?.setUserName(str: user.name + " " + user.familyName)
             vc?.setUserGroup(str: user.group)
@@ -49,5 +52,9 @@ final class ProfilePresenterImpl: ProfilePresenter {
 
     func navigateToProfileDetails() {
         coordinator.navigateToProfileDetails()
+    }
+    
+    func navigateToSettings() {
+        // coordinator.navigateToSettings()
     }
 }

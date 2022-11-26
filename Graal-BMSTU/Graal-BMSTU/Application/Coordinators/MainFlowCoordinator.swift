@@ -13,9 +13,9 @@ import SFSafeSymbols
 final class MainFlowCoordinator: Coordinator {
 
     weak var parentCoordinator: Coordinator?
-    var childCoordinators: [Coordinator] = []
     private let window: UIWindow
-    var navigationController: UINavigationController
+    private var childCoordinators: [Coordinator] = []
+    private var navigationController: UINavigationController
 
     private let tabBarController = UITabBarController()
     private lazy var navigationControllers = MainFlowCoordinator.makeNavigationControllers()
@@ -35,7 +35,6 @@ final class MainFlowCoordinator: Coordinator {
         tabBarController.setViewControllers(navigationControllers, animated: true)
         window.rootViewController = tabBarController
         window.makeKeyAndVisible()
-//        UIView.transition(with: window, duration: 0.5, options: .transitionCrossDissolve, animations: {})
     }
 
 
@@ -94,7 +93,7 @@ private extension MainFlowCoordinator {
         guard let navController = navigationControllers[.profile] else {
             fatalError("No navigation controller for profile tab!")
         }
-        let built = ProfileBuilderImpl.assemble(window: window, navigationController: navigationController)
+        let built = ProfileBuilderImpl.assemble(window: window, navigationController: navController)
         navController.setViewControllers([built.viewController], animated: false)
     }
 

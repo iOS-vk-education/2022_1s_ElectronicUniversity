@@ -11,18 +11,20 @@ import UIKit
 class AppCoordinator: Coordinator {
     var parentCoordinator: Coordinator?
     private let window: UIWindow
-    var childCoordinators = [Coordinator]()
-    var navigationController: UINavigationController
+    private var childCoordinators = [Coordinator]()
+    private var navigationController: UINavigationController
+    
+    static let firstLaunchKey = "NotFirstLaunch"
 
     required init(window: UIWindow, navigationController: UINavigationController = UINavigationController()) {
         self.window = window
         self.navigationController = navigationController
-        self.window.rootViewController = self.navigationController
+        self.window.rootViewController = navigationController
         self.window.makeKeyAndVisible()
     }
 
     func start() {
-        if isFirstLaunch() {
+        if AppCoordinator.isFirstLaunch() {
             self.startAuth()
         } else {
             self.startMain()
@@ -43,9 +45,16 @@ class AppCoordinator: Coordinator {
         child.start()
     }
 
-    private func isFirstLaunch() -> Bool {
-        UserDefaults.standard.value(forKey: "NotFirstLaunch") == nil
+    static func isFirstLaunch() -> Bool {
+        return UserDefaults.standard.value(forKey: firstLaunchKey) == nil
+    }
+    
+    static func setNotFirstLaunch() {
+        UserDefaults.standard.set(true, forKey: firstLaunchKey)
+    }
+    
+    static func resetFirstLaunch() {
+        UserDefaults.standard.removeObject(forKey: firstLaunchKey)
     }
 
-// Где-то тут должна быть подписка на notification center
 }

@@ -15,7 +15,8 @@
 "your_profile_button_title" = "Ваш профиль";
 "performance_button_title" = "Успеваемость";
 "tutors_schedule_button_title" = "Расписание преподавателей";
-"setting_button_title" = "Настройки";
+"settings_button_title" = "Настройки";
+"signout_button_title" = "Выйти";
 
 "login_field_placeholder" = "Ваш логин";
 "password_field_placeholder" = "Ваш пароль";

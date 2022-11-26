@@ -11,20 +11,31 @@ import SFSafeSymbols
 
 typealias ProfileDetailAction = () -> Void
 typealias SettingsAction = () -> Void
+typealias LogoutAction = () -> Void
 
-
-class ProfileView: UIView {
+final class ProfileView: UIView {
     private let userLogo = UIImageView(frame: .zero)
     private let userNameLabel = UILabel(frame: .zero)
     private let userGroupLabel = UILabel(frame: .zero)
     private let profileDetailButton = UIButton(frame: .zero)
     private let settingsButton = UIButton(frame: .zero)
-
+    private let logoutButton = UIButton(frame: .zero)
+    
     private var profileDetailAction: ProfileDetailAction?
     private var settingsAction: SettingsAction?
+    private var logoutAction: LogoutAction?
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupUI()
+    }
+    
+    required init?(coder: NSCoder) {
+        return nil
+    }
 }
 
-extension ProfileView {
+extension ProfileView { // data updates
     func updateUserGroup(with: String) {
         self.userGroupLabel.text = with
     }
@@ -39,178 +50,120 @@ extension ProfileView {
 
 }
 
-extension ProfileView {
+extension ProfileView { // actions setups
+    func setProfileDetailButtonAction(_ action: @escaping ProfileDetailAction) {
+        self.profileDetailAction = action
+    }
+    
+    func setSettingsButtonAction(_ action: @escaping SettingsAction) {
+        self.settingsAction = action
+    }
+    
+    func setLogoutAction(_ action: @escaping LogoutAction) {
+        self.logoutAction = action
+    }
+}
+
+
+private extension ProfileView { // UI
     func setupUI() {
+        self.backgroundColor = .white
         userLogo.image = UIImage(systemSymbol: .personCircle)
-        profileDetailButton.configuration = profileDetailButtonConf()
-        settingsButton.configuration = settingsButtonConf()
-        [userLogo, userNameLabel, userGroupLabel, profileDetailButton, settingsButton].forEach {
+        profileDetailButtonConf()
+        settingsButtonConf()
+        logoutButtonConf()
+        
+        [userLogo, userNameLabel, userGroupLabel, profileDetailButton, settingsButton, logoutButton].forEach {
             box in
             self.addSubview(box)
         }
         setupConstraints()
     }
-
-    private func setupConstraints() {
-
+    
+    func setupConstraints() {
+        userLogo.snp.makeConstraints { make in
+            make.centerX.equalTo(self.safeAreaLayoutGuide)
+            make.top.equalTo(self.safeAreaLayoutGuide).offset(20)
+            make.size.equalTo(50)
+        }
+        
+        userNameLabel.snp.makeConstraints { make in
+            make.centerX.equalTo(self.safeAreaLayoutGuide)
+            make.top.equalTo(userLogo.snp.bottom).offset(30)
+            // make.width.equalTo(100)
+            // height?
+        }
+        
+        userGroupLabel.snp.makeConstraints { make in
+            make.centerX.equalTo(self.safeAreaLayoutGuide)
+            make.top.equalTo(userNameLabel.snp.bottom).offset(30)
+            // make.width.equalTo(100)
+            // height?
+        }
+        
+        profileDetailButton.snp.makeConstraints { make in
+            make.centerX.equalTo(self.safeAreaLayoutGuide)
+            make.top.equalTo(userGroupLabel.snp.bottom).offset(30)
+            // make.width.equalTo(100)
+            // height?
+        }
+        
+        settingsButton.snp.makeConstraints { make in
+            make.centerX.equalTo(self.safeAreaLayoutGuide)
+            make.top.equalTo(profileDetailButton.snp.bottom).offset(30)
+            // make.width.equalTo(100)
+            // height?
+        }
+        
+        logoutButton.snp.makeConstraints { make in
+            make.centerX.equalTo(self.safeAreaLayoutGuide)
+            make.top.equalTo(settingsButton.snp.bottom).offset(30)
+            // make.width.equalTo(100)
+            // height?
+        }
+        
+        
     }
 
-    private func profileDetailButtonConf() -> UIButton.Configuration {
+    func profileDetailButtonConf() {
         var config = UIButton.Configuration.filled()
         config.title = R.string.localizable.your_profile_button_title()
         // ...
-        return config
+        profileDetailButton.configuration = config
+        profileDetailButton.addTarget(self, action: #selector(self.profileDetailButtonPressed), for: .touchUpInside)
+
     }
 
-    private func settingsButtonConf() -> UIButton.Configuration {
+    func settingsButtonConf() {
         var config = UIButton.Configuration.filled()
-        config.title = R.string.localizable.setting_button_title()
+        config.title = R.string.localizable.settings_button_title()
         // ...
-        return config
+        settingsButton.configuration = config
+        settingsButton.addTarget(self, action: #selector(self.settingsButtonPressed), for: .touchUpInside)
+
+    }
+    
+    func logoutButtonConf() {
+        var config = UIButton.Configuration.filled()
+        config.title = R.string.localizable.signout_button_title()
+        // ...
+        logoutButton.configuration = config
+        logoutButton.addTarget(self, action: #selector(self.logoutButtonPressed), for: .touchUpInside)
+
     }
 }
 
-extension ProfileView {
-    func setProfileDetailButtonAction(_ action: @escaping ProfileDetailAction) {
-        self.profileDetailAction = action
-    }
 
-    func setSettingsButtonAction(_ action: @escaping SettingsAction) {
-        self.settingsAction = action
-    }
-
-    @objc private func profileDetailButtonPressed() {
+private extension ProfileView { // UI actions
+    @objc func profileDetailButtonPressed() {
         self.profileDetailAction?()
     }
-
-    @objc private func settingsButtonPressed() {
+    
+    @objc func settingsButtonPressed() {
         self.settingsAction?()
     }
-}
-
-
-typealias LoginAction = (String?, String?) -> Void
-typealias SkipAuthAction = () -> Void
-
-final class AuthView: UIView {
-    private let bmstuImage = UIImageView(frame: .zero)
-
-    private let loginField = UITextField(frame: .zero)
-    private let passwordField = UITextField(frame: .zero)
-
-    private let loginButton = UIButton(frame: .zero)
-    private let skipAuthButton = UIButton(frame: .zero) // только при первом запуске есть такая кнопка!
-
-    private var loginAction: LoginAction?
-    private var skipAuthAction: SkipAuthAction?
-}
-
-
-extension AuthView {
-    // actions
-    func setupLoginAction(_ action: @escaping LoginAction) {
-        self.loginAction = action
-    }
-
-    @objc private func loginButtonPressed() {
-        if let action = self.loginAction {
-            action(loginField.text, passwordField.text)
-        } else {
-            print("No login action!")
-        }
-    }
-
-    func setupSkipAuthAction(_ action: @escaping SkipAuthAction) {
-        self.skipAuthAction = action
-    }
-
-    @objc private func skipAuthButtonPressed() {
-        if let action = self.skipAuthAction {
-            action()
-        } else {
-            print("No skipAuth action!")
-        }
+    
+    @objc func logoutButtonPressed() {
+        self.logoutAction?()
     }
 }
-
-extension AuthView {
-    private func createLoginButtonConfig() -> UIButton.Configuration {
-        var config = UIButton.Configuration.filled()
-        config.buttonSize = .large
-        config.cornerStyle = .medium
-        config.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { incoming in
-            var outgoing = incoming
-            outgoing.font = UIFont.preferredFont(forTextStyle: .headline)
-            return outgoing
-        }
-        config.title = R.string.localizable.login_button_text()
-        config.titlePadding = 5
-        config.image = UIImage(systemSymbol: .chevronRight)
-        config.imagePadding = 5
-        config.imagePlacement = .trailing
-        config.preferredSymbolConfigurationForImage = UIImage.SymbolConfiguration(scale: .medium)
-        return config
-    }
-
-    private func createSkipAuthButton() -> UIButton.Configuration {
-        var config = UIButton.Configuration.tinted()
-        config.buttonSize = .large
-        config.cornerStyle = .medium
-        config.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { incoming in
-            var outgoing = incoming
-            outgoing.font = UIFont.preferredFont(forTextStyle: .headline)
-            return outgoing
-        }
-        config.title = R.string.localizable.skip_auth_button_text()
-        config.titlePadding = 5
-        config.image = UIImage(systemSymbol: .rectanglePortraitAndArrowRight)
-        config.imagePadding = 5
-        config.imagePlacement = .trailing
-        config.preferredSymbolConfigurationForImage = UIImage.SymbolConfiguration(scale: .medium)
-        return config
-    }
-
-    func setupUI() {
-        self.backgroundColor = .white
-        bmstuImage.image = R.image.bmstuLogo()
-        loginField.placeholder = R.string.localizable.login_field_placeholder()
-        passwordField.placeholder = R.string.localizable.password_field_placeholder()
-
-        loginButton.configuration = createLoginButtonConfig()
-        loginButton.addTarget(self, action: #selector(self.loginButtonPressed), for: .touchUpInside)
-
-        skipAuthButton.configuration = createSkipAuthButton()
-        skipAuthButton.addTarget(self, action: #selector(self.skipAuthButtonPressed), for: .touchUpInside)
-        [bmstuImage, loginField, passwordField, loginButton, skipAuthButton].forEach { box in
-            self.addSubview(box)
-        }
-        self.setupConstraints()
-    }
-
-    private func setupConstraints() {
-        bmstuImage.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.size.equalTo(100)
-            make.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(20)
-        }
-        loginField.snp.makeConstraints { make in
-            make.top.equalTo(bmstuImage.snp.bottom).offset(20)
-            make.centerX.equalToSuperview()
-        }
-        passwordField.snp.makeConstraints { make in
-            make.top.equalTo(loginField.snp.bottom).offset(20)
-            make.centerX.equalToSuperview()
-        }
-        loginButton.snp.makeConstraints { make in
-            make.left.equalTo(self.safeAreaLayoutGuide.snp.left).offset(20)
-            make.right.equalTo(self.safeAreaLayoutGuide.snp.right).inset(20)
-            make.top.equalTo(passwordField.snp.bottom).offset(20)
-        }
-        skipAuthButton.snp.makeConstraints { make in
-            make.left.equalTo(self.safeAreaLayoutGuide.snp.left).offset(20)
-            make.right.equalTo(self.safeAreaLayoutGuide.snp.right).inset(20)
-            make.top.equalTo(loginButton.snp.bottom).offset(20)
-        }
-    }
-}
-
