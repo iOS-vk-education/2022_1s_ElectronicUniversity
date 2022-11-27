@@ -21,8 +21,8 @@ final class AuthFlowCoordinator: Coordinator {
 
     func start() {
         let child = ProfileBuilderImpl.assemble(window: window, navigationController: navigationController)
-        childCoordinators.append(child.coordinator)
-        child.coordinator.parentCoordinator = self
-        child.coordinator.start()
+        childCoordinators.append(child.router)
+        child.router.parentCoordinator = self
+        child.router.start()
     }
 }

@@ -9,9 +9,9 @@ import UIKit
 
 
 protocol ProfilePresenter {
-    init(coordinator: ProfileCoordinator, service: AuthService)
+    init(router: ProfileRouter, service: AuthService)
     func update()
-    func setVC(vc: ProfileViewController)
+    func setVC(vc: ProfileViewControllerProtocol)
 
     // MARK: - связка с сервисом, функции для вьюшки
     func authenticate(username: String?, password: String?)
@@ -21,13 +21,13 @@ protocol ProfilePresenter {
     func navigateToSettings()
 }
 
-protocol ProfileCoordinator: Coordinator {
+protocol ProfileRouter: Coordinator {
     func navigateToProfileDetails()
     func navigateToSettings()
     func setVC(vc: UIViewController)
 }
 
-protocol ProfileViewController: AnyObject {
+protocol ProfileViewControllerProtocol: AnyObject {
     func showAuthError(description: String?)
     func setUserName(str: String)
     func setUserGroup(str: String)
@@ -42,7 +42,7 @@ protocol AuthService {
 
 protocol ProfileBuilder {
     var presenter: ProfilePresenter { get }
-    var viewController: ProfileViewController { get }
-    var coordinator: ProfileCoordinator { get }
+    var viewController: ProfileViewControllerProtocol { get }
+    var router: ProfileRouter { get }
     static func assemble(window: UIWindow, navigationController: UINavigationController) -> ProfileBuilder
 }

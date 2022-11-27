@@ -86,14 +86,13 @@ private extension MainFlowCoordinator {
             return
         }
         let built = ProfileBuilderImpl.assemble(window: window, navigationController: navController)
-//        navController.setViewControllers([built.viewController], animated: false)
-        built.coordinator.start()
+        built.router.start()
     }
 }
 
 private extension MainFlowCoordinator {
     static func makeNavigationControllers() -> [TabType: UINavigationController] {
-        var result: [TabType: UINavigationController] = [:] // dictionary
+        var result: [TabType: UINavigationController] = [:]
 
         TabType.allCases.forEach { tab in
             let navController = UINavigationController()

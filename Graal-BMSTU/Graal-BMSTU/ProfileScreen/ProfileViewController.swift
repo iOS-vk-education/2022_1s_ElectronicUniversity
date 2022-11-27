@@ -12,16 +12,15 @@ enum ProfileViewState {
     case auth
 }
 
-final class ProfileViewControllerImpl: UIViewController {
+final class ProfileViewController: UIViewController {
     private var authView: AuthView = AuthView(frame: .zero)
     private var profileView: ProfileView = ProfileView(frame: .zero)
 
     private let presenter: ProfilePresenter
-    private var state: ProfileViewState
+    private var state: ProfileViewState?
 
-    init(presenter: ProfilePresenter, state: ProfileViewState) {
+    init(presenter: ProfilePresenter) {
         self.presenter = presenter
-        self.state = state
         super.init(nibName: nil, bundle: nil)
         setupActions()
         self.presenter.setVC(vc: self)
@@ -33,7 +32,7 @@ final class ProfileViewControllerImpl: UIViewController {
     }
 }
 
-extension ProfileViewControllerImpl: ProfileViewController {
+extension ProfileViewController: ProfileViewControllerProtocol {
     func showAuthError(description: String?) {
         // placeholder
         if let desc = description {

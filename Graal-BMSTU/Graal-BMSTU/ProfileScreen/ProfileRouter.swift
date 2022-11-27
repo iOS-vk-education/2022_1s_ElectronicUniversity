@@ -1,5 +1,5 @@
 //
-//  ProfileCoordinator.swift
+//  ProfileRouter.swift
 //  Graal-BMSTU
 //
 //  Created by Артём on 11.11.2022.
@@ -8,7 +8,7 @@
 import UIKit
 
 
-final class ProfileCoordinatorImpl: ProfileCoordinator {
+final class ProfileRouterImpl: ProfileRouter {
     private let window: UIWindow
     var parentCoordinator: Coordinator?
     var childCoordinators = [Coordinator]()

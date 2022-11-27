@@ -11,7 +11,7 @@
 		705B6A55291E88A500C5FB63 /* AuthFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 705B6A54291E88A500C5FB63 /* AuthFlowCoordinator.swift */; };
 		705B6A57291E8AAF00C5FB63 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 705B6A56291E8AAF00C5FB63 /* AppCoordinator.swift */; };
 		705B6A5E291EA96800C5FB63 /* ProfileBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 705B6A5D291EA96800C5FB63 /* ProfileBuilder.swift */; };
-		7080CD25291EAB1A00F1BBA0 /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7080CD24291EAB1A00F1BBA0 /* ProfileCoordinator.swift */; };
+		7080CD25291EAB1A00F1BBA0 /* ProfileRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7080CD24291EAB1A00F1BBA0 /* ProfileRouter.swift */; };
 		7080CD27291EAD3600F1BBA0 /* ProfileProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7080CD26291EAD3600F1BBA0 /* ProfileProtocols.swift */; };
 		7080CD29291EAE4800F1BBA0 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7080CD28291EAE4800F1BBA0 /* ProfileViewController.swift */; };
 		708CF77A291C4A3F0036AEA2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 708CF77C291C4A3F0036AEA2 /* Localizable.strings */; };
@@ -55,7 +55,7 @@
 		705B6A56291E8AAF00C5FB63 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		705B6A58291E8D7200C5FB63 /* Codestyle.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Codestyle.md; sourceTree = "<group>"; };
 		705B6A5D291EA96800C5FB63 /* ProfileBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileBuilder.swift; sourceTree = "<group>"; };
-		7080CD24291EAB1A00F1BBA0 /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
+		7080CD24291EAB1A00F1BBA0 /* ProfileRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRouter.swift; sourceTree = "<group>"; };
 		7080CD26291EAD3600F1BBA0 /* ProfileProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileProtocols.swift; sourceTree = "<group>"; };
 		7080CD28291EAE4800F1BBA0 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		708CF77B291C4A3F0036AEA2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -185,7 +185,7 @@
 				7092B979291C295E000D8D3C /* ProfilePresenter.swift */,
 				7092B97B291C2967000D8D3C /* UserModel.swift */,
 				705B6A5D291EA96800C5FB63 /* ProfileBuilder.swift */,
-				7080CD24291EAB1A00F1BBA0 /* ProfileCoordinator.swift */,
+				7080CD24291EAB1A00F1BBA0 /* ProfileRouter.swift */,
 				7080CD26291EAD3600F1BBA0 /* ProfileProtocols.swift */,
 			);
 			path = ProfileScreen;
@@ -319,7 +319,7 @@
 			mainGroup = 708E76BE29005E4A00D23E70;
 			packageReferences = (
 				70F653AD2915F3DC0024EA1D /* XCRemoteSwiftPackageReference "SnapKit" */,
-				7092B9BD291C447F000D8D3C /* XCRemoteSwiftPackageReference "R.swift" */,
+				7092B9BD291C447F000D8D3C /* XCRemoteSwiftPackageReference "R.swift.Library" */,
 				708CF77E291C550A0036AEA2 /* XCRemoteSwiftPackageReference "SFSafeSymbols" */,
 			);
 			productRefGroup = 708E76C829005E4A00D23E70 /* Products */;
@@ -372,7 +372,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7080CD25291EAB1A00F1BBA0 /* ProfileCoordinator.swift in Sources */,
+				7080CD25291EAB1A00F1BBA0 /* ProfileRouter.swift in Sources */,
 				7092B982291C29C3000D8D3C /* MainMenuView.swift in Sources */,
 				7080CD27291EAD3600F1BBA0 /* ProfileProtocols.swift in Sources */,
 				70576429291322B7006555E2 /* ProfileView.swift in Sources */,
@@ -634,7 +634,7 @@
 				kind = branch;
 			};
 		};
-		7092B9BD291C447F000D8D3C /* XCRemoteSwiftPackageReference "R.swift" */ = {
+		7092B9BD291C447F000D8D3C /* XCRemoteSwiftPackageReference "R.swift.Library" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/mac-cain13/R.swift.Library";
 			requirement = {
@@ -660,7 +660,7 @@
 		};
 		7092B9BE291C447F000D8D3C /* Rswift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 7092B9BD291C447F000D8D3C /* XCRemoteSwiftPackageReference "R.swift" */;
+			package = 7092B9BD291C447F000D8D3C /* XCRemoteSwiftPackageReference "R.swift.Library" */;
 			productName = Rswift;
 		};
 		70F653AE2915F3DC0024EA1D /* SnapKit */ = {

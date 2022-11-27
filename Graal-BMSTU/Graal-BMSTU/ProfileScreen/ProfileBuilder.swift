@@ -9,23 +9,23 @@ import UIKit
 
 final class ProfileBuilderImpl: ProfileBuilder {
     let presenter: ProfilePresenter
-    let viewController: ProfileViewController
-    let coordinator: ProfileCoordinator
+    let viewController: ProfileViewControllerProtocol
+    let router: ProfileRouter
 
-    private init(viewController: ProfileViewController, presenter: ProfilePresenter, coordinator: ProfileCoordinator) {
+    private init(viewController: ProfileViewControllerProtocol, presenter: ProfilePresenter, router: ProfileRouter) {
         self.viewController = viewController
         self.presenter = presenter
-        self.coordinator = coordinator
+        self.router = router
     }
 
     static func assemble(window: UIWindow, navigationController: UINavigationController) -> ProfileBuilder {
-        let coordinator = ProfileCoordinatorImpl(window: window, navigationController: navigationController)
-        let presenter = ProfilePresenterImpl(coordinator: coordinator, service: AuthServiceMockup())
-        let viewController = ProfileViewControllerImpl(presenter: presenter, state: .auth)
+        let router = ProfileRouterImpl(window: window, navigationController: navigationController)
+        let presenter = ProfilePresenterImpl(router: router, service: AuthServiceMockup())
+        let viewController = ProfileViewController(presenter: presenter)
 
         presenter.setVC(vc: viewController)
-        coordinator.setVC(vc: viewController)
+        router.setVC(vc: viewController)
 
-        return ProfileBuilderImpl(viewController: viewController, presenter: presenter, coordinator: coordinator)
+        return ProfileBuilderImpl(viewController: viewController, presenter: presenter, router: router)
     }
 }

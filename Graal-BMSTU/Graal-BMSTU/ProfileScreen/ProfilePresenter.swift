@@ -8,16 +8,16 @@
 import Foundation
 
 final class ProfilePresenterImpl: ProfilePresenter {
-    private weak var vc: ProfileViewController?
+    private weak var vc: ProfileViewControllerProtocol?
     private var service: AuthService?
-    private let coordinator: ProfileCoordinator
+    private let coordinator: ProfileRouter
 
-    init(coordinator: ProfileCoordinator, service: AuthService) {
-        self.coordinator = coordinator
+    init(router: ProfileRouter, service: AuthService) {
+        self.coordinator = router
         self.service = service
     }
 
-    func setVC(vc: ProfileViewController) {
+    func setVC(vc: ProfileViewControllerProtocol) {
         self.vc = vc
     }
 
