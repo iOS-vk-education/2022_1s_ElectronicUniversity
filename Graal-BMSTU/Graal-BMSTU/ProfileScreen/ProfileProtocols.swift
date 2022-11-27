@@ -9,7 +9,7 @@ import UIKit
 
 
 protocol ProfilePresenter {
-    init(coordinator: ProfileCoordinator, service: ProfileService)
+    init(coordinator: ProfileCoordinator, service: AuthService)
     func update()
     func setVC(vc: ProfileViewController)
 
@@ -18,20 +18,23 @@ protocol ProfilePresenter {
     func skipAuthentication()
     func logout()
     func navigateToProfileDetails()
+    func navigateToSettings()
 }
 
 protocol ProfileCoordinator: Coordinator {
     func navigateToProfileDetails()
+    func navigateToSettings()
+    func setVC(vc: UIViewController)
 }
 
-protocol ProfileViewController: AnyObject, UIViewController {
+protocol ProfileViewController: AnyObject {
     func showAuthError(description: String?)
     func setUserName(str: String)
     func setUserGroup(str: String)
     func setState(to: ProfileViewState)
 }
 
-protocol ProfileService {
+protocol AuthService {
     func authenticate(login: String, password: String) -> User?
     func getUserData() -> User?
     func logout()

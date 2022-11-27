@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 class AppCoordinator: Coordinator {
     var parentCoordinator: Coordinator?
     private let window: UIWindow

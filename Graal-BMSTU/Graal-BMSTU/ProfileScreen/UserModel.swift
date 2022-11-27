@@ -12,5 +12,3 @@ struct User {
     let familyName: String
     let group: String = "ИУ7-35Б"
 }
-
-

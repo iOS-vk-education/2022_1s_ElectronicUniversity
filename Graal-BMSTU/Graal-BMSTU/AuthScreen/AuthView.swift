@@ -4,52 +4,52 @@
 //
 //  Created by Артём on 26.11.2022.
 //
+
 import UIKit
 import SnapKit
 import Rswift
 import SFSafeSymbols
-
 
 typealias LoginAction = (String?, String?) -> Void
 typealias SkipAuthAction = () -> Void
 
 final class AuthView: UIView {
     private let bmstuImage = UIImageView(frame: .zero)
-    
+
     private let loginField = UITextField(frame: .zero)
     private let passwordField = UITextField(frame: .zero)
-    
+
     private let loginButton = UIButton(frame: .zero)
     private let skipAuthButton = UIButton(frame: .zero) // только при первом запуске есть такая кнопка!
-    
+
     private var loginAction: LoginAction?
     private var skipAuthAction: SkipAuthAction?
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()
     }
-    
+
     required init?(coder: NSCoder) {
         return nil
     }
 }
 
-
 // MARK: - actions setup
-extension AuthView { // actions setup
+
+extension AuthView {
     func setupLoginAction(_ action: @escaping LoginAction) {
         self.loginAction = action
     }
-    
+
     func setupSkipAuthAction(_ action: @escaping SkipAuthAction) {
         self.skipAuthAction = action
     }
-    
 }
 
 // MARK: - UI actions
-private extension AuthView { // UI actions
+
+private extension AuthView {
     @objc func loginButtonPressed() {
         if let action = self.loginAction {
             action(loginField.text, passwordField.text)
@@ -57,7 +57,7 @@ private extension AuthView { // UI actions
             print("No login action!")
         }
     }
-    
+
     @objc func skipAuthButtonPressed() {
         if let action = self.skipAuthAction {
             action()
@@ -68,6 +68,7 @@ private extension AuthView { // UI actions
 }
 
 // MARK: - UI
+
 private extension AuthView {
     func setupUI() {
         self.backgroundColor = .white
@@ -76,13 +77,17 @@ private extension AuthView {
         passwordField.placeholder = R.string.localizable.password_field_placeholder()
         loginButtonConf()
         skipAuthButtonConf()
-        
-        [bmstuImage, loginField, passwordField, loginButton, skipAuthButton].forEach { box in
+
+        var elems = [bmstuImage, loginField, passwordField, loginButton]
+        if AppCoordinator.isFirstLaunch() {
+            elems.append(skipAuthButton)
+        }
+        elems.forEach { box in
             self.addSubview(box)
         }
         setupConstraints()
     }
-    
+
     func setupConstraints() {
         bmstuImage.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
@@ -102,14 +107,17 @@ private extension AuthView {
             make.right.equalTo(self.safeAreaLayoutGuide.snp.right).inset(20)
             make.top.equalTo(passwordField.snp.bottom).offset(20)
         }
-        skipAuthButton.snp.makeConstraints { make in
-            make.left.equalTo(self.safeAreaLayoutGuide.snp.left).offset(20)
-            make.right.equalTo(self.safeAreaLayoutGuide.snp.right).inset(20)
-            make.top.equalTo(loginButton.snp.bottom).offset(20)
+        if AppCoordinator.isFirstLaunch() {
+            skipAuthButton.snp.makeConstraints { make in
+                make.left.equalTo(self.safeAreaLayoutGuide.snp.left).offset(20)
+                make.right.equalTo(self.safeAreaLayoutGuide.snp.right).inset(20)
+                make.top.equalTo(loginButton.snp.bottom).offset(20)
+            }
         }
     }
-    
+
     // MARK: - button configs
+
     func loginButtonConf() {
         var config = UIButton.Configuration.filled()
         config.buttonSize = .large
@@ -128,7 +136,7 @@ private extension AuthView {
         self.loginButton.configuration = config
         loginButton.addTarget(self, action: #selector(self.loginButtonPressed), for: .touchUpInside)
     }
-    
+
     func skipAuthButtonConf() {
         var config = UIButton.Configuration.tinted()
         config.buttonSize = .large
@@ -148,4 +156,3 @@ private extension AuthView {
         skipAuthButton.addTarget(self, action: #selector(self.skipAuthButtonPressed), for: .touchUpInside)
     }
 }
-

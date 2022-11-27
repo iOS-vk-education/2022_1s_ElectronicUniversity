@@ -35,6 +35,7 @@ final class MainFlowCoordinator: Coordinator {
     }
 }
 
+// MARK: - appearance
 private extension MainFlowCoordinator {
     func setupAppearance() {
         tabBarController.tabBar.isTranslucent = false
@@ -43,14 +44,12 @@ private extension MainFlowCoordinator {
         tabBarController.tabBar.shadowImage = nil
     }
 
-
     func setupAllTabs() {
         setupMainMenuTab()
         setupScheduleTab()
         setupTrainingTab()
         setupProfileTab()
     }
-
 
     func setupMainMenuTab() {
         guard let navController = navigationControllers[.mainMenu] else {
@@ -62,7 +61,6 @@ private extension MainFlowCoordinator {
         navController.setViewControllers([built], animated: false)
     }
 
-
     func setupScheduleTab() {
         guard let navController = navigationControllers[.schedule] else {
             return
@@ -72,7 +70,6 @@ private extension MainFlowCoordinator {
         built.view.backgroundColor = .white
         navController.setViewControllers([built], animated: false)
     }
-
 
     func setupTrainingTab() {
         guard let navController = navigationControllers[.training] else {
@@ -84,7 +81,6 @@ private extension MainFlowCoordinator {
         navController.setViewControllers([built], animated: false)
     }
 
-
     func setupProfileTab() {
         guard let navController = navigationControllers[.profile] else {
             return
@@ -95,8 +91,7 @@ private extension MainFlowCoordinator {
     }
 }
 
-
-fileprivate extension MainFlowCoordinator {
+private extension MainFlowCoordinator {
     static func makeNavigationControllers() -> [TabType: UINavigationController] {
         var result: [TabType: UINavigationController] = [:] // dictionary
 
@@ -109,7 +104,6 @@ fileprivate extension MainFlowCoordinator {
         return result
     }
 }
-
 
 fileprivate enum TabType: Int, CaseIterable {
     case mainMenu, schedule, training, profile

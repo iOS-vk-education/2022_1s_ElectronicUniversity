@@ -31,11 +31,9 @@ final class ProfileViewControllerImpl: UIViewController {
     required init?(coder: NSCoder) {
         return nil
     }
-
 }
 
 extension ProfileViewControllerImpl: ProfileViewController {
-
     func showAuthError(description: String?) {
         // placeholder
         if let desc = description {
@@ -54,14 +52,11 @@ extension ProfileViewControllerImpl: ProfileViewController {
     }
 
     func setupActions() {
-        if state == .profile {
-            profileView.setProfileDetailButtonAction(self.presenter.navigateToProfileDetails)
-            profileView.setLogoutAction(self.presenter.logout)
-//            profileView.setSettingsButtonAction(self.presenter.navigateToSettings)
-        } else {
-            authView.setupLoginAction(self.presenter.authenticate)
-            authView.setupSkipAuthAction(self.presenter.skipAuthentication)
-        }
+        profileView.setProfileDetailButtonAction(self.presenter.navigateToProfileDetails)
+        profileView.setLogoutAction(self.presenter.logout)
+        profileView.setSettingsButtonAction(self.presenter.navigateToSettings)
+        authView.setupLoginAction(self.presenter.authenticate)
+        authView.setupSkipAuthAction(self.presenter.skipAuthentication)
     }
 
     func setState(to: ProfileViewState) {
@@ -73,5 +68,3 @@ extension ProfileViewControllerImpl: ProfileViewController {
         }
     }
 }
-
-

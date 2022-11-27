@@ -8,16 +8,15 @@
 import Foundation
 
 final class ProfilePresenterImpl: ProfilePresenter {
-
     private weak var vc: ProfileViewController?
-    private var service: ProfileService?
+    private var service: AuthService?
     private let coordinator: ProfileCoordinator
 
-    init(coordinator: ProfileCoordinator, service: ProfileService) {
+    init(coordinator: ProfileCoordinator, service: AuthService) {
         self.coordinator = coordinator
         self.service = service
     }
-    
+
     func setVC(vc: ProfileViewController) {
         self.vc = vc
     }
@@ -33,12 +32,13 @@ final class ProfilePresenterImpl: ProfilePresenter {
             vc?.showAuthError(description: "Incorrect input")
         }
     }
-    
+
     func skipAuthentication() {
         AppCoordinator.setNotFirstLaunch()
-        
+        // ... notification center
+        // ... restart appcoordinator or just change flow coordinator
     }
-    
+
     func update() {
         let user = service?.getUserData()
         if let user = user {
@@ -58,8 +58,8 @@ final class ProfilePresenterImpl: ProfilePresenter {
     func navigateToProfileDetails() {
         coordinator.navigateToProfileDetails()
     }
-    
+
     func navigateToSettings() {
-        // coordinator.navigateToSettings()
+         coordinator.navigateToSettings()
     }
 }
