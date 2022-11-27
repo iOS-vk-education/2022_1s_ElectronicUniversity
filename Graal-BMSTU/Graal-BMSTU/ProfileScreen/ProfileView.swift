@@ -35,6 +35,7 @@ final class ProfileView: UIView {
     }
 }
 
+// MARK: - data updates
 extension ProfileView { // data updates
     func updateUserGroup(with: String) {
         self.userGroupLabel.text = with
@@ -50,7 +51,8 @@ extension ProfileView { // data updates
 
 }
 
-extension ProfileView { // actions setups
+// MARK: - actions setups
+extension ProfileView {
     func setProfileDetailButtonAction(_ action: @escaping ProfileDetailAction) {
         self.profileDetailAction = action
     }
@@ -64,7 +66,7 @@ extension ProfileView { // actions setups
     }
 }
 
-
+// MARK: - UI
 private extension ProfileView { // UI
     func setupUI() {
         self.backgroundColor = .white
@@ -124,7 +126,7 @@ private extension ProfileView { // UI
         
         
     }
-
+    // MARK: - button configs
     func profileDetailButtonConf() {
         var config = UIButton.Configuration.filled()
         config.title = R.string.localizable.your_profile_button_title()
@@ -153,8 +155,8 @@ private extension ProfileView { // UI
     }
 }
 
-
-private extension ProfileView { // UI actions
+// MARK: - UI actions
+private extension ProfileView {
     @objc func profileDetailButtonPressed() {
         self.profileDetailAction?()
     }

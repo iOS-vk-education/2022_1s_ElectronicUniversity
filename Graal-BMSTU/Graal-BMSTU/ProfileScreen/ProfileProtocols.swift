@@ -11,9 +11,11 @@ import UIKit
 protocol ProfilePresenter {
     init(coordinator: ProfileCoordinator, service: ProfileService)
     func update()
+    func setVC(vc: ProfileViewController)
 
     // MARK: - связка с сервисом, функции для вьюшки
     func authenticate(username: String?, password: String?)
+    func skipAuthentication()
     func logout()
     func navigateToProfileDetails()
 }

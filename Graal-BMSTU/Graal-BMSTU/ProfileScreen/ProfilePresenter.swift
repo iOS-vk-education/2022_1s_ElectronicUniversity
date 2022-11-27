@@ -33,7 +33,12 @@ final class ProfilePresenterImpl: ProfilePresenter {
             vc?.showAuthError(description: "Incorrect input")
         }
     }
-
+    
+    func skipAuthentication() {
+        AppCoordinator.setNotFirstLaunch()
+        
+    }
+    
     func update() {
         let user = service?.getUserData()
         if let user = user {

@@ -28,7 +28,7 @@ final class ProfileBuilderImpl: ProfileBuilder
     {
         let coordinator = ProfileCoordinatorImpl(window: window, navigationController: navigationController)
         let presenter = ProfilePresenterImpl(coordinator: coordinator, service: AuthServiceMockup())
-        let viewController = ProfileViewControllerImpl(presenter: presenter)
+        let viewController = ProfileViewControllerImpl(presenter: presenter, state: .auth)
 
         presenter.setVC(vc: viewController)
         coordinator.viewController = viewController

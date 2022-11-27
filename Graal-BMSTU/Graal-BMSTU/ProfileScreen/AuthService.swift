@@ -15,6 +15,7 @@ class AuthServiceMockup: ProfileService {
         
         if let validCredentials = AuthServiceMockup.validTestUsersCredentials.first(where: { $0.0 == login && $0.1 == password }) {
             AuthServiceMockup.loggedUser = User(name: validCredentials.0, familyName: "Tikhonenko")
+            AppCoordinator.setNotFirstLaunch()
         }
         return AuthServiceMockup.loggedUser
     }

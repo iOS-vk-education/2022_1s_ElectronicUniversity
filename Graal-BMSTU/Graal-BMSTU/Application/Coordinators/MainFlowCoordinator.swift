@@ -11,7 +11,6 @@ import SFSafeSymbols
 
 
 final class MainFlowCoordinator: Coordinator {
-
     weak var parentCoordinator: Coordinator?
     private let window: UIWindow
     private var childCoordinators: [Coordinator] = []
@@ -25,10 +24,8 @@ final class MainFlowCoordinator: Coordinator {
         self.navigationController = navigationController
     }
 
-
     func start() {
         setupAllTabs()
-
         let navigationControllers = TabType.allCases.compactMap { // достаем вьюконтроллеры из словаря
             self.navigationControllers[$0]
         }
@@ -36,8 +33,6 @@ final class MainFlowCoordinator: Coordinator {
         window.rootViewController = tabBarController
         window.makeKeyAndVisible()
     }
-
-
 }
 
 private extension MainFlowCoordinator {
@@ -59,7 +54,7 @@ private extension MainFlowCoordinator {
 
     func setupMainMenuTab() {
         guard let navController = navigationControllers[.mainMenu] else {
-            fatalError("No navigation controller for main menu tab!")
+            return
         }
 //        let built = MainMenuBuilder.assemble()
         let built = UIViewController()
@@ -70,7 +65,7 @@ private extension MainFlowCoordinator {
 
     func setupScheduleTab() {
         guard let navController = navigationControllers[.schedule] else {
-            fatalError("No navigation controller for schedule tab!")
+            return
         }
 //        let built = ScheduleBuilder.assemble()
         let built = UIViewController()
@@ -81,22 +76,23 @@ private extension MainFlowCoordinator {
 
     func setupTrainingTab() {
         guard let navController = navigationControllers[.training] else {
-            fatalError("No navigation controller for training tab!")
+            return
         }
 //        let built = TrainingBuilder.assemble()
         let built = UIViewController()
         built.view.backgroundColor = .white
-        navController.setViewControllers([built], animated: false)    }
+        navController.setViewControllers([built], animated: false)
+    }
 
 
     func setupProfileTab() {
         guard let navController = navigationControllers[.profile] else {
-            fatalError("No navigation controller for profile tab!")
+            return
         }
         let built = ProfileBuilderImpl.assemble(window: window, navigationController: navController)
-        navController.setViewControllers([built.viewController], animated: false)
+//        navController.setViewControllers([built.viewController], animated: false)
+        built.coordinator.start()
     }
-
 }
 
 

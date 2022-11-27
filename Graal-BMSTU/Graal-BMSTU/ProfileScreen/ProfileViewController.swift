@@ -19,12 +19,13 @@ final class ProfileViewControllerImpl: UIViewController {
     private let presenter: ProfilePresenter
     private var state: ProfileViewState
 
-    init(presenter: ProfilePresenter) {
+    init(presenter: ProfilePresenter, state: ProfileViewState) {
         self.presenter = presenter
-        state = .auth
+        self.state = state
         super.init(nibName: nil, bundle: nil)
         setupActions()
-        presenter.update()
+        self.presenter.setVC(vc: self)
+        self.presenter.update()
     }
 
     required init?(coder: NSCoder) {
@@ -59,6 +60,7 @@ extension ProfileViewControllerImpl: ProfileViewController {
 //            profileView.setSettingsButtonAction(self.presenter.navigateToSettings)
         } else {
             authView.setupLoginAction(self.presenter.authenticate)
+            authView.setupSkipAuthAction(self.presenter.skipAuthentication)
         }
     }
 

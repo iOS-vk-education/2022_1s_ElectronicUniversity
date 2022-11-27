@@ -24,6 +24,7 @@ class AppCoordinator: Coordinator {
     }
 
     func start() {
+        navigationController.setViewControllers([], animated: false)
         if AppCoordinator.isFirstLaunch() {
             self.startAuth()
         } else {

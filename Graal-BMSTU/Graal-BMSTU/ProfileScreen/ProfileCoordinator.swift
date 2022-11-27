@@ -26,6 +26,7 @@ final class ProfileCoordinatorImpl: ProfileCoordinator
         if let viewController = viewController {
             navigationController.pushViewController(viewController, animated: true)
         }
+    
         self.window.makeKeyAndVisible()
     }
 

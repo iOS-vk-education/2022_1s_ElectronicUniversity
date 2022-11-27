@@ -9,7 +9,6 @@ import UIKit
 
 
 final class AuthFlowCoordinator: Coordinator {
-
     weak var parentCoordinator: Coordinator?
     private var navigationController: UINavigationController
     private var childCoordinators: [Coordinator] = []
@@ -22,7 +21,6 @@ final class AuthFlowCoordinator: Coordinator {
 
     func start() {
         let child = ProfileBuilderImpl.assemble(window: window, navigationController: navigationController)
-//        self.navigationController.setViewControllers([child.viewController], animated: false)
         childCoordinators.append(child.coordinator)
         child.coordinator.parentCoordinator = self
         child.coordinator.start()

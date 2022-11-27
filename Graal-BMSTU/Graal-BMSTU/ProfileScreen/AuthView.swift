@@ -36,6 +36,7 @@ final class AuthView: UIView {
 }
 
 
+// MARK: - actions setup
 extension AuthView { // actions setup
     func setupLoginAction(_ action: @escaping LoginAction) {
         self.loginAction = action
@@ -47,6 +48,7 @@ extension AuthView { // actions setup
     
 }
 
+// MARK: - UI actions
 private extension AuthView { // UI actions
     @objc func loginButtonPressed() {
         if let action = self.loginAction {
@@ -65,7 +67,8 @@ private extension AuthView { // UI actions
     }
 }
 
-private extension AuthView { // UI
+// MARK: - UI
+private extension AuthView {
     func setupUI() {
         self.backgroundColor = .white
         bmstuImage.image = R.image.bmstuLogo()
@@ -106,6 +109,7 @@ private extension AuthView { // UI
         }
     }
     
+    // MARK: - button configs
     func loginButtonConf() {
         var config = UIButton.Configuration.filled()
         config.buttonSize = .large
