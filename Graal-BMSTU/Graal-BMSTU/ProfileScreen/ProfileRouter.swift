@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 final class ProfileRouterImpl: ProfileRouter {
     private let window: UIWindow
     var parentCoordinator: Coordinator?

@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 protocol ProfilePresenter {
     init(router: ProfileRouter, service: AuthService)
     func update()

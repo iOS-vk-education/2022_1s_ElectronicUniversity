@@ -31,8 +31,7 @@
 		7092B997291C2AA1000D8D3C /* TrainingPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7092B996291C2AA1000D8D3C /* TrainingPresenter.swift */; };
 		7092B999291C2AAD000D8D3C /* TrainingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7092B998291C2AAD000D8D3C /* TrainingView.swift */; };
 		7092B99B291C2ABB000D8D3C /* TrainingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7092B99A291C2ABB000D8D3C /* TrainingModel.swift */; };
-		7092B9BF291C447F000D8D3C /* Rswift in Frameworks */ = {isa = PBXBuildFile; productRef = 7092B9BE291C447F000D8D3C /* Rswift */; };
-		70E12EAD2933A2D4006EE701 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E12EAC2933A2D4006EE701 /* R.generated.swift */; };
+		70B0553829350A7C00ED3A54 /* RswiftLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 70B0553729350A7C00ED3A54 /* RswiftLibrary */; };
 		70F653AF2915F3DC0024EA1D /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 70F653AE2915F3DC0024EA1D /* SnapKit */; };
 		70F83A5F291E81F90087CC01 /* MainFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F83A5E291E81F90087CC01 /* MainFlowCoordinator.swift */; };
 		70F83A61291E82540087CC01 /* CoordinatorsProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F83A60291E82540087CC01 /* CoordinatorsProtocols.swift */; };
@@ -77,7 +76,6 @@
 		7092B996291C2AA1000D8D3C /* TrainingPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingPresenter.swift; sourceTree = "<group>"; };
 		7092B998291C2AAD000D8D3C /* TrainingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingView.swift; sourceTree = "<group>"; };
 		7092B99A291C2ABB000D8D3C /* TrainingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingModel.swift; sourceTree = "<group>"; };
-		70E12EAC2933A2D4006EE701 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
 		70F83A5E291E81F90087CC01 /* MainFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFlowCoordinator.swift; sourceTree = "<group>"; };
 		70F83A60291E82540087CC01 /* CoordinatorsProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorsProtocols.swift; sourceTree = "<group>"; };
 		85B83211E2D6C9AD39BCAD20 /* DetailProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailProfileViewController.swift; sourceTree = "<group>"; };
@@ -99,8 +97,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				708CF780291C550A0036AEA2 /* SFSafeSymbols in Frameworks */,
-				7092B9BF291C447F000D8D3C /* Rswift in Frameworks */,
 				70F653AF2915F3DC0024EA1D /* SnapKit in Frameworks */,
+				70B0553829350A7C00ED3A54 /* RswiftLibrary in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -144,7 +142,6 @@
 		708E76BE29005E4A00D23E70 = {
 			isa = PBXGroup;
 			children = (
-				70E12EAC2933A2D4006EE701 /* R.generated.swift */,
 				705B6A59291E90CF00C5FB63 /* Localize */,
 				708E76C929005E4A00D23E70 /* Graal-BMSTU */,
 				708E76C829005E4A00D23E70 /* Products */,
@@ -273,7 +270,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 708E76DB29005E4D00D23E70 /* Build configuration list for PBXNativeTarget "Graal-BMSTU" */;
 			buildPhases = (
-				708CF771291C46E20036AEA2 /* ShellScript */,
 				708E76C329005E4A00D23E70 /* Sources */,
 				708E76C429005E4A00D23E70 /* Frameworks */,
 				708E76C529005E4A00D23E70 /* Resources */,
@@ -281,12 +277,13 @@
 			buildRules = (
 			);
 			dependencies = (
+				70B0553A29350ABB00ED3A54 /* PBXTargetDependency */,
 			);
 			name = "Graal-BMSTU";
 			packageProductDependencies = (
 				70F653AE2915F3DC0024EA1D /* SnapKit */,
-				7092B9BE291C447F000D8D3C /* Rswift */,
 				708CF77F291C550A0036AEA2 /* SFSafeSymbols */,
+				70B0553729350A7C00ED3A54 /* RswiftLibrary */,
 			);
 			productName = "Graal-BMSTU";
 			productReference = 708E76C729005E4A00D23E70 /* Graal-BMSTU.app */;
@@ -319,8 +316,8 @@
 			mainGroup = 708E76BE29005E4A00D23E70;
 			packageReferences = (
 				70F653AD2915F3DC0024EA1D /* XCRemoteSwiftPackageReference "SnapKit" */,
-				7092B9BD291C447F000D8D3C /* XCRemoteSwiftPackageReference "R.swift.Library" */,
 				708CF77E291C550A0036AEA2 /* XCRemoteSwiftPackageReference "SFSafeSymbols" */,
+				70B0553629350A7C00ED3A54 /* XCRemoteSwiftPackageReference "R" */,
 			);
 			productRefGroup = 708E76C829005E4A00D23E70 /* Products */;
 			projectDirPath = "";
@@ -344,28 +341,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		708CF771291C46E20036AEA2 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				$SRCROOT/R.generated.swift,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"$SRCROOT/rswift/rswift\" generate \"$SRCROOT/R.generated.swift\"\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		708E76C329005E4A00D23E70 /* Sources */ = {
@@ -399,7 +374,6 @@
 				85B8312CA7218D7D94B49CEB /* DetailProfilePresenter.swift in Sources */,
 				85B83265EDD7A1E19D518030 /* DetailProfileProtocols.swift in Sources */,
 				85B83625C3779268CC1818C3 /* DetailProfileView.swift in Sources */,
-				70E12EAD2933A2D4006EE701 /* R.generated.swift in Sources */,
 				85B8340A6249C59EECDB1F28 /* DetailProfileViewController.swift in Sources */,
 				85B83A04C81701B7B43EEA1A /* DetailProfileModel.swift in Sources */,
 				85B83DE2CC694133E9630F32 /* AuthService.swift in Sources */,
@@ -408,6 +382,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		70B0553A29350ABB00ED3A54 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 70B0553929350ABB00ED3A54 /* RswiftGenerateInternalResources */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		708CF77C291C4A3F0036AEA2 /* Localizable.strings */ = {
@@ -634,12 +615,12 @@
 				kind = branch;
 			};
 		};
-		7092B9BD291C447F000D8D3C /* XCRemoteSwiftPackageReference "R.swift.Library" */ = {
+		70B0553629350A7C00ED3A54 /* XCRemoteSwiftPackageReference "R" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/mac-cain13/R.swift.Library";
+			repositoryURL = "https://github.com/mac-cain13/R.swift";
 			requirement = {
-				branch = master;
-				kind = branch;
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
 			};
 		};
 		70F653AD2915F3DC0024EA1D /* XCRemoteSwiftPackageReference "SnapKit" */ = {
@@ -658,10 +639,14 @@
 			package = 708CF77E291C550A0036AEA2 /* XCRemoteSwiftPackageReference "SFSafeSymbols" */;
 			productName = SFSafeSymbols;
 		};
-		7092B9BE291C447F000D8D3C /* Rswift */ = {
+		70B0553729350A7C00ED3A54 /* RswiftLibrary */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 7092B9BD291C447F000D8D3C /* XCRemoteSwiftPackageReference "R.swift.Library" */;
-			productName = Rswift;
+			package = 70B0553629350A7C00ED3A54 /* XCRemoteSwiftPackageReference "R" */;
+			productName = RswiftLibrary;
+		};
+		70B0553929350ABB00ED3A54 /* RswiftGenerateInternalResources */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = "plugin:RswiftGenerateInternalResources";
 		};
 		70F653AE2915F3DC0024EA1D /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;

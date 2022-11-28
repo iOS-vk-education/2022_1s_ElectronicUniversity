@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 import SFSafeSymbols
-import Rswift
+import RswiftResources
 
 typealias ProfileDetailAction = () -> Void
 typealias SettingsAction = () -> Void

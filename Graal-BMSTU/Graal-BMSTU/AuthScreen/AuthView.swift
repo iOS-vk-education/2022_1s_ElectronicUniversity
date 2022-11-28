@@ -7,7 +7,7 @@
 
 import UIKit
 import SnapKit
-import Rswift
+import RswiftResources
 import SFSafeSymbols
 
 typealias LoginAction = (String?, String?) -> Void

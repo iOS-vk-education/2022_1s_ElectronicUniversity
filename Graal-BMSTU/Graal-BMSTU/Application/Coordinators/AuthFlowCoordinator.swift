@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 final class AuthFlowCoordinator: Coordinator {
     weak var parentCoordinator: Coordinator?
     private var navigationController: UINavigationController
