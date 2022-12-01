@@ -15,6 +15,8 @@ typealias SkipAuthAction = () -> Void
 
 final class AuthView: UIView {
     private let bmstuImage = UIImageView(frame: .zero)
+    
+    private let label = UILabel()
 
     private let loginField = UITextField(frame: .zero)
     private let passwordField = UITextField(frame: .zero)
@@ -71,14 +73,41 @@ private extension AuthView {
 
 private extension AuthView {
     func setupUI() {
+        
         self.backgroundColor = .white
+        
         bmstuImage.image = R.image.bmstuLogo()
+        
         loginField.placeholder = R.string.localizable.login_field_placeholder()
         passwordField.placeholder = R.string.localizable.password_field_placeholder()
+        loginField.clearButtonMode = .whileEditing
+        passwordField.clearButtonMode = .whileEditing
+        loginField.borderStyle = UITextField.BorderStyle.roundedRect
+        passwordField.borderStyle = UITextField.BorderStyle.roundedRect
+        loginField.layer.borderWidth = 1.5;
+        loginField.layer.borderColor = CGColor.init(red: 0.2, green: 0.5, blue: 0.8, alpha: 0.4);
+        passwordField.layer.borderColor = CGColor.init(red: 0.2, green: 0.5, blue: 0.8, alpha: 0.4);
+        passwordField.layer.borderWidth = 1.5;
+        passwordField.layer.shadowRadius = 1.0
+             //passwordField.layer.shadowColor = UIColor.lightGray
+        passwordField .layer.shadowOffset = CGSizeMake(1.0, 1.0)
+        passwordField.layer.shadowOpacity = 1.0
+        loginField.layer.shadowRadius = 1.0
+             //passwordField.layer.shadowColor = UIColor.lightGray
+        loginField .layer.shadowOffset = CGSizeMake(1.0, 1.0)
+        loginField.layer.shadowOpacity = 1.0
+        
+        loginButton.layer.cornerRadius = 20
+        skipAuthButton.layer.cornerRadius = 20
+        
         loginButtonConf()
         skipAuthButtonConf()
-
-        var elems = [bmstuImage, loginField, passwordField, loginButton]
+        
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
+             label.text = "Введите логин/пароль от учетной записи университета"
+             label.textAlignment = .center
+        
+        var elems = [bmstuImage, loginField, passwordField, loginButton, label, skipAuthButton]
         if AppCoordinator.isFirstLaunch() {
             elems.append(skipAuthButton)
         }
@@ -91,11 +120,11 @@ private extension AuthView {
     func setupConstraints() {
         bmstuImage.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.size.equalTo(100)
+            make.size.equalTo(200)
             make.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(20)
         }
         loginField.snp.makeConstraints { make in
-            make.top.equalTo(bmstuImage.snp.bottom).offset(20)
+            make.top.equalTo(label.snp.bottom).offset(80)
             make.centerX.equalToSuperview()
         }
         passwordField.snp.makeConstraints { make in
@@ -103,21 +132,29 @@ private extension AuthView {
             make.centerX.equalToSuperview()
         }
         loginButton.snp.makeConstraints { make in
-            make.left.equalTo(self.safeAreaLayoutGuide.snp.left).offset(20)
-            make.right.equalTo(self.safeAreaLayoutGuide.snp.right).inset(20)
-            make.top.equalTo(passwordField.snp.bottom).offset(20)
+            make.left.equalTo(self.safeAreaLayoutGuide.snp.left).offset(30)
+            make.right.equalTo(self.safeAreaLayoutGuide.snp.right).inset(30)
+            make.top.equalTo(passwordField.snp.bottom).offset(80)
             make.height.equalTo(50)
         }
         if AppCoordinator.isFirstLaunch() {
             skipAuthButton.snp.makeConstraints { make in
-                make.left.equalTo(self.safeAreaLayoutGuide.snp.left).offset(20)
-                make.right.equalTo(self.safeAreaLayoutGuide.snp.right).inset(20)
-                make.top.equalTo(loginButton.snp.bottom).offset(20)
+                make.left.equalTo(self.safeAreaLayoutGuide.snp.left).offset(30)
+                make.right.equalTo(self.safeAreaLayoutGuide.snp.right).inset(30)
+                make.top.equalTo(loginButton.snp.bottom).offset(25)
                 make.height.equalTo(50)
             }
         }
+        label.snp.makeConstraints { make in
+                make.left.equalTo(safeAreaLayoutGuide.snp.left).offset(30)
+                make.right.equalTo(safeAreaLayoutGuide.snp.right).inset(30)
+                make.top.equalTo(bmstuImage.snp.bottom).offset(25 )
+                make.height.equalTo(50)
+                 }
+                 
     }
-
+    
+    
     // MARK: - button configs
 
     func loginButtonConf() {
