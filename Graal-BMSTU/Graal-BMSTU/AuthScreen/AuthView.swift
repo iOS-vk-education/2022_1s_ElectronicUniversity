@@ -16,7 +16,7 @@ typealias SkipAuthAction = () -> Void
 final class AuthView: UIView {
     private let bmstuImage = UIImageView(frame: .zero)
     
-    private let label = UILabel()
+    private let label = UILabel(frame: .zero)
 
     private let loginField = UITextField(frame: .zero)
     private let passwordField = UITextField(frame: .zero)
@@ -103,11 +103,11 @@ private extension AuthView {
         loginButtonConf()
         skipAuthButtonConf()
         
-        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
-             label.text = "Введите логин/пароль от учетной записи университета"
-             label.textAlignment = .center
+//        label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
+        label.text = "Введите логин/пароль от учетной записи университета"
+        label.textAlignment = .center
         
-        var elems = [bmstuImage, loginField, passwordField, loginButton, label, skipAuthButton]
+        var elems = [bmstuImage, loginField, passwordField, loginButton, label]
         if AppCoordinator.isFirstLaunch() {
             elems.append(skipAuthButton)
         }
@@ -122,6 +122,12 @@ private extension AuthView {
             make.centerX.equalToSuperview()
             make.size.equalTo(200)
             make.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(20)
+        }
+        label.snp.makeConstraints { make in
+            make.left.equalTo(safeAreaLayoutGuide.snp.left).offset(30)
+            make.right.equalTo(safeAreaLayoutGuide.snp.right).inset(30)
+            make.top.equalTo(bmstuImage.snp.bottom).offset(25 )
+            make.height.equalTo(50)
         }
         loginField.snp.makeConstraints { make in
             make.top.equalTo(label.snp.bottom).offset(80)
@@ -145,12 +151,7 @@ private extension AuthView {
                 make.height.equalTo(50)
             }
         }
-        label.snp.makeConstraints { make in
-                make.left.equalTo(safeAreaLayoutGuide.snp.left).offset(30)
-                make.right.equalTo(safeAreaLayoutGuide.snp.right).inset(30)
-                make.top.equalTo(bmstuImage.snp.bottom).offset(25 )
-                make.height.equalTo(50)
-                 }
+       
                  
     }
     
