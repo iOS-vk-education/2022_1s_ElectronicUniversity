@@ -44,9 +44,9 @@ final class ProfilePresenterImpl: ProfilePresenter {
         if let user = user {
             vc?.setUserName(str: user.name + " " + user.familyName)
             vc?.setUserGroup(str: user.group)
-            vc?.setState(to: .profile)
+            vc?.setState(toView: .profile)
         } else {
-            vc?.setState(to: .auth)
+            vc?.setState(toView: .auth)
         }
     }
 
@@ -60,6 +60,6 @@ final class ProfilePresenterImpl: ProfilePresenter {
     }
 
     func navigateToSettings() {
-         coordinator.navigateToSettings()
+        coordinator.navigateToSettings()
     }
 }

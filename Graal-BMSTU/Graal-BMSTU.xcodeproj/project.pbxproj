@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		704C5C86293C009B00C2F3F9 /* Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 704C5C85293C009B00C2F3F9 /* Buttons.swift */; };
 		70576429291322B7006555E2 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70576428291322B7006555E2 /* ProfileView.swift */; };
 		705B6A55291E88A500C5FB63 /* AuthFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 705B6A54291E88A500C5FB63 /* AuthFlowCoordinator.swift */; };
 		705B6A57291E8AAF00C5FB63 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 705B6A56291E8AAF00C5FB63 /* AppCoordinator.swift */; };
@@ -45,10 +46,12 @@
 		85B83A04C81701B7B43EEA1A /* DetailProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B83223529F87099EB53A2E /* DetailProfileModel.swift */; };
 		85B83D7D168C76D3DC5C699E /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 85B83B1056CFCF2D1E3ED5A5 /* .gitignore */; };
 		85B83DE2CC694133E9630F32 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B832FAD4119DB7B5612354 /* AuthService.swift */; };
+		85B83EAB374127AB909A90C0 /* Fields.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B83921D0F4975C63B494B6 /* Fields.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		70198EBA2926976700B45C3A /* Graal-BMSTU.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Graal-BMSTU.entitlements"; sourceTree = "<group>"; };
+		704C5C85293C009B00C2F3F9 /* Buttons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buttons.swift; sourceTree = "<group>"; };
 		70576428291322B7006555E2 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		705B6A54291E88A500C5FB63 /* AuthFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthFlowCoordinator.swift; sourceTree = "<group>"; };
 		705B6A56291E8AAF00C5FB63 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
@@ -84,6 +87,7 @@
 		85B8345E1551B82C7186FF92 /* DetailProfilePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailProfilePresenter.swift; sourceTree = "<group>"; };
 		85B8382BFD6E0E0DB86602F2 /* DetailProfileCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailProfileCoordinator.swift; sourceTree = "<group>"; };
 		85B838F954DA1BB8269090B0 /* DetailProfileProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailProfileProtocols.swift; sourceTree = "<group>"; };
+		85B83921D0F4975C63B494B6 /* Fields.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fields.swift; sourceTree = "<group>"; };
 		85B83A2ECBF4266C824A8652 /* DetailProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailProfileView.swift; sourceTree = "<group>"; };
 		85B83B1056CFCF2D1E3ED5A5 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = file.gitignore; path = .gitignore; sourceTree = "<group>"; };
 		85B83D4EE826791C198073B3 /* AuthView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
@@ -109,6 +113,8 @@
 			isa = PBXGroup;
 			children = (
 				85B83D7666044496A76D3AC0 /* .gitkeep */,
+				704C5C85293C009B00C2F3F9 /* Buttons.swift */,
+				85B83921D0F4975C63B494B6 /* Fields.swift */,
 			);
 			path = BaseComponents;
 			sourceTree = "<group>";
@@ -317,7 +323,7 @@
 			packageReferences = (
 				70F653AD2915F3DC0024EA1D /* XCRemoteSwiftPackageReference "SnapKit" */,
 				708CF77E291C550A0036AEA2 /* XCRemoteSwiftPackageReference "SFSafeSymbols" */,
-				70B0553629350A7C00ED3A54 /* XCRemoteSwiftPackageReference "R" */,
+				70B0553629350A7C00ED3A54 /* XCRemoteSwiftPackageReference "R.swift" */,
 			);
 			productRefGroup = 708E76C829005E4A00D23E70 /* Products */;
 			projectDirPath = "";
@@ -370,6 +376,7 @@
 				70F83A5F291E81F90087CC01 /* MainFlowCoordinator.swift in Sources */,
 				708E76CD29005E4A00D23E70 /* SceneDelegate.swift in Sources */,
 				85B8340EF1048C7E38742933 /* DetailProfileBuilder.swift in Sources */,
+				704C5C86293C009B00C2F3F9 /* Buttons.swift in Sources */,
 				85B836C71BE4E27C54B1D5BE /* DetailProfileCoordinator.swift in Sources */,
 				85B8312CA7218D7D94B49CEB /* DetailProfilePresenter.swift in Sources */,
 				85B83265EDD7A1E19D518030 /* DetailProfileProtocols.swift in Sources */,
@@ -378,6 +385,7 @@
 				85B83A04C81701B7B43EEA1A /* DetailProfileModel.swift in Sources */,
 				85B83DE2CC694133E9630F32 /* AuthService.swift in Sources */,
 				85B8305C6248A0399B265E23 /* AuthView.swift in Sources */,
+				85B83EAB374127AB909A90C0 /* Fields.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -386,7 +394,7 @@
 /* Begin PBXTargetDependency section */
 		70B0553A29350ABB00ED3A54 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			productRef = 70B0553929350ABB00ED3A54 /* RswiftGenerateInternalResources */;
+			productRef = 70B0553929350ABB00ED3A54 /* plugin:RswiftGenerateInternalResources */;
 		};
 /* End PBXTargetDependency section */
 
@@ -615,7 +623,7 @@
 				kind = branch;
 			};
 		};
-		70B0553629350A7C00ED3A54 /* XCRemoteSwiftPackageReference "R" */ = {
+		70B0553629350A7C00ED3A54 /* XCRemoteSwiftPackageReference "R.swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/mac-cain13/R.swift";
 			requirement = {
@@ -641,10 +649,10 @@
 		};
 		70B0553729350A7C00ED3A54 /* RswiftLibrary */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 70B0553629350A7C00ED3A54 /* XCRemoteSwiftPackageReference "R" */;
+			package = 70B0553629350A7C00ED3A54 /* XCRemoteSwiftPackageReference "R.swift" */;
 			productName = RswiftLibrary;
 		};
-		70B0553929350ABB00ED3A54 /* RswiftGenerateInternalResources */ = {
+		70B0553929350ABB00ED3A54 /* plugin:RswiftGenerateInternalResources */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = "plugin:RswiftGenerateInternalResources";
 		};

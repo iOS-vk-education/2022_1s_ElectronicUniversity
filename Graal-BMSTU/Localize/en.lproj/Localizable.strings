@@ -22,3 +22,4 @@
 "password_field_placeholder" = "Your password";
 "login_button_text" = "Login!";
 "skip_auth_button_text" = "Skip authentication";
+"hint_label_text" = "Enter your login and password from BMSTU account";

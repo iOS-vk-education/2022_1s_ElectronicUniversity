@@ -15,14 +15,12 @@ typealias SkipAuthAction = () -> Void
 
 final class AuthView: UIView {
     private let bmstuImage = UIImageView(frame: .zero)
-    
-    private let label = UILabel(frame: .zero)
-
+    private let hint = UILabel(frame: .zero)
     private let loginField = UITextField(frame: .zero)
     private let passwordField = UITextField(frame: .zero)
-
     private let loginButton = UIButton(frame: .zero)
-    private let skipAuthButton = UIButton(frame: .zero) // только при первом запуске есть такая кнопка!
+    private let skipAuthButton = UIButton(
+            frame: .zero) // только при первом запуске есть такая кнопка!
 
     private var loginAction: LoginAction?
     private var skipAuthAction: SkipAuthAction?
@@ -53,19 +51,11 @@ extension AuthView {
 
 private extension AuthView {
     @objc func loginButtonPressed() {
-        if let action = self.loginAction {
-            action(loginField.text, passwordField.text)
-        } else {
-            print("No login action!")
-        }
+        self.loginAction?(loginField.text, passwordField.text)
     }
 
     @objc func skipAuthButtonPressed() {
-        if let action = self.skipAuthAction {
-            action()
-        } else {
-            print("No skipAuth action!")
-        }
+        self.skipAuthAction?()
     }
 }
 
@@ -73,41 +63,15 @@ private extension AuthView {
 
 private extension AuthView {
     func setupUI() {
-        
         self.backgroundColor = .white
-        
         bmstuImage.image = R.image.bmstuLogo()
-        
-        loginField.placeholder = R.string.localizable.login_field_placeholder()
-        passwordField.placeholder = R.string.localizable.password_field_placeholder()
-        loginField.clearButtonMode = .whileEditing
-        passwordField.clearButtonMode = .whileEditing
-        loginField.borderStyle = UITextField.BorderStyle.roundedRect
-        passwordField.borderStyle = UITextField.BorderStyle.roundedRect
-        loginField.layer.borderWidth = 1.5;
-        loginField.layer.borderColor = CGColor.init(red: 0.2, green: 0.5, blue: 0.8, alpha: 0.4);
-        passwordField.layer.borderColor = CGColor.init(red: 0.2, green: 0.5, blue: 0.8, alpha: 0.4);
-        passwordField.layer.borderWidth = 1.5;
-        passwordField.layer.shadowRadius = 1.0
-             //passwordField.layer.shadowColor = UIColor.lightGray
-        passwordField .layer.shadowOffset = CGSizeMake(1.0, 1.0)
-        passwordField.layer.shadowOpacity = 1.0
-        loginField.layer.shadowRadius = 1.0
-             //passwordField.layer.shadowColor = UIColor.lightGray
-        loginField .layer.shadowOffset = CGSizeMake(1.0, 1.0)
-        loginField.layer.shadowOpacity = 1.0
-        
-        loginButton.layer.cornerRadius = 20
-        skipAuthButton.layer.cornerRadius = 20
-        
+        loginFieldConf()
+        passwordFieldConf()
         loginButtonConf()
         skipAuthButtonConf()
-        
-//        label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
-        label.text = "Введите логин/пароль от учетной записи университета"
-        label.textAlignment = .center
-        
-        var elems = [bmstuImage, loginField, passwordField, loginButton, label]
+        hintLabelConf()
+
+        var elems = [bmstuImage, loginField, passwordField, loginButton, hint]
         if AppCoordinator.isFirstLaunch() {
             elems.append(skipAuthButton)
         }
@@ -123,14 +87,14 @@ private extension AuthView {
             make.size.equalTo(200)
             make.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(20)
         }
-        label.snp.makeConstraints { make in
+        hint.snp.makeConstraints { make in
             make.left.equalTo(safeAreaLayoutGuide.snp.left).offset(30)
             make.right.equalTo(safeAreaLayoutGuide.snp.right).inset(30)
-            make.top.equalTo(bmstuImage.snp.bottom).offset(25 )
+            make.top.equalTo(bmstuImage.snp.bottom).offset(25)
             make.height.equalTo(50)
         }
         loginField.snp.makeConstraints { make in
-            make.top.equalTo(label.snp.bottom).offset(80)
+            make.top.equalTo(hint.snp.bottom).offset(80)
             make.centerX.equalToSuperview()
         }
         passwordField.snp.makeConstraints { make in
@@ -151,48 +115,40 @@ private extension AuthView {
                 make.height.equalTo(50)
             }
         }
-       
-                 
     }
-    
-    
+
     // MARK: - button configs
 
     func loginButtonConf() {
-        var config = UIButton.Configuration.filled()
-        config.buttonSize = .large
-        config.cornerStyle = .medium
-        config.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { incoming in
-            var outgoing = incoming
-            outgoing.font = UIFont.preferredFont(forTextStyle: .headline)
-            return outgoing
-        }
-        config.title = R.string.localizable.login_button_text()
-        config.titlePadding = 5
-        config.image = UIImage(systemSymbol: .chevronRight)
-        config.imagePadding = 5
-        config.imagePlacement = .trailing
-        config.preferredSymbolConfigurationForImage = UIImage.SymbolConfiguration(scale: .medium)
-        self.loginButton.configuration = config
+        var config = basicButtonConf(button: loginButton)
+        config.title = R.string.localizable.login_button_text() //
+        config.image = UIImage(systemSymbol: .chevronRight) //
+        loginButton.configuration = config
         loginButton.addTarget(self, action: #selector(self.loginButtonPressed), for: .touchUpInside)
     }
 
     func skipAuthButtonConf() {
-        var config = UIButton.Configuration.tinted()
-        config.buttonSize = .large
-        config.cornerStyle = .medium
-        config.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { incoming in
-            var outgoing = incoming
-            outgoing.font = UIFont.preferredFont(forTextStyle: .headline)
-            return outgoing
-        }
-        config.title = R.string.localizable.skip_auth_button_text()
-        config.titlePadding = 5
-        config.image = UIImage(systemSymbol: .rectanglePortraitAndArrowRight)
-        config.imagePadding = 5
-        config.imagePlacement = .trailing
-        config.preferredSymbolConfigurationForImage = UIImage.SymbolConfiguration(scale: .medium)
-        self.skipAuthButton.configuration = config
-        skipAuthButton.addTarget(self, action: #selector(self.skipAuthButtonPressed), for: .touchUpInside)
+        var config = basicButtonConf(button: skipAuthButton)
+        config.title = R.string.localizable.skip_auth_button_text() //
+        config.image = UIImage(systemSymbol: .rectanglePortraitAndArrowRight) //
+        skipAuthButton.configuration = config
+        skipAuthButton.addTarget(self, action: #selector(self.skipAuthButtonPressed),
+                for: .touchUpInside)
+    }
+
+    func loginFieldConf() {
+        basicTextFieldConf(field: loginField)
+        loginField.placeholder = R.string.localizable.login_field_placeholder()
+    }
+
+    func passwordFieldConf() {
+        basicTextFieldConf(field: passwordField)
+        passwordField.placeholder = R.string.localizable.password_field_placeholder()
+    }
+
+    func hintLabelConf() {
+        hint.text = R.string.localizable.hint_label_text()
+        hint.textAlignment = .center
+        hint.numberOfLines = 0
     }
 }

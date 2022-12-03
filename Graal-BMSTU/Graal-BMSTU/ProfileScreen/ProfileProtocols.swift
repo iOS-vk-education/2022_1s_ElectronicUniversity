@@ -30,7 +30,7 @@ protocol ProfileViewControllerProtocol: AnyObject {
     func showAuthError(description: String?)
     func setUserName(str: String)
     func setUserGroup(str: String)
-    func setState(to: ProfileViewState)
+    func setState(toView: ProfileViewState)
 }
 
 protocol AuthService {
@@ -43,5 +43,6 @@ protocol ProfileBuilder {
     var presenter: ProfilePresenter { get }
     var viewController: ProfileViewControllerProtocol { get }
     var router: ProfileRouter { get }
-    static func assemble(window: UIWindow, navigationController: UINavigationController) -> ProfileBuilder
+    static func assemble(window: UIWindow,
+                         navigationController: UINavigationController) -> ProfileBuilder
 }

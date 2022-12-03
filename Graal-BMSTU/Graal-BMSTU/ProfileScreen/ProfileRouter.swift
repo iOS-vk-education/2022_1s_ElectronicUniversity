@@ -39,13 +39,13 @@ final class ProfileRouterImpl: ProfileRouter {
         let placeholder = UIViewController()
         placeholder.view.backgroundColor = .darkGray
         let placeholderLabel = UILabel()
-        placeholderLabel.text = "Profile"
+        placeholderLabel.text = R.string.localizable.your_profile_button_title()
         placeholder.view.addSubview(placeholderLabel)
         navigationController.pushViewController(placeholder, animated: true)
-//        let child = DetailProfileBuilder.assemble(window: window, navigationController: navigationController)
-//        childCoordinators.append(child.coordinator)
-//        child.coordinator.parentCoordinator = self
-//        child.coordinator.start()
+        //        let child = DetailProfileBuilder.assemble(window: window, navigationController: navigationController)
+        //        childCoordinators.append(child.coordinator)
+        //        child.coordinator.parentCoordinator = self
+        //        child.coordinator.start()
     }
 
     func navigateToSettings() {
@@ -53,12 +53,12 @@ final class ProfileRouterImpl: ProfileRouter {
         let placeholder = UIViewController()
         placeholder.view.backgroundColor = .gray
         let placeholderLabel = UILabel()
-        placeholderLabel.text = "Settings"
+        placeholderLabel.text = R.string.localizable.settings_button_title()
         placeholder.view.addSubview(placeholderLabel)
         navigationController.pushViewController(placeholder, animated: true)
-//        let child = SettingsBuilder.assemble(window: window, navigationController: navigationController)
-//        childCoordinators.append(child.coordinator)
-//        child.coordinator.parentCoordinator = self
-//        child.coordinator.start()
+        //        let child = SettingsBuilder.assemble(window: window, navigationController: navigationController)
+        //        childCoordinators.append(child.coordinator)
+        //        child.coordinator.parentCoordinator = self
+        //        child.coordinator.start()
     }
 }
