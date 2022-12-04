@@ -37,7 +37,6 @@ final class ProfileView: UIView {
 }
 
 // MARK: - data updates
-
 extension ProfileView {
     func updateUserGroup(with group: String) {
         self.userGroupLabel.text = group
@@ -53,7 +52,6 @@ extension ProfileView {
 }
 
 // MARK: - actions setups
-
 extension ProfileView {
     func setProfileDetailButtonAction(_ action: @escaping ProfileDetailAction) {
         self.profileDetailAction = action
@@ -69,7 +67,6 @@ extension ProfileView {
 }
 
 // MARK: - UI
-
 private extension ProfileView {
     func setupUI() {
         self.backgroundColor = .white
@@ -119,11 +116,9 @@ private extension ProfileView {
     }
 
     // MARK: - button configs
-
     func profileDetailButtonConf() {
         var config = basicButtonConf(button: profileDetailButton)
         config.title = R.string.localizable.your_profile_button_title()
-        // ...
         profileDetailButton.configuration = config
         profileDetailButton.addTarget(self, action: #selector(self.profileDetailButtonPressed),
                 for: .touchUpInside)
@@ -133,7 +128,6 @@ private extension ProfileView {
     func settingsButtonConf() {
         var config = basicButtonConf(button: settingsButton)
         config.title = R.string.localizable.settings_button_title()
-        // ...
         settingsButton.configuration = config
         settingsButton.addTarget(self, action: #selector(self.settingsButtonPressed),
                 for: .touchUpInside)
@@ -143,7 +137,6 @@ private extension ProfileView {
     func logoutButtonConf() {
         var config = basicButtonConf(button: logoutButton)
         config.title = R.string.localizable.signout_button_title()
-        // ...
         logoutButton.configuration = config
         logoutButton.addTarget(self, action: #selector(self.logoutButtonPressed),
                 for: .touchUpInside)
@@ -152,7 +145,6 @@ private extension ProfileView {
 }
 
 // MARK: - UI actions
-
 private extension ProfileView {
     @objc func profileDetailButtonPressed() {
         self.profileDetailAction?()

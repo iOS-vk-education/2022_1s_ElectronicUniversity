@@ -36,7 +36,6 @@ final class AuthView: UIView {
 }
 
 // MARK: - actions setup
-
 extension AuthView {
     func setupLoginAction(_ action: @escaping LoginAction) {
         self.loginAction = action
@@ -48,7 +47,6 @@ extension AuthView {
 }
 
 // MARK: - UI actions
-
 private extension AuthView {
     @objc func loginButtonPressed() {
         self.loginAction?(loginField.text, passwordField.text)
@@ -60,7 +58,6 @@ private extension AuthView {
 }
 
 // MARK: - UI
-
 private extension AuthView {
     func setupUI() {
         self.backgroundColor = .white
@@ -118,7 +115,6 @@ private extension AuthView {
     }
 
     // MARK: - button configs
-
     func loginButtonConf() {
         var config = basicButtonConf(button: loginButton)
         config.title = R.string.localizable.login_button_text() //
