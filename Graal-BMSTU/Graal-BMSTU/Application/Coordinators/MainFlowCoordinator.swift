@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import Rswift
+import RswiftResources
 import SFSafeSymbols
 
 

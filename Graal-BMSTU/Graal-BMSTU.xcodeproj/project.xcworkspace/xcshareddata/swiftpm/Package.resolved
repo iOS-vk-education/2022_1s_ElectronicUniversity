@@ -1,12 +1,12 @@
 {
   "pins" : [
     {
-      "identity" : "r.swift.library",
+      "identity" : "r.swift",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/mac-cain13/R.swift.Library",
+      "location" : "https://github.com/mac-cain13/R.swift",
       "state" : {
-        "branch" : "master",
-        "revision" : "3a64127e8113cc33179504dfadc91b361d55a0b1"
+        "revision" : "691a53e2306aeec63384431bc7727eba1366ac1f",
+        "version" : "7.1.0"
       }
     },
     {
@@ -25,6 +25,24 @@
       "state" : {
         "revision" : "f222cbdf325885926566172f6f5f06af95473158",
         "version" : "5.6.0"
+      }
+    },
+    {
+      "identity" : "swift-argument-parser",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-argument-parser",
+      "state" : {
+        "revision" : "fddd1c00396eed152c45a46bea9f47b98e59301d",
+        "version" : "1.2.0"
+      }
+    },
+    {
+      "identity" : "xcodeedit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/tomlokhorst/XcodeEdit",
+      "state" : {
+        "revision" : "cd466d6e8c5ffd2f2b61165d37b0646f09068e1e",
+        "version" : "2.9.0"
       }
     }
   ],

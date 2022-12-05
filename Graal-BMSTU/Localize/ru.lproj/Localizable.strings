@@ -22,3 +22,4 @@
 "password_field_placeholder" = "Ваш пароль";
 "login_button_text" = "Войти!";
 "skip_auth_button_text" = "Продолжить без входа";
+"hint_label_text" = "Введите логин/пароль от учетной записи университета";

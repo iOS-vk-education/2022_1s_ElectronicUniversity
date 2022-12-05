@@ -7,7 +7,7 @@
 
 import UIKit
 import SnapKit
-import Rswift
+import RswiftResources
 import SFSafeSymbols
 
 typealias LoginAction = (String?, String?) -> Void
@@ -15,12 +15,12 @@ typealias SkipAuthAction = () -> Void
 
 final class AuthView: UIView {
     private let bmstuImage = UIImageView(frame: .zero)
-
+    private let hint = UILabel(frame: .zero)
     private let loginField = UITextField(frame: .zero)
     private let passwordField = UITextField(frame: .zero)
-
     private let loginButton = UIButton(frame: .zero)
-    private let skipAuthButton = UIButton(frame: .zero) // только при первом запуске есть такая кнопка!
+    private let skipAuthButton = UIButton(
+            frame: .zero) // только при первом запуске есть такая кнопка!
 
     private var loginAction: LoginAction?
     private var skipAuthAction: SkipAuthAction?
@@ -36,7 +36,6 @@ final class AuthView: UIView {
 }
 
 // MARK: - actions setup
-
 extension AuthView {
     func setupLoginAction(_ action: @escaping LoginAction) {
         self.loginAction = action
@@ -48,37 +47,28 @@ extension AuthView {
 }
 
 // MARK: - UI actions
-
 private extension AuthView {
     @objc func loginButtonPressed() {
-        if let action = self.loginAction {
-            action(loginField.text, passwordField.text)
-        } else {
-            print("No login action!")
-        }
+        self.loginAction?(loginField.text, passwordField.text)
     }
 
     @objc func skipAuthButtonPressed() {
-        if let action = self.skipAuthAction {
-            action()
-        } else {
-            print("No skipAuth action!")
-        }
+        self.skipAuthAction?()
     }
 }
 
 // MARK: - UI
-
 private extension AuthView {
     func setupUI() {
         self.backgroundColor = .white
         bmstuImage.image = R.image.bmstuLogo()
-        loginField.placeholder = R.string.localizable.login_field_placeholder()
-        passwordField.placeholder = R.string.localizable.password_field_placeholder()
+        loginFieldConf()
+        passwordFieldConf()
         loginButtonConf()
         skipAuthButtonConf()
+        hintLabelConf()
 
-        var elems = [bmstuImage, loginField, passwordField, loginButton]
+        var elems = [bmstuImage, loginField, passwordField, loginButton, hint]
         if AppCoordinator.isFirstLaunch() {
             elems.append(skipAuthButton)
         }
@@ -91,11 +81,17 @@ private extension AuthView {
     func setupConstraints() {
         bmstuImage.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.size.equalTo(100)
+            make.size.equalTo(200)
             make.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(20)
         }
+        hint.snp.makeConstraints { make in
+            make.left.equalTo(safeAreaLayoutGuide.snp.left).offset(30)
+            make.right.equalTo(safeAreaLayoutGuide.snp.right).inset(30)
+            make.top.equalTo(bmstuImage.snp.bottom).offset(25)
+            make.height.equalTo(50)
+        }
         loginField.snp.makeConstraints { make in
-            make.top.equalTo(bmstuImage.snp.bottom).offset(20)
+            make.top.equalTo(hint.snp.bottom).offset(80)
             make.centerX.equalToSuperview()
         }
         passwordField.snp.makeConstraints { make in
@@ -103,56 +99,52 @@ private extension AuthView {
             make.centerX.equalToSuperview()
         }
         loginButton.snp.makeConstraints { make in
-            make.left.equalTo(self.safeAreaLayoutGuide.snp.left).offset(20)
-            make.right.equalTo(self.safeAreaLayoutGuide.snp.right).inset(20)
-            make.top.equalTo(passwordField.snp.bottom).offset(20)
+            make.left.equalTo(self.safeAreaLayoutGuide.snp.left).offset(30)
+            make.right.equalTo(self.safeAreaLayoutGuide.snp.right).inset(30)
+            make.top.equalTo(passwordField.snp.bottom).offset(80)
+            make.height.equalTo(50)
         }
         if AppCoordinator.isFirstLaunch() {
             skipAuthButton.snp.makeConstraints { make in
-                make.left.equalTo(self.safeAreaLayoutGuide.snp.left).offset(20)
-                make.right.equalTo(self.safeAreaLayoutGuide.snp.right).inset(20)
-                make.top.equalTo(loginButton.snp.bottom).offset(20)
+                make.left.equalTo(self.safeAreaLayoutGuide.snp.left).offset(30)
+                make.right.equalTo(self.safeAreaLayoutGuide.snp.right).inset(30)
+                make.top.equalTo(loginButton.snp.bottom).offset(25)
+                make.height.equalTo(50)
             }
         }
     }
 
     // MARK: - button configs
-
     func loginButtonConf() {
-        var config = UIButton.Configuration.filled()
-        config.buttonSize = .large
-        config.cornerStyle = .medium
-        config.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { incoming in
-            var outgoing = incoming
-            outgoing.font = UIFont.preferredFont(forTextStyle: .headline)
-            return outgoing
-        }
-        config.title = R.string.localizable.login_button_text()
-        config.titlePadding = 5
-        config.image = UIImage(systemSymbol: .chevronRight)
-        config.imagePadding = 5
-        config.imagePlacement = .trailing
-        config.preferredSymbolConfigurationForImage = UIImage.SymbolConfiguration(scale: .medium)
-        self.loginButton.configuration = config
+        var config = basicButtonConf(button: loginButton)
+        config.title = R.string.localizable.login_button_text() //
+        config.image = UIImage(systemSymbol: .chevronRight) //
+        loginButton.configuration = config
         loginButton.addTarget(self, action: #selector(self.loginButtonPressed), for: .touchUpInside)
     }
 
     func skipAuthButtonConf() {
-        var config = UIButton.Configuration.tinted()
-        config.buttonSize = .large
-        config.cornerStyle = .medium
-        config.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer { incoming in
-            var outgoing = incoming
-            outgoing.font = UIFont.preferredFont(forTextStyle: .headline)
-            return outgoing
-        }
-        config.title = R.string.localizable.skip_auth_button_text()
-        config.titlePadding = 5
-        config.image = UIImage(systemSymbol: .rectanglePortraitAndArrowRight)
-        config.imagePadding = 5
-        config.imagePlacement = .trailing
-        config.preferredSymbolConfigurationForImage = UIImage.SymbolConfiguration(scale: .medium)
-        self.skipAuthButton.configuration = config
-        skipAuthButton.addTarget(self, action: #selector(self.skipAuthButtonPressed), for: .touchUpInside)
+        var config = basicButtonConf(button: skipAuthButton)
+        config.title = R.string.localizable.skip_auth_button_text() //
+        config.image = UIImage(systemSymbol: .rectanglePortraitAndArrowRight) //
+        skipAuthButton.configuration = config
+        skipAuthButton.addTarget(self, action: #selector(self.skipAuthButtonPressed),
+                for: .touchUpInside)
+    }
+
+    func loginFieldConf() {
+        basicTextFieldConf(field: loginField)
+        loginField.placeholder = R.string.localizable.login_field_placeholder()
+    }
+
+    func passwordFieldConf() {
+        basicTextFieldConf(field: passwordField)
+        passwordField.placeholder = R.string.localizable.password_field_placeholder()
+    }
+
+    func hintLabelConf() {
+        hint.text = R.string.localizable.hint_label_text()
+        hint.textAlignment = .center
+        hint.numberOfLines = 0
     }
 }

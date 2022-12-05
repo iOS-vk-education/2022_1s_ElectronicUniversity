@@ -58,12 +58,19 @@ extension ProfileViewController: ProfileViewControllerProtocol {
         authView.setupSkipAuthAction(self.presenter.skipAuthentication)
     }
 
-    func setState(to: ProfileViewState) {
+    func setState(toView to: ProfileViewState) {
         self.state = to
-        if to == .profile {
-            self.view = profileView
-        } else {
+        switch to {
+        case .auth:
+            authViewRefresh()
             self.view = authView
+        case .profile:
+            self.view = profileView
         }
+    }
+
+    func authViewRefresh() {
+        self.authView = AuthView(frame: .zero)
+        setupActions()
     }
 }

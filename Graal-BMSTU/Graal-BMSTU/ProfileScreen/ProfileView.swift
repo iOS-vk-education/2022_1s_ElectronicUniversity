@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 import SFSafeSymbols
-import Rswift
+import RswiftResources
 
 typealias ProfileDetailAction = () -> Void
 typealias SettingsAction = () -> Void
@@ -37,7 +37,6 @@ final class ProfileView: UIView {
 }
 
 // MARK: - data updates
-
 extension ProfileView {
     func updateUserGroup(with group: String) {
         self.userGroupLabel.text = group
@@ -53,7 +52,6 @@ extension ProfileView {
 }
 
 // MARK: - actions setups
-
 extension ProfileView {
     func setProfileDetailButtonAction(_ action: @escaping ProfileDetailAction) {
         self.profileDetailAction = action
@@ -69,7 +67,6 @@ extension ProfileView {
 }
 
 // MARK: - UI
-
 private extension ProfileView {
     func setupUI() {
         self.backgroundColor = .white
@@ -78,8 +75,7 @@ private extension ProfileView {
         settingsButtonConf()
         logoutButtonConf()
 
-        let elems = [userLogo, userNameLabel, userGroupLabel, profileDetailButton, settingsButton, logoutButton]
-        elems.forEach {
+        [userLogo, userNameLabel, userGroupLabel, profileDetailButton, settingsButton, logoutButton].forEach {
             box in
             self.addSubview(box)
         }
@@ -120,37 +116,35 @@ private extension ProfileView {
     }
 
     // MARK: - button configs
-
     func profileDetailButtonConf() {
-        var config = UIButton.Configuration.filled()
+        var config = basicButtonConf(button: profileDetailButton)
         config.title = R.string.localizable.your_profile_button_title()
-        // ...
         profileDetailButton.configuration = config
-        profileDetailButton.addTarget(self, action: #selector(self.profileDetailButtonPressed), for: .touchUpInside)
+        profileDetailButton.addTarget(self, action: #selector(self.profileDetailButtonPressed),
+                for: .touchUpInside)
 
     }
 
     func settingsButtonConf() {
-        var config = UIButton.Configuration.filled()
+        var config = basicButtonConf(button: settingsButton)
         config.title = R.string.localizable.settings_button_title()
-        // ...
         settingsButton.configuration = config
-        settingsButton.addTarget(self, action: #selector(self.settingsButtonPressed), for: .touchUpInside)
+        settingsButton.addTarget(self, action: #selector(self.settingsButtonPressed),
+                for: .touchUpInside)
 
     }
 
     func logoutButtonConf() {
-        var config = UIButton.Configuration.filled()
+        var config = basicButtonConf(button: logoutButton)
         config.title = R.string.localizable.signout_button_title()
-        // ...
         logoutButton.configuration = config
-        logoutButton.addTarget(self, action: #selector(self.logoutButtonPressed), for: .touchUpInside)
+        logoutButton.addTarget(self, action: #selector(self.logoutButtonPressed),
+                for: .touchUpInside)
 
     }
 }
 
 // MARK: - UI actions
-
 private extension ProfileView {
     @objc func profileDetailButtonPressed() {
         self.profileDetailAction?()
