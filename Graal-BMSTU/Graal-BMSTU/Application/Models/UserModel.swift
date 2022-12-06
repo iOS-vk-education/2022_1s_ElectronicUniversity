@@ -10,5 +10,5 @@ import Foundation
 struct User {
     let name: String
     let familyName: String
-    let group: String = "ИУ7-35Б"
+    let group: Group
 }

@@ -7,6 +7,12 @@
 
 import Foundation
 
+protocol AuthService {
+    func authenticate(login: String, password: String) -> User?
+    func getUserData() -> User?
+    func logout()
+}
+
 class AuthServiceMockup: AuthService {
     static var loggedUser: User? = nil
     static private let validTestUsersCredentials = [("Artem", "12345"), ("Maria", "54321"), ("Egor",

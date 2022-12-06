@@ -5,4 +5,8 @@
 //  Created by Артём on 09.11.2022.
 //
 
-import Foundation
+import UIKit
+
+final class MainMenuView: UIView {
+
+}

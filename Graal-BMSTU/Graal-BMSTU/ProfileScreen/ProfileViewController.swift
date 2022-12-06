@@ -13,8 +13,8 @@ enum ProfileViewState {
 }
 
 final class ProfileViewController: UIViewController {
-    private var authView: AuthView = AuthView(frame: .zero)
-    private var profileView: ProfileView = ProfileView(frame: .zero)
+    private var authView = AuthView(frame: .zero)
+    private var profileView = ProfileView(frame: .zero)
 
     private let presenter: ProfilePresenter
     private var state: ProfileViewState?

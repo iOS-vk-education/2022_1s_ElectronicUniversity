@@ -35,12 +35,6 @@ protocol ProfileViewControllerProtocol: AnyObject {
     func setState(toView: ProfileViewState)
 }
 
-protocol AuthService {
-    func authenticate(login: String, password: String) -> User?
-    func getUserData() -> User?
-    func logout()
-}
-
 protocol ProfileBuilder {
     var presenter: ProfilePresenter { get }
     var viewController: ProfileViewControllerProtocol { get }
