@@ -14,6 +14,7 @@ final class ProfileRouterImpl: ProfileRouter {
     var navigationController: UINavigationController
 
     private weak var viewController: UIViewController?
+    private var mainFlowCoordinator: Coordinator?
 
     init(window: UIWindow, navigationController: UINavigationController) {
         self.window = window
@@ -22,6 +23,10 @@ final class ProfileRouterImpl: ProfileRouter {
 
     func setVC(vc: UIViewController) {
         self.viewController = vc
+    }
+
+    func setMainFlowCoordinator(coordinator: Coordinator) {
+        self.mainFlowCoordinator = coordinator
     }
 
     func start() {
@@ -35,9 +40,7 @@ final class ProfileRouterImpl: ProfileRouter {
 
     func switchToMainFlow() {
         print("change flow")
-        let newFlow = MainFlowCoordinator.init(window: window,
-                navigationController: navigationController)
-        newFlow.start()
+        mainFlowCoordinator?.start()
     }
 
     // MARK: - navigation actions

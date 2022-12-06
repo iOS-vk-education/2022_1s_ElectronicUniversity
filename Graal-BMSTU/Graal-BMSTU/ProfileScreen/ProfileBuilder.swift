@@ -27,6 +27,8 @@ final class ProfileBuilderImpl: ProfileBuilder {
 
         presenter.setVC(vc: viewController)
         router.setVC(vc: viewController)
+        router.setMainFlowCoordinator(coordinator: MainFlowCoordinator(window: window,
+                navigationController: navigationController))
 
         return ProfileBuilderImpl(viewController: viewController, presenter: presenter,
                 router: router)

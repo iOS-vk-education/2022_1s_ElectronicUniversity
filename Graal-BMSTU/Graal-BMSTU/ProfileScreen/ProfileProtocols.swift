@@ -25,6 +25,7 @@ protocol ProfileRouter: Coordinator {
     func navigateToProfileDetails()
     func navigateToSettings()
     func setVC(vc: UIViewController)
+    func setMainFlowCoordinator(coordinator: Coordinator)
 }
 
 protocol ProfileViewControllerProtocol: AnyObject {
