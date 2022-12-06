@@ -31,9 +31,16 @@ final class ProfileRouterImpl: ProfileRouter {
         self.window.makeKeyAndVisible()
     }
 
+    // MARK: - flow changer
+
+    func switchToMainFlow() {
+        print("change flow")
+        let newFlow = MainFlowCoordinator.init(window: window,
+                navigationController: navigationController)
+        newFlow.start()
+    }
 
     // MARK: - navigation actions
-
     func navigateToProfileDetails() {
         print("navigate")
         let placeholder = UIViewController()

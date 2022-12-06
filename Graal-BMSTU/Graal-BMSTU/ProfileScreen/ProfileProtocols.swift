@@ -21,6 +21,7 @@ protocol ProfilePresenter {
 }
 
 protocol ProfileRouter: Coordinator {
+    func switchToMainFlow()
     func navigateToProfileDetails()
     func navigateToSettings()
     func setVC(vc: UIViewController)
