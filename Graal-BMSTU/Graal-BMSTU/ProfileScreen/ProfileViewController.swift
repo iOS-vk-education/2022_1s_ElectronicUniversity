@@ -32,6 +32,17 @@ final class ProfileViewController: UIViewController {
     }
 }
 
+extension ProfileViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        authView.passwordFieldResignFirstResponder() || authView.loginFieldResignFirstResponder()
+    }
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+}
+
+
 extension ProfileViewController: ProfileViewControllerProtocol {
     func showAuthError(description: String?) {
         // placeholder
@@ -56,6 +67,8 @@ extension ProfileViewController: ProfileViewControllerProtocol {
         profileView.setSettingsButtonAction(self.presenter.navigateToSettings)
         authView.setupLoginAction(self.presenter.authenticate)
         authView.setupSkipAuthAction(self.presenter.skipAuthentication)
+        authView.setLoginFieldDelegate(self)
+        authView.setPasswordFieldDelegate(self)
     }
 
     func setState(toView to: ProfileViewState) {
