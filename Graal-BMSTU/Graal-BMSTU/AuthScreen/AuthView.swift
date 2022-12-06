@@ -74,7 +74,7 @@ private extension AuthView {
 private extension AuthView {
     func setupUI() {
         
-        self.backgroundColor = .white
+        self.backgroundColor = .init(red: 255/255, green: 255/255, blue: 255/255, alpha: 1.0)
         
         bmstuImage.image = R.image.bmstuLogo()
         
@@ -84,18 +84,28 @@ private extension AuthView {
         passwordField.clearButtonMode = .whileEditing
         loginField.borderStyle = UITextField.BorderStyle.roundedRect
         passwordField.borderStyle = UITextField.BorderStyle.roundedRect
-        loginField.layer.borderWidth = 1.5;
-        loginField.layer.borderColor = CGColor.init(red: 0.2, green: 0.5, blue: 0.8, alpha: 0.4);
-        passwordField.layer.borderColor = CGColor.init(red: 0.2, green: 0.5, blue: 0.8, alpha: 0.4);
-        passwordField.layer.borderWidth = 1.5;
-        passwordField.layer.shadowRadius = 1.0
+        loginField.layer.cornerRadius = 2.0
+        passwordField.layer.cornerRadius = 2.0
+        loginField.borderStyle = UITextField.BorderStyle.none
+        passwordField.borderStyle = UITextField.BorderStyle.none
+        loginField.layer.masksToBounds = false
+        passwordField.layer.masksToBounds = false
+        loginField.layer.borderWidth = 0.0;
+        loginField.layer.borderColor = CGColor.init(red: 255/255, green: 250/255, blue: 250/255, alpha: 1)
+        passwordField.layer.borderColor = CGColor.init(red: 255/255, green: 250/255, blue: 250/255, alpha: 1);
+        passwordField.layer.borderWidth = 0.0;
+        passwordField.layer.shadowRadius = 5.0
+        passwordField.layer.shadowColor = CGColor.init(red: 177/255, green: 174/255, blue: 168/255, alpha: 0.8)
+        loginField.layer.shadowColor = CGColor.init(red: 177/255, green: 174/255, blue: 168/255, alpha: 0.8)
+        passwordField .layer.shadowOffset = CGSizeMake(0.0, 0.0)
+        passwordField.layer.shadowOpacity = 0.9
+        loginField.layer.shadowRadius = 5.0
              //passwordField.layer.shadowColor = UIColor.lightGray
-        passwordField .layer.shadowOffset = CGSizeMake(1.0, 1.0)
-        passwordField.layer.shadowOpacity = 1.0
-        loginField.layer.shadowRadius = 1.0
-             //passwordField.layer.shadowColor = UIColor.lightGray
-        loginField .layer.shadowOffset = CGSizeMake(1.0, 1.0)
-        loginField.layer.shadowOpacity = 1.0
+        loginField .layer.shadowOffset = CGSizeMake(0.0, 0.0)
+        loginField.layer.shadowOpacity = 0.9
+        loginField.backgroundColor = .init(red: 255/255, green: 255/255, blue: 255/255, alpha: 1.0)
+        passwordField.backgroundColor = .init(red: 255/255, green: 255/255, blue: 255/255, alpha: 1.0)
+      
         
         loginButton.layer.cornerRadius = 20
         skipAuthButton.layer.cornerRadius = 20
@@ -104,8 +114,12 @@ private extension AuthView {
         skipAuthButtonConf()
         
 //        label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
-        label.text = "Введите логин/пароль от учетной записи университета"
+        label.numberOfLines = 2;
+        label.text = "Введите логин/пароль от учетной   записи университета"
         label.textAlignment = .center
+        label.lineBreakMode = NSLineBreakMode.byCharWrapping
+        label.font = UIFont.boldSystemFont (ofSize: 25)
+        label.font = UIFont.systemFont (ofSize: 20)
         
         var elems = [bmstuImage, loginField, passwordField, loginButton, label]
         if AppCoordinator.isFirstLaunch() {
@@ -126,21 +140,21 @@ private extension AuthView {
         label.snp.makeConstraints { make in
             make.left.equalTo(safeAreaLayoutGuide.snp.left).offset(30)
             make.right.equalTo(safeAreaLayoutGuide.snp.right).inset(30)
-            make.top.equalTo(bmstuImage.snp.bottom).offset(25 )
+            make.top.equalTo(bmstuImage.snp.bottom).offset(35)
             make.height.equalTo(50)
         }
         loginField.snp.makeConstraints { make in
-            make.top.equalTo(label.snp.bottom).offset(80)
+            make.top.equalTo(label.snp.bottom).offset(55)
             make.centerX.equalToSuperview()
         }
         passwordField.snp.makeConstraints { make in
-            make.top.equalTo(loginField.snp.bottom).offset(20)
+            make.top.equalTo(loginField.snp.bottom).offset(25)
             make.centerX.equalToSuperview()
         }
         loginButton.snp.makeConstraints { make in
             make.left.equalTo(self.safeAreaLayoutGuide.snp.left).offset(30)
             make.right.equalTo(self.safeAreaLayoutGuide.snp.right).inset(30)
-            make.top.equalTo(passwordField.snp.bottom).offset(80)
+            make.top.equalTo(passwordField.snp.bottom).offset(115)
             make.height.equalTo(50)
         }
         if AppCoordinator.isFirstLaunch() {
