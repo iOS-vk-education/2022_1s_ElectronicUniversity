@@ -44,6 +44,24 @@ extension AuthView {
     func setupSkipAuthAction(_ action: @escaping SkipAuthAction) {
         self.skipAuthAction = action
     }
+
+    func setLoginFieldDelegate(_ delegate: UITextFieldDelegate) {
+        loginField.delegate = delegate;
+    }
+
+    func setPasswordFieldDelegate(_ delegate: UITextFieldDelegate) {
+        passwordField.delegate = delegate;
+    }
+
+    func passwordFieldResignFirstResponder() -> Bool {
+        passwordField.resignFirstResponder()
+    }
+
+    func loginFieldResignFirstResponder() -> Bool {
+        loginField.resignFirstResponder()
+    }
+
+
 }
 
 // MARK: - UI actions
