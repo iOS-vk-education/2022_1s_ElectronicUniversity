@@ -21,14 +21,15 @@ final class ProfileBuilderImpl: ProfileBuilder {
 
     static func assemble(window: UIWindow,
                          navigationController: UINavigationController) -> ProfileBuilder {
-        let router = ProfileRouterImpl(window: window, navigationController: navigationController)
+        let router = ProfileRouterImpl(window: window, navigationController: navigationController,
+                flowAfterFirstAuth: MainFlowCoordinator(window: window,
+                        navigationController: navigationController))
         let presenter = ProfilePresenterImpl(router: router, service: AuthServiceMockup())
         let viewController = ProfileViewController(presenter: presenter)
 
         presenter.setVC(vc: viewController)
         router.setVC(vc: viewController)
-        router.setMainFlowCoordinator(coordinator: MainFlowCoordinator(window: window,
-                navigationController: navigationController))
+
 
         return ProfileBuilderImpl(viewController: viewController, presenter: presenter,
                 router: router)
