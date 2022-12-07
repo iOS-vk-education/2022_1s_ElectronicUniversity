@@ -55,10 +55,9 @@ private extension MainFlowCoordinator {
         guard let navController = navigationControllers[.mainMenu] else {
             return
         }
-//        let built = MainMenuBuilder.assemble()
-        let built = UIViewController()
-        built.view.backgroundColor = .white
-        navController.setViewControllers([built], animated: false)
+        let built = MainMenuBuilderImpl.assemble(window: window,
+                navigationController: navController)
+        built.router.start()
     }
 
     func setupScheduleTab() {

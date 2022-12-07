@@ -7,6 +7,7 @@
 
 import Foundation
 
+
 final class MainMenuPresenterImpl: MainMenuPresenter {
     private weak var vc: MainMenuViewControllerProtocol?
     private var service: ScheduleService?
@@ -40,8 +41,8 @@ final class MainMenuPresenterImpl: MainMenuPresenter {
         }
     }
 
-    func navigateToFullSchedule() {
-        router.navigateToFullSchedule(group: service?.getSelectedGroup())
+    func navigateToFullSchedule(position: SchedulePosition) {
+        router.navigateToFullSchedule(group: service?.getSelectedGroup(), position: position)
     }
 
     func navigateToGroupSelection() {

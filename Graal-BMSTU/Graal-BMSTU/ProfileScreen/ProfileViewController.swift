@@ -32,6 +32,8 @@ final class ProfileViewController: UIViewController {
     }
 }
 
+
+// MARK: - keyboard hiding
 extension ProfileViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         authView.passwordFieldResignFirstResponder() || authView.loginFieldResignFirstResponder()

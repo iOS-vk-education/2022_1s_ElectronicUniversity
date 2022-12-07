@@ -59,6 +59,7 @@
 		85B83CAA431356245705BAFD /* TeacherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B832FE9A620E030CA8BB0D /* TeacherModel.swift */; };
 		85B83D7D168C76D3DC5C699E /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 85B83B1056CFCF2D1E3ED5A5 /* .gitignore */; };
 		85B83EAB374127AB909A90C0 /* Fields.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B83921D0F4975C63B494B6 /* Fields.swift */; };
+		85B83F670357DC40F44BBFAC /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B8378FD3C7A96626638BFC /* Router.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -100,6 +101,7 @@
 		85B8334F3F7D4635DA27DACA /* LessonsDayModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LessonsDayModel.swift; path = Models/LessonsDayModel.swift; sourceTree = "<group>"; };
 		85B833C12362EDF7756DE07F /* ScheduleModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ScheduleModel.swift; path = Models/ScheduleModel.swift; sourceTree = "<group>"; };
 		85B8345E1551B82C7186FF92 /* DetailProfilePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailProfilePresenter.swift; sourceTree = "<group>"; };
+		85B8378FD3C7A96626638BFC /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		85B8382BFD6E0E0DB86602F2 /* DetailProfileCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailProfileCoordinator.swift; sourceTree = "<group>"; };
 		85B838F954DA1BB8269090B0 /* DetailProfileProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailProfileProtocols.swift; sourceTree = "<group>"; };
 		85B83921D0F4975C63B494B6 /* Fields.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fields.swift; sourceTree = "<group>"; };
@@ -111,7 +113,6 @@
 		85B83C19A91E260FC4CD8C24 /* LessonTile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LessonTile.swift; sourceTree = "<group>"; };
 		85B83C27376C7E5777A507A8 /* SubjectModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SubjectModel.swift; path = Models/SubjectModel.swift; sourceTree = "<group>"; };
 		85B83D4EE826791C198073B3 /* AuthView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
-		85B83D7666044496A76D3AC0 /* .gitkeep */ = {isa = PBXFileReference; lastKnownFileType = file.gitkeep; path = .gitkeep; sourceTree = "<group>"; };
 		85B83E1B88F49483B12F7EBE /* AuthService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthService.swift; path = Services/AuthService.swift; sourceTree = "<group>"; };
 		85B83E79944CC6FC0DD1ABD4 /* MainMenuRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuRouter.swift; sourceTree = "<group>"; };
 		85B83EC9B9DC0C1F5A260470 /* DetailProfileBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailProfileBuilder.swift; sourceTree = "<group>"; };
@@ -136,10 +137,10 @@
 		7057642029131E9C006555E2 /* BaseComponents */ = {
 			isa = PBXGroup;
 			children = (
-				85B83D7666044496A76D3AC0 /* .gitkeep */,
 				704C5C85293C009B00C2F3F9 /* Buttons.swift */,
 				85B83921D0F4975C63B494B6 /* Fields.swift */,
 				85B83C19A91E260FC4CD8C24 /* LessonTile.swift */,
+				85B8378FD3C7A96626638BFC /* Router.swift */,
 			);
 			path = BaseComponents;
 			sourceTree = "<group>";
@@ -434,6 +435,7 @@
 				85B83689DFB54D776526C9AD /* LessonsDayModel.swift in Sources */,
 				85B83127233AA4E86C242039 /* PlaceModel.swift in Sources */,
 				85B83CAA431356245705BAFD /* TeacherModel.swift in Sources */,
+				85B83F670357DC40F44BBFAC /* Router.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

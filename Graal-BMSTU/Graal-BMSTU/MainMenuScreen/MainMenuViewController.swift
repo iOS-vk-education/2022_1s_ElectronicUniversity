@@ -7,6 +7,7 @@ import UIKit
 final class MainMenuViewController: UIViewController {
     private let presenter: MainMenuPresenter
     private var mainMenuView = MainMenuView(frame: .zero)
+
     init(presenter: MainMenuPresenter) {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
@@ -21,7 +22,7 @@ final class MainMenuViewController: UIViewController {
     }
 }
 
-// MARK: - getting data from presenter
+// MARK: - receiving data from presenter
 extension MainMenuViewController: MainMenuViewControllerProtocol {
     func setGroupName(_ name: String) {
         mainMenuView.setGroupName(name)
@@ -59,6 +60,13 @@ extension MainMenuViewController: MainMenuViewControllerProtocol {
                 lessonLocationName: lessonLocationName, teacherName: teacherName,
                 startTime: startTime.formatted(date: .omitted, time: .shortened),
                 endTime: endTime.formatted(date: .omitted, time: .shortened))
+    }
+}
+
+extension MainMenuViewController {
+    func setupActions() {
+        mainMenuView.setSeeFullScheduleAction(self.presenter.navigateToFullSchedule)
+        mainMenuView.setSelectGroupAction(self.presenter.navigateToGroupSelection)
     }
 }
 

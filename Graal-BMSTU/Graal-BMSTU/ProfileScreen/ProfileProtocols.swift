@@ -20,14 +20,12 @@ protocol ProfilePresenter {
     func navigateToSettings()
 }
 
-protocol ProfileRouter: Coordinator {
+protocol ProfileRouter: Router {
     init(window: UIWindow, navigationController: UINavigationController,
          flowAfterFirstAuth: Coordinator)
-    func start()
     func switchToMainFlow()
     func navigateToProfileDetails()
     func navigateToSettings()
-    func setVC(vc: UIViewController)
 }
 
 protocol ProfileViewControllerProtocol: AnyObject {

@@ -10,13 +10,12 @@ protocol MainMenuPresenter {
     func setVC(vc: MainMenuViewControllerProtocol)
 
     // MARK: - связка с сервисом, функции для вьюшки
-    func navigateToFullSchedule()
+    func navigateToFullSchedule(position: SchedulePosition)
     func navigateToGroupSelection()
 }
 
-protocol MainMenuRouter: Coordinator {
-    func setVC(vc: UIViewController)
-    func navigateToFullSchedule(group: Group)
+protocol MainMenuRouter: Router {
+    func navigateToFullSchedule(group: Group, position: SchedulePosition)
     func navigateToGroupSelection()
 }
 
