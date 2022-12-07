@@ -8,25 +8,29 @@
 import UIKit
 
 final class ProfileRouterImpl: ProfileRouter {
+
+
     private let window: UIWindow
     var parentCoordinator: Coordinator?
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
 
     private weak var viewController: UIViewController?
-    private var mainFlowCoordinator: Coordinator?
+    private var flowAfterFirstAuth: Coordinator?
 
     init(window: UIWindow, navigationController: UINavigationController) {
         self.window = window
         self.navigationController = navigationController
     }
 
-    func setVC(vc: UIViewController) {
-        self.viewController = vc
+    convenience init(window: UIWindow, navigationController: UINavigationController,
+                     flowAfterFirstAuth: Coordinator) {
+        self.init(window: window, navigationController: navigationController)
+        self.flowAfterFirstAuth = flowAfterFirstAuth
     }
 
-    func setMainFlowCoordinator(coordinator: Coordinator) {
-        self.mainFlowCoordinator = coordinator
+    func setVC(vc: UIViewController) {
+        self.viewController = vc
     }
 
     func start() {
@@ -40,7 +44,7 @@ final class ProfileRouterImpl: ProfileRouter {
 
     func switchToMainFlow() {
         print("change flow")
-        mainFlowCoordinator?.start()
+        flowAfterFirstAuth?.start()
     }
 
     // MARK: - navigation actions
