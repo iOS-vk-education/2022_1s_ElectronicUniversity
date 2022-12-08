@@ -28,7 +28,7 @@ final class MainMenuRouterImpl: MainMenuRouter {
     }
 
     // MARK: - navigation
-    func navigateToFullSchedule(group: Group) {
+    func navigateToFullSchedule(group: Group, position: SchedulePosition) {
         print("navigate")
         let placeholder = UIViewController()
         placeholder.view.backgroundColor = .darkGray

@@ -42,7 +42,9 @@ final class MainMenuPresenterImpl: MainMenuPresenter {
     }
 
     func navigateToFullSchedule(position: SchedulePosition) {
-        router.navigateToFullSchedule(group: service?.getSelectedGroup(), position: position)
+        if let group = service?.getSelectedGroup() {
+            router.navigateToFullSchedule(group: group, position: position)
+        }
     }
 
     func navigateToGroupSelection() {

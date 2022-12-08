@@ -9,6 +9,9 @@ import UIKit
 
 // передается при нажатии на день, чтобы полное расписание открылось на нужном месте (отмоталось
 // само)
+enum SchedulePosition {
+    case today, nextDay
+}
 
 let TableView = UIView.init(frame: CGRect.zero, style: .grouped)
 
@@ -37,22 +40,23 @@ class TableViewController: UITableViewController {
     }
     
     private func updateLayout(with size: CGSize) {
-        self.TableView.frame = CGRect.init(origin: .zero, size: size)
+        self.tableView.frame = CGRect.init(origin: .zero, size: size)
     }
 }
 
-extension ViewController: UITableViewDataSource {
+extension TableViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch tableViw {
+        switch tableView {
         case self.tableView:
             return self.data.count
         default:
             return 0
         }
     }
-    
+
     func tableView(tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = self.tableView(tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as! TableViewCell
+        let cell = self.tableView.dequeueReusableCell(withIdentifier: "TableViewCell",
+                for: indexPath) as! TableViewCell
         cell.textLabel?.text = self.data[indexPath.row]
         if indexPath.row == 0 {
             cell.accessoryType = .disclosureIndicator
@@ -62,19 +66,10 @@ extension ViewController: UITableViewDataSource {
 }
 
 class TableViewCell: UITableViewCell {
-    
-            override func prepareForReuse() {
-                super.prepareForReuse()
-                self.accessoryType = .none
-            }
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.accessoryType = .none
+    }
 }
 
-
-
-//enum SchedulePosition {
- //   case today, nextDay
-//}
-
 //final class MainMenuView: UIView { }
-
-

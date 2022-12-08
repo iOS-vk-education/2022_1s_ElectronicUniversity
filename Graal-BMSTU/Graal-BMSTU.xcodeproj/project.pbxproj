@@ -26,7 +26,6 @@
 		7092B984291C29CF000D8D3C /* MainMenuPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7092B983291C29CF000D8D3C /* MainMenuPresenter.swift */; };
 		7092B98C291C2A3F000D8D3C /* SchedulePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7092B98B291C2A3F000D8D3C /* SchedulePresenter.swift */; };
 		7092B98F291C2A4E000D8D3C /* ScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7092B98E291C2A4E000D8D3C /* ScheduleView.swift */; };
-		7092B991291C2A5A000D8D3C /* ScheduleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7092B990291C2A5A000D8D3C /* ScheduleModel.swift */; };
 		7092B997291C2AA1000D8D3C /* TrainingPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7092B996291C2AA1000D8D3C /* TrainingPresenter.swift */; };
 		7092B999291C2AAD000D8D3C /* TrainingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7092B998291C2AAD000D8D3C /* TrainingView.swift */; };
 		7092B99B291C2ABB000D8D3C /* TrainingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7092B99A291C2ABB000D8D3C /* TrainingModel.swift */; };
@@ -46,7 +45,7 @@
 		85B8340EF1048C7E38742933 /* DetailProfileBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B83EC9B9DC0C1F5A260470 /* DetailProfileBuilder.swift */; };
 		85B834F5652EA57FD638E0DC /* ScheduleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B833C12362EDF7756DE07F /* ScheduleModel.swift */; };
 		85B83540A1DC1F4722627DCA /* MainMenuBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B83A48E253D5BBB51C5B6F /* MainMenuBuilder.swift */; };
-		85B835D5F7E5BB48E9C0FB1F /* Lesson Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B83022711B66DCBEFBC923 /* Lesson Model.swift */; };
+		85B835D5F7E5BB48E9C0FB1F /* LessonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B83022711B66DCBEFBC923 /* LessonModel.swift */; };
 		85B83625C3779268CC1818C3 /* DetailProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B83A2ECBF4266C824A8652 /* DetailProfileView.swift */; };
 		85B83689DFB54D776526C9AD /* LessonsDayModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B8334F3F7D4635DA27DACA /* LessonsDayModel.swift */; };
 		85B836C71BE4E27C54B1D5BE /* DetailProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B8382BFD6E0E0DB86602F2 /* DetailProfileCoordinator.swift */; };
@@ -86,13 +85,12 @@
 		7092B983291C29CF000D8D3C /* MainMenuPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuPresenter.swift; sourceTree = "<group>"; };
 		7092B98B291C2A3F000D8D3C /* SchedulePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulePresenter.swift; sourceTree = "<group>"; };
 		7092B98E291C2A4E000D8D3C /* ScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleView.swift; sourceTree = "<group>"; };
-		7092B990291C2A5A000D8D3C /* ScheduleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleModel.swift; sourceTree = "<group>"; };
 		7092B996291C2AA1000D8D3C /* TrainingPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingPresenter.swift; sourceTree = "<group>"; };
 		7092B998291C2AAD000D8D3C /* TrainingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingView.swift; sourceTree = "<group>"; };
 		7092B99A291C2ABB000D8D3C /* TrainingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingModel.swift; sourceTree = "<group>"; };
 		70F83A5E291E81F90087CC01 /* MainFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFlowCoordinator.swift; sourceTree = "<group>"; };
 		70F83A60291E82540087CC01 /* CoordinatorsProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorsProtocols.swift; sourceTree = "<group>"; };
-		85B83022711B66DCBEFBC923 /* Lesson Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Lesson Model.swift"; path = "Models/Lesson Model.swift"; sourceTree = "<group>"; };
+		85B83022711B66DCBEFBC923 /* LessonModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LessonModel.swift; path = Models/LessonModel.swift; sourceTree = "<group>"; };
 		85B830CF88BB50EDDC925ED5 /* GroupModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GroupModel.swift; path = Models/GroupModel.swift; sourceTree = "<group>"; };
 		85B8317AE5C7A6D62DD2E851 /* PlaceModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlaceModel.swift; path = Models/PlaceModel.swift; sourceTree = "<group>"; };
 		85B83211E2D6C9AD39BCAD20 /* DetailProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailProfileViewController.swift; sourceTree = "<group>"; };
@@ -237,7 +235,6 @@
 			children = (
 				7092B98B291C2A3F000D8D3C /* SchedulePresenter.swift */,
 				7092B98E291C2A4E000D8D3C /* ScheduleView.swift */,
-				7092B990291C2A5A000D8D3C /* ScheduleModel.swift */,
 			);
 			path = ScheduleScreen;
 			sourceTree = "<group>";
@@ -260,7 +257,7 @@
 				70F83A56291E7FD10087CC01 /* Coordinators */,
 				7057642029131E9C006555E2 /* BaseComponents */,
 				85B830CF88BB50EDDC925ED5 /* GroupModel.swift */,
-				85B83022711B66DCBEFBC923 /* Lesson Model.swift */,
+				85B83022711B66DCBEFBC923 /* LessonModel.swift */,
 				85B833C12362EDF7756DE07F /* ScheduleModel.swift */,
 				85B83B97B7F8D375FF4D4968 /* UserModel.swift */,
 				85B83E1B88F49483B12F7EBE /* AuthService.swift */,
@@ -360,7 +357,7 @@
 			packageReferences = (
 				70F653AD2915F3DC0024EA1D /* XCRemoteSwiftPackageReference "SnapKit" */,
 				708CF77E291C550A0036AEA2 /* XCRemoteSwiftPackageReference "SFSafeSymbols" */,
-				70B0553629350A7C00ED3A54 /* XCRemoteSwiftPackageReference "R" */,
+				70B0553629350A7C00ED3A54 /* XCRemoteSwiftPackageReference "R.swift" */,
 			);
 			productRefGroup = 708E76C829005E4A00D23E70 /* Products */;
 			projectDirPath = "";
@@ -407,7 +404,6 @@
 				7080CD29291EAE4800F1BBA0 /* ProfileViewController.swift in Sources */,
 				7092B97A291C295E000D8D3C /* ProfilePresenter.swift in Sources */,
 				7092B984291C29CF000D8D3C /* MainMenuPresenter.swift in Sources */,
-				7092B991291C2A5A000D8D3C /* ScheduleModel.swift in Sources */,
 				70F83A5F291E81F90087CC01 /* MainFlowCoordinator.swift in Sources */,
 				708E76CD29005E4A00D23E70 /* SceneDelegate.swift in Sources */,
 				85B8340EF1048C7E38742933 /* DetailProfileBuilder.swift in Sources */,
@@ -426,7 +422,7 @@
 				85B83120D81ED6CF7BC7D346 /* MainMenuProtocols.swift in Sources */,
 				85B8334C8BEDC377F353EC5F /* LessonTile.swift in Sources */,
 				85B83C8D5405F29AF8C9B5FD /* GroupModel.swift in Sources */,
-				85B835D5F7E5BB48E9C0FB1F /* Lesson Model.swift in Sources */,
+				85B835D5F7E5BB48E9C0FB1F /* LessonModel.swift in Sources */,
 				85B834F5652EA57FD638E0DC /* ScheduleModel.swift in Sources */,
 				85B83C6EF1906EDAD3E911B1 /* UserModel.swift in Sources */,
 				85B8329B1EB39F69A8E19F20 /* AuthService.swift in Sources */,
@@ -444,7 +440,7 @@
 /* Begin PBXTargetDependency section */
 		70B0553A29350ABB00ED3A54 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			productRef = 70B0553929350ABB00ED3A54 /* RswiftGenerateInternalResources */;
+			productRef = 70B0553929350ABB00ED3A54 /* plugin:RswiftGenerateInternalResources */;
 		};
 /* End PBXTargetDependency section */
 
@@ -673,7 +669,7 @@
 				kind = branch;
 			};
 		};
-		70B0553629350A7C00ED3A54 /* XCRemoteSwiftPackageReference "R" */ = {
+		70B0553629350A7C00ED3A54 /* XCRemoteSwiftPackageReference "R.swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/mac-cain13/R.swift";
 			requirement = {
@@ -699,10 +695,10 @@
 		};
 		70B0553729350A7C00ED3A54 /* RswiftLibrary */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 70B0553629350A7C00ED3A54 /* XCRemoteSwiftPackageReference "R" */;
+			package = 70B0553629350A7C00ED3A54 /* XCRemoteSwiftPackageReference "R.swift" */;
 			productName = RswiftLibrary;
 		};
-		70B0553929350ABB00ED3A54 /* RswiftGenerateInternalResources */ = {
+		70B0553929350ABB00ED3A54 /* plugin:RswiftGenerateInternalResources */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = "plugin:RswiftGenerateInternalResources";
 		};

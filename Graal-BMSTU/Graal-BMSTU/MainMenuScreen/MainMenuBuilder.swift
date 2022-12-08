@@ -19,7 +19,7 @@ final class MainMenuBuilderImpl: MainMenuBuilder {
     static func assemble(window: UIWindow,
                          navigationController: UINavigationController) -> MainMenuBuilder {
         let router = MainMenuRouterImpl(window: window, navigationController: navigationController)
-        let presenter = MainMenuPresenterImpl(router: router, service: ScheduleService())
+        let presenter = MainMenuPresenterImpl(router: router, service: ScheduleServiceMockup())
         let viewController = MainMenuViewController(presenter: presenter)
 
         presenter.setVC(vc: viewController)

@@ -5,5 +5,5 @@
 import Foundation
 
 struct Teacher {
-
+    var name: String
 }
