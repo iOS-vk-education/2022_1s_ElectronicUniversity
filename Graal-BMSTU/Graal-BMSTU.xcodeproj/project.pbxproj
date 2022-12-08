@@ -360,7 +360,7 @@
 			packageReferences = (
 				70F653AD2915F3DC0024EA1D /* XCRemoteSwiftPackageReference "SnapKit" */,
 				708CF77E291C550A0036AEA2 /* XCRemoteSwiftPackageReference "SFSafeSymbols" */,
-				70B0553629350A7C00ED3A54 /* XCRemoteSwiftPackageReference "R.swift" */,
+				70B0553629350A7C00ED3A54 /* XCRemoteSwiftPackageReference "R" */,
 			);
 			productRefGroup = 708E76C829005E4A00D23E70 /* Products */;
 			projectDirPath = "";
@@ -444,7 +444,7 @@
 /* Begin PBXTargetDependency section */
 		70B0553A29350ABB00ED3A54 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			productRef = 70B0553929350ABB00ED3A54 /* plugin:RswiftGenerateInternalResources */;
+			productRef = 70B0553929350ABB00ED3A54 /* RswiftGenerateInternalResources */;
 		};
 /* End PBXTargetDependency section */
 
@@ -673,7 +673,7 @@
 				kind = branch;
 			};
 		};
-		70B0553629350A7C00ED3A54 /* XCRemoteSwiftPackageReference "R.swift" */ = {
+		70B0553629350A7C00ED3A54 /* XCRemoteSwiftPackageReference "R" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/mac-cain13/R.swift";
 			requirement = {
@@ -699,10 +699,10 @@
 		};
 		70B0553729350A7C00ED3A54 /* RswiftLibrary */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 70B0553629350A7C00ED3A54 /* XCRemoteSwiftPackageReference "R.swift" */;
+			package = 70B0553629350A7C00ED3A54 /* XCRemoteSwiftPackageReference "R" */;
 			productName = RswiftLibrary;
 		};
-		70B0553929350ABB00ED3A54 /* plugin:RswiftGenerateInternalResources */ = {
+		70B0553929350ABB00ED3A54 /* RswiftGenerateInternalResources */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = "plugin:RswiftGenerateInternalResources";
 		};
