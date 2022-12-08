@@ -10,10 +10,10 @@ import Foundation
 final class ProfilePresenterImpl: ProfilePresenter {
     private weak var vc: ProfileViewControllerProtocol?
     private var service: AuthService?
-    private let coordinator: ProfileRouter
+    private let router: ProfileRouter
 
     init(router: ProfileRouter, service: AuthService) {
-        self.coordinator = router
+        self.router = router
         self.service = service
     }
 
@@ -24,7 +24,11 @@ final class ProfilePresenterImpl: ProfilePresenter {
     func authenticate(username: String?, password: String?) {
         if let username = username, let password = password {
             if let _ = service?.authenticate(login: username, password: password) {
-                update()
+                if AppCoordinator.isFirstLaunch() {
+                    skipAuthentication()
+                } else {
+                    update()
+                }
             } else {
                 vc?.showAuthError(description: "Auth error")
             }
@@ -35,8 +39,7 @@ final class ProfilePresenterImpl: ProfilePresenter {
 
     func skipAuthentication() {
         AppCoordinator.setNotFirstLaunch()
-        // ... notification center
-        // ... restart appcoordinator or just change flow coordinator
+        router.switchToMainFlow()
     }
 
     func update() {
@@ -56,10 +59,10 @@ final class ProfilePresenterImpl: ProfilePresenter {
     }
 
     func navigateToProfileDetails() {
-        coordinator.navigateToProfileDetails()
+        router.navigateToProfileDetails()
     }
 
     func navigateToSettings() {
-        coordinator.navigateToSettings()
+        router.navigateToSettings()
     }
 }
