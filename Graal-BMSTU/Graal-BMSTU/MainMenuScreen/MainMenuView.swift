@@ -72,4 +72,6 @@ class TableViewCell: UITableViewCell {
     }
 }
 
-//final class MainMenuView: UIView { }
+final class MainMenuView: UIView {
+
+}

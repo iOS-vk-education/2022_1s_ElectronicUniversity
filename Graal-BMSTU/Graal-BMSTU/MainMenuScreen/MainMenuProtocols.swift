@@ -19,18 +19,8 @@ protocol MainMenuRouter: Router {
     func navigateToGroupSelection()
 }
 
-protocol MainMenuViewControllerProtocol: AnyObject {
-    func setGroupName(_ name: String)
+protocol MainMenuViewControllerProtocol: AnyObject, UITableViewDataSource, UITableViewDelegate {
 
-    func setTodayLessonsCnt(_ cnt: Int)
-    func setTodayDate(_ date: Date)
-    func setNextDayLessonsCnt(_ cnt: Int)
-    func setNextDayDate(_ date: Date)
-
-    func setTodayLesson(seq_num: Int, subjectName: String, lessonLocationName: String,
-                        teacherName: String, startTime: Date, endTime: Date)
-    func setNextDayLesson(seq_num: Int, subjectName: String, lessonLocationName: String,
-                          teacherName: String, startTime: Date, endTime: Date)
 }
 
 

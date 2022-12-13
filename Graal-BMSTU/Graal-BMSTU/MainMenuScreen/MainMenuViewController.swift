@@ -11,9 +11,12 @@ final class MainMenuViewController: UIViewController {
     init(presenter: MainMenuPresenter) {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
+
+        navigationConf()
         setupActions()
-        self.presenter.setVC(vc: self)
         view = mainMenuView
+
+        self.presenter.setVC(vc: self)
         self.presenter.update()
     }
 
@@ -22,51 +25,19 @@ final class MainMenuViewController: UIViewController {
     }
 }
 
-// MARK: - receiving data from presenter
+// MARK:
 extension MainMenuViewController: MainMenuViewControllerProtocol {
-    func setGroupName(_ name: String) {
-        mainMenuView.setGroupName(name)
-    }
 
-    func setTodayLessonsCnt(_ cnt: Int) {
-        mainMenuView.generateTodayLessonsTiles(cnt)
-    }
-
-    func setTodayDate(_ date: Date) {
-        mainMenuView.setTodayDate(date.formatted(
-                .dateTime.day(.defaultDigits) + " " + date.formatted(.dateTime.month(.wide))))
-    }
-
-    func setNextDayLessonsCnt(_ cnt: Int) {
-        mainMenuView.generateNextDayLessonsTiles(cnt)
-    }
-
-    func setNextDayDate(_ date: Date) {
-        mainMenuView.setNextDayDate(date.formatted(
-                .dateTime.day(.defaultDigits) + " " + date.formatted(.dateTime.month(.wide))))
-    }
-
-    func setTodayLesson(seq_num: Int, subjectName: String, lessonLocationName: String,
-                        teacherName: String, startTime: Date, endTime: Date) {
-        mainMenuView.setTodayLesson(seq_num: seq_num, subjectName: subjectName,
-                lessonLocationName: lessonLocationName, teacherName: teacherName,
-                startTime: startTime.formatted(date: .omitted, time: .shortened),
-                endTime: endTime.formatted(date: .omitted, time: .shortened))
-    }
-
-    func setNextDayLesson(seq_num: Int, subjectName: String, lessonLocationName: String,
-                          teacherName: String, startTime: Date, endTime: Date) {
-        mainMenuView.setNextDayLesson(seq_num: seq_num, subjectName: subjectName,
-                lessonLocationName: lessonLocationName, teacherName: teacherName,
-                startTime: startTime.formatted(date: .omitted, time: .shortened),
-                endTime: endTime.formatted(date: .omitted, time: .shortened))
-    }
 }
 
 extension MainMenuViewController {
     func setupActions() {
         mainMenuView.setSeeFullScheduleAction(self.presenter.navigateToFullSchedule)
         mainMenuView.setSelectGroupAction(self.presenter.navigateToGroupSelection)
+    }
+
+    func navigationConf() {
+        navigationItem.title = "Schedule"
     }
 }
 
