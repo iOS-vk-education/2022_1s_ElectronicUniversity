@@ -4,6 +4,10 @@
 
 import UIKit
 
+enum SchedulePosition: Int {
+    case today = 0, nextDay
+}
+
 final class MainMenuViewController: UIViewController {
     private let presenter: MainMenuPresenter
     private var mainMenuView = MainMenuView(frame: .zero)
@@ -27,7 +31,21 @@ final class MainMenuViewController: UIViewController {
 
 // MARK:
 extension MainMenuViewController: MainMenuViewControllerProtocol {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return presenter.getLessonsCnt(day: SchedulePosition(rawValue: section))
+    }
 
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let lesson = presenter.getLesson(day: SchedulePosition(rawValue: indexPath.section),
+                indexPath.row)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "LessonCell") as! LessonCell
+        cell.lesson = lesson
+        return cell
+    }
+
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
 }
 
 extension MainMenuViewController {
