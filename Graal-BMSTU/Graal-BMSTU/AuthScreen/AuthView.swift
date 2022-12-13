@@ -109,12 +109,16 @@ private extension AuthView {
             make.height.equalTo(50)
         }
         loginField.snp.makeConstraints { make in
-            make.top.equalTo(hint.snp.bottom).offset(80)
+            make.top.equalTo(hint.snp.bottom).offset(55)
             make.centerX.equalToSuperview()
+            make.left.equalTo(safeAreaLayoutGuide.snp.left).offset(25)
+            make.right.equalTo(safeAreaLayoutGuide.snp.right).inset(25)
         }
         passwordField.snp.makeConstraints { make in
             make.top.equalTo(loginField.snp.bottom).offset(20)
             make.centerX.equalToSuperview()
+            make.left.equalTo(safeAreaLayoutGuide.snp.left).offset(25)
+            make.right.equalTo(safeAreaLayoutGuide.snp.right).inset(25)
         }
         loginButton.snp.makeConstraints { make in
             make.left.equalTo(self.safeAreaLayoutGuide.snp.left).offset(30)
@@ -135,16 +139,16 @@ private extension AuthView {
     // MARK: - button configs
     func loginButtonConf() {
         var config = basicButtonConf(button: loginButton)
-        config.title = R.string.localizable.login_button_text() //
-        config.image = UIImage(systemSymbol: .chevronRight) //
+        config.title = R.string.localizable.login_button_text()
+        config.image = UIImage(systemSymbol: .chevronRight)
         loginButton.configuration = config
         loginButton.addTarget(self, action: #selector(self.loginButtonPressed), for: .touchUpInside)
     }
 
     func skipAuthButtonConf() {
         var config = basicButtonConf(button: skipAuthButton)
-        config.title = R.string.localizable.skip_auth_button_text() //
-        config.image = UIImage(systemSymbol: .rectanglePortraitAndArrowRight) //
+        config.title = R.string.localizable.skip_auth_button_text()
+        config.image = UIImage(systemSymbol: .rectanglePortraitAndArrowRight)
         skipAuthButton.configuration = config
         skipAuthButton.addTarget(self, action: #selector(self.skipAuthButtonPressed),
                 for: .touchUpInside)
@@ -164,5 +168,7 @@ private extension AuthView {
         hint.text = R.string.localizable.hint_label_text()
         hint.textAlignment = .center
         hint.numberOfLines = 0
+        //        hint.font = UIFont.boldSystemFont(ofSize: 25) // почему два шрифта?
+        hint.font = UIFont.systemFont(ofSize: 20)
     }
 }
