@@ -77,8 +77,7 @@ final class MainMenuView: UIView {
     private var weekLabel = UILabel(frame: .zero)
     private var scheduleTable = UITableView(frame: .zero)
 
-    init(frame: CGRect, dataSource: UITableViewDataSource) {
-        self.scheduleTable.dataSource = dataSource
+    override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()
     }
@@ -87,6 +86,9 @@ final class MainMenuView: UIView {
         return nil
     }
 
+    func setDataSource(dataSource: UITableViewDataSource) {
+        self.scheduleTable.dataSource = dataSource
+    }
 
 }
 
@@ -113,6 +115,8 @@ private extension MainMenuView {
             make.centerX.equalToSuperview()
             make.top.equalTo(weekLabel.snp.bottom).offset(10)
             make.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom)
+            make.left.equalTo(safeAreaLayoutGuide.snp.left)
+            make.right.equalTo(safeAreaLayoutGuide.snp.right)
         }
     }
 

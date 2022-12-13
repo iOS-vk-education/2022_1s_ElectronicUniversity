@@ -18,6 +18,7 @@ final class MainMenuViewController: UIViewController {
 
         navigationConf()
         setupActions()
+        mainMenuView.setDataSource(dataSource: self)
         view = mainMenuView
 
         self.presenter.setVC(vc: self)
@@ -29,15 +30,21 @@ final class MainMenuViewController: UIViewController {
     }
 }
 
-// MARK:
+// MARK: - table view data source
 extension MainMenuViewController: MainMenuViewControllerProtocol {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter.getLessonsCnt(day: SchedulePosition(rawValue: section))
+        guard let day = SchedulePosition(rawValue: section) else {
+            return 0
+        }
+        return presenter.getLessonsCnt(day: day) // а может
+        // оставлять пустые и писать в них только время?
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let lesson = presenter.getLesson(day: SchedulePosition(rawValue: indexPath.section),
-                indexPath.row)
+        guard let day = SchedulePosition(rawValue: indexPath.section) else {
+            return UITableViewCell()
+        } //? нормально такое возвращать при ошибке?
+        let lesson = presenter.getLesson(day: day, indexPath.row)
         let cell = tableView.dequeueReusableCell(withIdentifier: "LessonCell") as! LessonCell
         cell.lesson = lesson
         return cell
@@ -48,14 +55,22 @@ extension MainMenuViewController: MainMenuViewControllerProtocol {
     }
 }
 
-extension MainMenuViewController {
+private extension MainMenuViewController {
     func setupActions() {
-        mainMenuView.setSeeFullScheduleAction(self.presenter.navigateToFullSchedule)
-        mainMenuView.setSelectGroupAction(self.presenter.navigateToGroupSelection)
+        //        mainMenuView.setSeeFullScheduleAction(self.presenter.navigateToFullSchedule)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemSymbol: .gear),
+                style: .plain, target: self, action: #selector(groupSelectButtonTapped))
     }
 
     func navigationConf() {
         navigationItem.title = "Schedule"
+    }
+
+}
+
+private extension MainMenuViewController {
+    @objc func groupSelectButtonTapped() {
+        self.presenter.navigateToGroupSelection()
     }
 }
 

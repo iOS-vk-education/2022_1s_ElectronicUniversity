@@ -47,19 +47,24 @@ private extension LessonCell {
 
     func setupUI() {
         self.backgroundColor = .white
-        self.stack.axis = .vertical
-        let elems = [subjectNameLabel, startTimeLabel, finishTimeLabel, placeLabel, teacherLabel]
-        elems.forEach { box in
-            self.stack.addSubview(box)
-        }
+        //        self.stack.axis = .vertical
+        //        let elems = [subjectNameLabel, startTimeLabel, finishTimeLabel, placeLabel, teacherLabel]
+        //        elems.forEach { box in
+        //            self.stack.addSubview(box)
+        //        }
+        //        self.contentView.addSubview(stack)
+        self.contentView.addSubview(subjectNameLabel)
         setupConstraints()
     }
 
     func setupConstraints() {
-        stack.snp.makeConstraints { make in
-            make.edges.equalTo(self.safeAreaLayoutGuide.snp.edges)
-        }
+        //        stack.snp.makeConstraints { make in
+        //            make.edges.equalTo(self.contentView.snp.edges)
+        //        }
         // inside stack...
+        subjectNameLabel.snp.makeConstraints { make in
+            make.edges.equalTo(self.contentView.snp.edges).offset(2)
+        }
     }
 }
 

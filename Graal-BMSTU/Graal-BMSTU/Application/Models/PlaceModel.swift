@@ -6,7 +6,7 @@ import Foundation
 
 enum BMSTUBuilding {
     case GZ, ULK, LT, E, SM, MT, MF
-
+    // не добавить ли сюда ФВ?
     var textDesc: String {
         switch (self) {
         case .GZ:
@@ -31,3 +31,11 @@ struct Place {
     var name: String
     var building: BMSTUBuilding
 }
+
+// places
+let gz_pl_1 = Place(name: "308ю", building: .GZ)
+let gz_pl_2 = Place(name: "327", building: .GZ)
+let ulk_pl_1 = Place(name: "218л", building: .ULK)
+let ulk_pl_2 = Place(name: "533л", building: .ULK)
+let e_pl_1 = Place(name: "332э", building: .E)
+let e_pl_2 = Place(name: "каф.", building: .E)

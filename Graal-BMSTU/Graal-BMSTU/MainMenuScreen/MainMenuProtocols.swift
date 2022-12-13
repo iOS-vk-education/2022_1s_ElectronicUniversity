@@ -9,9 +9,13 @@ protocol MainMenuPresenter {
     func update()
     func setVC(vc: MainMenuViewControllerProtocol)
 
-    // MARK: - связка с сервисом, функции для вьюшки
+    // MARK: - связка с роутером
     func navigateToFullSchedule(position: SchedulePosition)
     func navigateToGroupSelection()
+
+    // MARK: - работа с данными
+    func getLessonsCnt(day: SchedulePosition) -> Int
+    func getLesson(day: SchedulePosition, _ num: Int) -> Lesson?
 }
 
 protocol MainMenuRouter: Router {

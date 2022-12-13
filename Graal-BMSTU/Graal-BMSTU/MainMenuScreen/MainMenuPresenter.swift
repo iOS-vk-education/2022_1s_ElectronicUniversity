@@ -22,23 +22,7 @@ final class MainMenuPresenterImpl: MainMenuPresenter {
     }
 
     func update() {
-        if let schedule = service?.getSelectedGroupSchedule() {
-            vc?.setGroupName(schedule.group.name)
-            vc?.setTodayLessonsCnt(schedule.today.lessons.count)
-            vc?.setTodayDate(schedule.today.date)
-            vc?.setNextDayLessonsCnt(schedule.nextDay.lessons.count)
-            vc?.setNextDayDate(schedule.nextDay.date)
-            for (num, lesson) in schedule.today.lessons.enumerated() {
-                vc?.setTodayLesson(seq_num: num, subjectName: lesson.subject.name,
-                        lessonLocationName: lesson.place.name, teacherName: lesson.teacher.name,
-                        startTime: lesson.startTime, endTime: lesson.endTime)
-            }
-            for (num, lesson) in schedule.nextDay.lessons.enumerated() {
-                vc?.setNextDayLesson(seq_num: num, subjectName: lesson.subject.name,
-                        lessonLocationName: lesson.place.name, teacherName: lesson.teacher.name,
-                        startTime: lesson.startTime, endTime: lesson.endTime)
-            }
-        }
+        print("update main menu")
     }
 
     func navigateToFullSchedule(position: SchedulePosition) {
@@ -49,5 +33,32 @@ final class MainMenuPresenterImpl: MainMenuPresenter {
 
     func navigateToGroupSelection() {
         router.navigateToGroupSelection()
+    }
+}
+
+extension MainMenuPresenterImpl {
+    func getLessonsCnt(day: SchedulePosition) -> Int {
+        guard let service = service else {
+            return 0
+        }
+        switch (day) {
+        case .today:
+            return service.getSelectedGroupSchedule().today.lessons.count
+        case .nextDay:
+            return service.getSelectedGroupSchedule().nextDay.lessons.count
+        }
+    }
+
+    func getLesson(day: SchedulePosition, _ num: Int) -> Lesson? {
+        guard let service = service else {
+            return nil
+        }
+        let schedule = service.getSelectedGroupSchedule()
+        switch (day) {
+        case .today:
+            return schedule.today.lessons[num]
+        case .nextDay:
+            return schedule.nextDay.lessons[num]
+        }
     }
 }

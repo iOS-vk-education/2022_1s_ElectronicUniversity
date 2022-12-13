@@ -161,6 +161,7 @@ private extension AuthView {
 
     func passwordFieldConf() {
         basicTextFieldConf(field: passwordField)
+        passwordField.isSecureTextEntry = true
         passwordField.placeholder = R.string.localizable.password_field_placeholder()
     }
 
