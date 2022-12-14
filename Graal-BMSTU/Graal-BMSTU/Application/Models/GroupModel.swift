@@ -7,3 +7,5 @@ import Foundation
 struct Group {
     var name: String
 }
+
+let mock_group = Group(name: "ИУ7-35Б")

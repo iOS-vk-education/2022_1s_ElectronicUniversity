@@ -48,22 +48,48 @@ private extension LessonCell {
     func setupUI() {
         self.backgroundColor = .white
         //        self.stack.axis = .vertical
-        //        let elems = [subjectNameLabel, startTimeLabel, finishTimeLabel, placeLabel, teacherLabel]
-        //        elems.forEach { box in
-        //            self.stack.addSubview(box)
-        //        }
-        //        self.contentView.addSubview(stack)
-        self.contentView.addSubview(subjectNameLabel)
+        let elems = [subjectNameLabel, startTimeLabel, finishTimeLabel, placeLabel, teacherLabel]
+        elems.forEach { box in
+            self.stack.addSubview(box)
+        }
+        self.contentView.addSubview(stack)
         setupConstraints()
     }
 
     func setupConstraints() {
-        //        stack.snp.makeConstraints { make in
-        //            make.edges.equalTo(self.contentView.snp.edges)
-        //        }
-        // inside stack...
+        stack.snp.makeConstraints { make in
+            make.edges.equalTo(self.contentView.snp.edges).offset(5)
+        }
+        //         inside stack...
         subjectNameLabel.snp.makeConstraints { make in
-            make.edges.equalTo(self.contentView.snp.edges).offset(2)
+            make.top.equalTo(self.stack.snp.top).offset(5)
+            make.left.equalTo(self.stack.snp.left).offset(5)
+            make.right.equalTo(self.stack.snp.right).offset(5)
+            make.height.equalTo(20)
+        }
+        startTimeLabel.snp.makeConstraints { make in
+            make.top.equalTo(self.subjectNameLabel.snp.bottom).offset(5)
+            make.left.equalTo(self.stack.snp.left).offset(5)
+            make.right.equalTo(self.stack.snp.right).offset(5)
+            make.height.equalTo(20)
+        }
+        finishTimeLabel.snp.makeConstraints { make in
+            make.top.equalTo(self.startTimeLabel.snp.bottom).offset(5)
+            make.left.equalTo(self.stack.snp.left).offset(5)
+            make.right.equalTo(self.stack.snp.right).offset(5)
+            make.height.equalTo(20)
+        }
+        placeLabel.snp.makeConstraints { make in
+            make.top.equalTo(self.finishTimeLabel.snp.bottom).offset(5)
+            make.left.equalTo(self.stack.snp.left).offset(5)
+            make.right.equalTo(self.stack.snp.right).offset(5)
+            make.height.equalTo(20)
+        }
+        teacherLabel.snp.makeConstraints { make in
+            make.top.equalTo(self.placeLabel.snp.bottom).offset(5)
+            make.left.equalTo(self.stack.snp.left).offset(5)
+            make.right.equalTo(self.stack.snp.right).offset(5)
+            make.height.equalTo(20)
         }
     }
 }

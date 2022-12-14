@@ -53,6 +53,13 @@ extension MainMenuViewController: MainMenuViewControllerProtocol {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
+    public func tableView(_ tableView: UITableView,
+                          titleForHeaderInSection section: Int) -> String? {
+        guard let day = SchedulePosition(rawValue: section) else {
+            return nil
+        }
+        return "test"
+    }
 }
 
 private extension MainMenuViewController {

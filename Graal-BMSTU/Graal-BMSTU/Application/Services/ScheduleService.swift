@@ -11,14 +11,11 @@ protocol ScheduleService {
 
 final class ScheduleServiceMockup: ScheduleService {
     func getSelectedGroupSchedule() -> Schedule {
-        return Schedule(group: Group(name: "ИУ7-35Б"), today: LessonsDay(lessons: lessons_today,
-                date: Date(timeIntervalSince1970: 1670965200)),
-                nextDay: LessonsDay(lessons: lessons_today,
-                        date: Date(timeIntervalSince1970: 1670966200)))
+        return Schedule(group: mock_group, today: less_day_today, nextDay: less_day_next_day)
     }
 
     func getSelectedGroup() -> Group {
-        return Group(name: "IU7-35B")
+        return mock_group
     }
 }
 
@@ -28,20 +25,4 @@ let nextDay_first_session = Date(timeIntervalSince1970: 1671082200) // четв�
 let session_len = TimeInterval(5700) // 1 час 35 минут = 1 пара
 let between_session_len = TimeInterval(600) // 10 минут = 1 перемена
 
-// DAYS
-let lessons_today = [Lesson(subject: discret, place: ulk_pl_1, teacher: discret_tch_2,
-        startTime: today_first_session,
-        endTime: today_first_session.addingTimeInterval(session_len)), // окно
-    Lesson(subject: pravo, place: gz_pl_2, teacher: pravo_tch_2,
-            startTime: today_first_session.addingTimeInterval(
-                    2 * session_len + 2 * between_session_len),
-            endTime: today_first_session.addingTimeInterval(
-                    3 * session_len + 2 * between_session_len)), Lesson(subject: pravo,
-            place: gz_pl_1, teacher: pravo_tch_1, startTime: today_first_session.addingTimeInterval(
-            3 * session_len + 3 * between_session_len),
-            endTime: today_first_session.addingTimeInterval(
-                    4 * session_len + 3 * between_session_len)), Lesson(subject: tisd,
-            place: ulk_pl_2, teacher: tisd_tch_1, startTime: today_first_session.addingTimeInterval(
-            4 * session_len + 4 * between_session_len),
-            endTime: today_first_session.addingTimeInterval(
-                    5 * session_len + 4 * between_session_len)), ]
+
