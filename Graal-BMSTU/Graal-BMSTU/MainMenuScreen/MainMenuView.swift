@@ -118,7 +118,7 @@ private extension MainMenuView {
             make.left.equalTo(safeAreaLayoutGuide.snp.left)
             make.right.equalTo(safeAreaLayoutGuide.snp.right)
         }
-        scheduleTable.rowHeight = 140
+//        scheduleTable.rowHeight = 140
     }
 
     func weekLabelConf() {

@@ -47,10 +47,10 @@ private extension LessonCell {
 
     func setupUI() {
         self.backgroundColor = .white
-        //        self.stack.axis = .vertical
+        self.stack.axis = .vertical
         let elems = [subjectNameLabel, startTimeLabel, finishTimeLabel, placeLabel, teacherLabel]
         elems.forEach { box in
-            self.stack.addSubview(box)
+            self.stack.addArrangedSubview(box)
         }
         self.contentView.addSubview(stack)
         setupConstraints()
@@ -58,39 +58,44 @@ private extension LessonCell {
 
     func setupConstraints() {
         stack.snp.makeConstraints { make in
-            make.edges.equalTo(self.contentView.snp.edges).offset(5)
+            make.left.equalTo(self.contentView.snp.left).offset(30)
+            make.right.equalTo(self.contentView.snp.right).inset(15)
+            make.top.equalTo(self.contentView.snp.top).offset(5)
+            make.bottom.equalTo(self.contentView.snp.bottom).inset(10)
         }
+        stack.distribution = .fillEqually
+        stack.spacing = 4
         //         inside stack...
-        subjectNameLabel.snp.makeConstraints { make in
-            make.top.equalTo(self.stack.snp.top).offset(5)
-            make.left.equalTo(self.stack.snp.left).offset(5)
-            make.right.equalTo(self.stack.snp.right).offset(5)
-            make.height.equalTo(20)
-        }
-        startTimeLabel.snp.makeConstraints { make in
-            make.top.equalTo(self.subjectNameLabel.snp.bottom).offset(5)
-            make.left.equalTo(self.stack.snp.left).offset(5)
-            make.right.equalTo(self.stack.snp.right).offset(5)
-            make.height.equalTo(20)
-        }
-        finishTimeLabel.snp.makeConstraints { make in
-            make.top.equalTo(self.startTimeLabel.snp.bottom).offset(5)
-            make.left.equalTo(self.stack.snp.left).offset(5)
-            make.right.equalTo(self.stack.snp.right).offset(5)
-            make.height.equalTo(20)
-        }
-        placeLabel.snp.makeConstraints { make in
-            make.top.equalTo(self.finishTimeLabel.snp.bottom).offset(5)
-            make.left.equalTo(self.stack.snp.left).offset(5)
-            make.right.equalTo(self.stack.snp.right).offset(5)
-            make.height.equalTo(20)
-        }
-        teacherLabel.snp.makeConstraints { make in
-            make.top.equalTo(self.placeLabel.snp.bottom).offset(5)
-            make.left.equalTo(self.stack.snp.left).offset(5)
-            make.right.equalTo(self.stack.snp.right).offset(5)
-            make.height.equalTo(20)
-        }
+//        subjectNameLabel.snp.makeConstraints { make in
+//            make.top.equalTo(self.stack.snp.top).offset(5)
+//            make.left.equalTo(self.stack.snp.left).offset(5)
+//            make.right.equalTo(self.stack.snp.right).offset(5)
+//            make.height.equalTo(20)
+//        }
+//        startTimeLabel.snp.makeConstraints { make in
+//            make.top.equalTo(self.subjectNameLabel.snp.bottom).offset(5)
+//            make.left.equalTo(self.stack.snp.left).offset(5)
+//            make.right.equalTo(self.stack.snp.right).offset(5)
+//            make.height.equalTo(20)
+//        }
+//        finishTimeLabel.snp.makeConstraints { make in
+//            make.top.equalTo(self.startTimeLabel.snp.bottom).offset(5)
+//            make.left.equalTo(self.stack.snp.left).offset(5)
+//            make.right.equalTo(self.stack.snp.right).offset(5)
+//            make.height.equalTo(20)
+//        }
+//        placeLabel.snp.makeConstraints { make in
+//            make.top.equalTo(self.finishTimeLabel.snp.bottom).offset(5)
+//            make.left.equalTo(self.stack.snp.left).offset(5)
+//            make.right.equalTo(self.stack.snp.right).offset(5)
+//            make.height.equalTo(20)
+//        }
+//        teacherLabel.snp.makeConstraints { make in
+//            make.top.equalTo(self.placeLabel.snp.bottom).offset(5)
+//            make.left.equalTo(self.stack.snp.left).offset(5)
+//            make.right.equalTo(self.stack.snp.right).offset(5)
+//            make.height.equalTo(20)
+//        }
     }
 }
 
