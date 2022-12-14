@@ -90,14 +90,14 @@
 		7092B99A291C2ABB000D8D3C /* TrainingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingModel.swift; sourceTree = "<group>"; };
 		70F83A5E291E81F90087CC01 /* MainFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFlowCoordinator.swift; sourceTree = "<group>"; };
 		70F83A60291E82540087CC01 /* CoordinatorsProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorsProtocols.swift; sourceTree = "<group>"; };
-		85B83022711B66DCBEFBC923 /* LessonModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LessonModel.swift; path = Models/LessonModel.swift; sourceTree = "<group>"; };
-		85B830CF88BB50EDDC925ED5 /* GroupModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GroupModel.swift; path = Models/GroupModel.swift; sourceTree = "<group>"; };
-		85B8317AE5C7A6D62DD2E851 /* PlaceModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlaceModel.swift; path = Models/PlaceModel.swift; sourceTree = "<group>"; };
+		85B83022711B66DCBEFBC923 /* LessonModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LessonModel.swift; sourceTree = "<group>"; };
+		85B830CF88BB50EDDC925ED5 /* GroupModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupModel.swift; sourceTree = "<group>"; };
+		85B8317AE5C7A6D62DD2E851 /* PlaceModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceModel.swift; sourceTree = "<group>"; };
 		85B83211E2D6C9AD39BCAD20 /* DetailProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailProfileViewController.swift; sourceTree = "<group>"; };
 		85B83223529F87099EB53A2E /* DetailProfileModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailProfileModel.swift; sourceTree = "<group>"; };
-		85B832FE9A620E030CA8BB0D /* TeacherModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TeacherModel.swift; path = Models/TeacherModel.swift; sourceTree = "<group>"; };
-		85B8334F3F7D4635DA27DACA /* LessonsDayModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LessonsDayModel.swift; path = Models/LessonsDayModel.swift; sourceTree = "<group>"; };
-		85B833C12362EDF7756DE07F /* ScheduleModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ScheduleModel.swift; path = Models/ScheduleModel.swift; sourceTree = "<group>"; };
+		85B832FE9A620E030CA8BB0D /* TeacherModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherModel.swift; sourceTree = "<group>"; };
+		85B8334F3F7D4635DA27DACA /* LessonsDayModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LessonsDayModel.swift; sourceTree = "<group>"; };
+		85B833C12362EDF7756DE07F /* ScheduleModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleModel.swift; sourceTree = "<group>"; };
 		85B8345E1551B82C7186FF92 /* DetailProfilePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailProfilePresenter.swift; sourceTree = "<group>"; };
 		85B8378FD3C7A96626638BFC /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		85B8382BFD6E0E0DB86602F2 /* DetailProfileCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailProfileCoordinator.swift; sourceTree = "<group>"; };
@@ -107,15 +107,15 @@
 		85B83A48E253D5BBB51C5B6F /* MainMenuBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuBuilder.swift; sourceTree = "<group>"; };
 		85B83B0CFE5CA83E7B9CE1A5 /* MainMenuProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuProtocols.swift; sourceTree = "<group>"; };
 		85B83B1056CFCF2D1E3ED5A5 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = file.gitignore; path = .gitignore; sourceTree = "<group>"; };
-		85B83B97B7F8D375FF4D4968 /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserModel.swift; path = Models/UserModel.swift; sourceTree = "<group>"; };
+		85B83B97B7F8D375FF4D4968 /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		85B83C19A91E260FC4CD8C24 /* LessonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LessonCell.swift; sourceTree = "<group>"; };
-		85B83C27376C7E5777A507A8 /* SubjectModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SubjectModel.swift; path = Models/SubjectModel.swift; sourceTree = "<group>"; };
+		85B83C27376C7E5777A507A8 /* SubjectModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubjectModel.swift; sourceTree = "<group>"; };
 		85B83D4EE826791C198073B3 /* AuthView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
-		85B83E1B88F49483B12F7EBE /* AuthService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthService.swift; path = Services/AuthService.swift; sourceTree = "<group>"; };
+		85B83E1B88F49483B12F7EBE /* AuthService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		85B83E79944CC6FC0DD1ABD4 /* MainMenuRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuRouter.swift; sourceTree = "<group>"; };
 		85B83EC9B9DC0C1F5A260470 /* DetailProfileBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailProfileBuilder.swift; sourceTree = "<group>"; };
 		85B83F830343FB8E99B3C072 /* MainMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuViewController.swift; sourceTree = "<group>"; };
-		85B83FC129B162DFBC1778BA /* ScheduleService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ScheduleService.swift; path = Services/ScheduleService.swift; sourceTree = "<group>"; };
+		85B83FC129B162DFBC1778BA /* ScheduleService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +167,30 @@
 				708E76CC29005E4A00D23E70 /* SceneDelegate.swift */,
 			);
 			path = Delegates;
+			sourceTree = "<group>";
+		};
+		706F9987294A094900DEF1F7 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				85B83C27376C7E5777A507A8 /* SubjectModel.swift */,
+				85B8334F3F7D4635DA27DACA /* LessonsDayModel.swift */,
+				85B8317AE5C7A6D62DD2E851 /* PlaceModel.swift */,
+				85B832FE9A620E030CA8BB0D /* TeacherModel.swift */,
+				85B830CF88BB50EDDC925ED5 /* GroupModel.swift */,
+				85B83022711B66DCBEFBC923 /* LessonModel.swift */,
+				85B833C12362EDF7756DE07F /* ScheduleModel.swift */,
+				85B83B97B7F8D375FF4D4968 /* UserModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		706F9988294A095600DEF1F7 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				85B83E1B88F49483B12F7EBE /* AuthService.swift */,
+				85B83FC129B162DFBC1778BA /* ScheduleService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		708E76BE29005E4A00D23E70 = {
@@ -252,20 +276,12 @@
 		7092B9A6291C2B17000D8D3C /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				706F9988294A095600DEF1F7 /* Services */,
+				706F9987294A094900DEF1F7 /* Models */,
 				705B6A5B291E946A00C5FB63 /* Delegates */,
 				705B6A5A291E944C00C5FB63 /* Resources */,
 				70F83A56291E7FD10087CC01 /* Coordinators */,
 				7057642029131E9C006555E2 /* BaseComponents */,
-				85B830CF88BB50EDDC925ED5 /* GroupModel.swift */,
-				85B83022711B66DCBEFBC923 /* LessonModel.swift */,
-				85B833C12362EDF7756DE07F /* ScheduleModel.swift */,
-				85B83B97B7F8D375FF4D4968 /* UserModel.swift */,
-				85B83E1B88F49483B12F7EBE /* AuthService.swift */,
-				85B83FC129B162DFBC1778BA /* ScheduleService.swift */,
-				85B83C27376C7E5777A507A8 /* SubjectModel.swift */,
-				85B8334F3F7D4635DA27DACA /* LessonsDayModel.swift */,
-				85B8317AE5C7A6D62DD2E851 /* PlaceModel.swift */,
-				85B832FE9A620E030CA8BB0D /* TeacherModel.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -357,7 +373,7 @@
 			packageReferences = (
 				70F653AD2915F3DC0024EA1D /* XCRemoteSwiftPackageReference "SnapKit" */,
 				708CF77E291C550A0036AEA2 /* XCRemoteSwiftPackageReference "SFSafeSymbols" */,
-				70B0553629350A7C00ED3A54 /* XCRemoteSwiftPackageReference "R.swift" */,
+				70B0553629350A7C00ED3A54 /* XCRemoteSwiftPackageReference "R" */,
 			);
 			productRefGroup = 708E76C829005E4A00D23E70 /* Products */;
 			projectDirPath = "";
@@ -440,7 +456,7 @@
 /* Begin PBXTargetDependency section */
 		70B0553A29350ABB00ED3A54 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			productRef = 70B0553929350ABB00ED3A54 /* plugin:RswiftGenerateInternalResources */;
+			productRef = 70B0553929350ABB00ED3A54 /* RswiftGenerateInternalResources */;
 		};
 /* End PBXTargetDependency section */
 
@@ -669,7 +685,7 @@
 				kind = branch;
 			};
 		};
-		70B0553629350A7C00ED3A54 /* XCRemoteSwiftPackageReference "R.swift" */ = {
+		70B0553629350A7C00ED3A54 /* XCRemoteSwiftPackageReference "R" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/mac-cain13/R.swift";
 			requirement = {
@@ -695,10 +711,10 @@
 		};
 		70B0553729350A7C00ED3A54 /* RswiftLibrary */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 70B0553629350A7C00ED3A54 /* XCRemoteSwiftPackageReference "R.swift" */;
+			package = 70B0553629350A7C00ED3A54 /* XCRemoteSwiftPackageReference "R" */;
 			productName = RswiftLibrary;
 		};
-		70B0553929350ABB00ED3A54 /* plugin:RswiftGenerateInternalResources */ = {
+		70B0553929350ABB00ED3A54 /* RswiftGenerateInternalResources */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = "plugin:RswiftGenerateInternalResources";
 		};
