@@ -45,9 +45,13 @@ private extension LessonCell {
     //        teacherLabel.text = nil
     //    }
 
+ 
+    
     func setupUI() {
         self.backgroundColor = .white
-        self.stack.axis = .vertical
+        
+        setupStack()
+        
         let elems = [subjectNameLabel, startTimeLabel, finishTimeLabel, placeLabel, teacherLabel]
         elems.forEach { box in
             self.stack.addArrangedSubview(box)
@@ -99,6 +103,13 @@ private extension LessonCell {
     }
 }
 
-extension LessonCell {
-
+private extension LessonCell {
+    func setupStack() {
+        // stack setup
+        stack.axis = .vertical
+        stack.clipsToBounds = true
+        stack.layer.cornerRadius = 7
+        stack.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner, .layerMaxXMaxYCorner, .layerMinXMaxYCorner]
+        stack.backgroundColor = .systemGray6
+    }
 }
