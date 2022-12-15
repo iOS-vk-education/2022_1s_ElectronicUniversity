@@ -100,6 +100,7 @@ private extension LessonCell {
         }
     }
 }
+///////////
 
 private extension LessonCell {
     func setupStack() {
