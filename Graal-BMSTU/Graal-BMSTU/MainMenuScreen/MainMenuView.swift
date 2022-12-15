@@ -122,7 +122,7 @@ private extension MainMenuView {
     }
 
     func weekLabelConf() {
-        weekLabel.text = "Неделя 16/17" // placeholder
+        weekLabel.text = "Неделя 16, знаменатель" // placeholder
         weekLabel.numberOfLines = 1
     }
 

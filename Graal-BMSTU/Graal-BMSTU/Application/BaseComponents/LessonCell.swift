@@ -67,7 +67,7 @@ private extension LessonCell {
             make.top.equalTo(self.contentView.snp.top).offset(5)
             make.bottom.equalTo(self.contentView.snp.bottom).inset(10)
         }
-        stack.distribution = .fillEqually
+        //stack.distribution = .fillEqually
         stack.spacing = 4
         //         inside stack...
 //        subjectNameLabel.snp.makeConstraints { make in
@@ -108,8 +108,8 @@ private extension LessonCell {
         // stack setup
         stack.axis = .vertical
         stack.clipsToBounds = true
-        stack.layer.cornerRadius = 7
+        stack.layer.cornerRadius = 9
         stack.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner, .layerMaxXMaxYCorner, .layerMinXMaxYCorner]
-        stack.backgroundColor = .systemGray6
+        stack.backgroundColor = .systemYellow
     }
 }

@@ -123,7 +123,7 @@ private extension AuthView {
         loginButton.snp.makeConstraints { make in
             make.left.equalTo(self.safeAreaLayoutGuide.snp.left).offset(30)
             make.right.equalTo(self.safeAreaLayoutGuide.snp.right).inset(30)
-            make.top.equalTo(passwordField.snp.bottom).offset(80)
+           
             make.height.equalTo(50)
         }
         if AppCoordinator.isFirstLaunch() {

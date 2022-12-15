@@ -70,7 +70,8 @@ private extension MainMenuViewController {
     }
 
     func navigationConf() {
-        navigationItem.title = "Schedule"
+        navigationItem.title = "Расписание"
+        navigationItem.title.font = UIFont.systemFont(ofSize: 30, weight: .bold)
     }
 
 }
