@@ -6,11 +6,11 @@ import Foundation
 
 struct Subject {
     var name: String
-    // var groups: Group
+    var stream: StudyStream
 }
 
 // subjects
-let discret = Subject(name: "Дискретная математика")
-let pravo = Subject(name: "Правоведение")
-let electronics = Subject(name: "Основы электроники")
-let tisd = Subject(name: "Типы и структуры данных")
+let discret = Subject(name: "Дискретная математика", stream: mock_stream)
+let pravo = Subject(name: "Правоведение", stream: mock_stream)
+let electronics = Subject(name: "Основы электроники", stream: mock_stream)
+let tisd = Subject(name: "Типы и структуры данных", stream: mock_stream)
