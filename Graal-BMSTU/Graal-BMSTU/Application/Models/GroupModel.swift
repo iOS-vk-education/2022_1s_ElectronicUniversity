@@ -1,7 +1,7 @@
 //
 // Created by Артём on 06.12.2022.
 //
-
+s
 import Foundation
 
 struct StudyStream {

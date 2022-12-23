@@ -5,6 +5,7 @@ from itertools import count
 
 global db
 
+
 class StudyStream(object):
     new_id = count()
 
@@ -64,7 +65,8 @@ def fill():
         db.collection(u"study_stream_to_groups").document(u"{}".format(stream)).create({})
         for group in stream_to_groups[stream]:
             print("Add stream->group")
-            db.collection(u"study_stream_to_groups").document(u"{}".format(stream)).collection("groups").document(u"{}".format(group.id)).create(group.to_dict())
+            db.collection(u"study_stream_to_groups").document(u"{}".format(stream)).collection("groups").document(
+                u"{}".format(group.id)).create(group.to_dict())
 
 
 def test():

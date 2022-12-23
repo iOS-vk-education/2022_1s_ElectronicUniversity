@@ -5,7 +5,7 @@
 import Foundation
 
 enum BMSTUBuilding {
-    case GZ, ULK, LT, E, SM, MT, MF
+    case GZ, ULK, LT, E, SM, MT, MF, FV
     // не добавить ли сюда ФВ?
     var textDesc: String {
         switch (self) {
@@ -23,6 +23,8 @@ enum BMSTUBuilding {
             return R.string.localizable.mt_building_name()
         case .MF:
             return R.string.localizable.mf_building_name()
+        case .FV:
+            return R.string.localizable.fv_building_name()
         }
     }
 }

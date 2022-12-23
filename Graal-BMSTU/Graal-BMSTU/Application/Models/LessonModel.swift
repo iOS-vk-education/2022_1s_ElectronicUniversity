@@ -4,12 +4,17 @@
 
 import Foundation
 
+enum LessonType {
+    case LAB, SEM, LEC, PRATICE, PHYSICAL
+}
+
 struct Lesson {
     var subject: Subject
     var place: Place
     var teacher: Teacher
     var startTime: Date
     var endTime: Date
+    var lessonType: LessonType
 }
 
 let less_1 = Lesson(subject: discret, place: ulk_pl_1, teacher: discret_tch_2,
