@@ -38,15 +38,35 @@ def group_lessons(request, group_id, day_offset_from_today=None):
 
 
 def groups(request):
-    pass
+    groups = Group.objects.all()
+    json_response = list()
+    for i in range(len(groups)):
+        group = groups[i]
+        json_response.append(model_to_dict(group))
+    return JsonResponse(json_response, safe=False)
 
 
-def group(request):
-    pass
+def group(request, group_id):
+    try:
+        group = Group.objects.get(pk=group_id)
+    except Group.DoesNotExist:
+        return Http404("Couldn't find group with id {}".format(group_id))
+    json_response = list()
+    json_response.append(model_to_dict(group))
+    json_response[0]["stream"] = model_to_dict(StudyStream.objects.get(pk=group.stream.pk))
+    return JsonResponse(json_response, safe=False)
 
 
-def teacher(request):
-    pass
+
+def teacher(request, teacher_id):
+    try:
+        teacher = Teacher.objects.get(pk=teacher_id)
+    except Teacher.DoesNotExist:
+        return Http404("Couldn't find teacher with id {}".format(teacher_id))
+    json_response = list()
+    json_response.append(model_to_dict(teacher))
+    json_response[0]["study_streams"] = list(teacher.study_streams.values_list("pk", flat=True))
+    return JsonResponse(json_response, safe=False)
 
 
 def streams(request):

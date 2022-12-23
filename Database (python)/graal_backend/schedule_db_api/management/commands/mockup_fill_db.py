@@ -23,6 +23,8 @@ class Command(BaseCommand):
         tmp3.save()
         tmp4 = Teacher(familyName="Белоусов", forename="Алексей", fatherName="Иванович")
         tmp4.save()
+        tmp4.study_streams.add(tmp)
+        tmp4.save()
 
         groups = []
         for i in range(ratio):
