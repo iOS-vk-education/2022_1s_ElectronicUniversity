@@ -53,7 +53,8 @@ class Command(BaseCommand):
         groups = [Group.objects.get(name="ИУ7-3{}Б".format(i * 2)),
                   Group.objects.get(name="ИУ7-3{}Б".format(i * 2 + 1))]
         teacher = Teacher.objects.get(familyName="Белоусов")
-        lesson.teacher.add(teacher)
+        teacher.lesson_set.add(lesson)
+        teacher.save()
         for group in groups:
             lesson.groups.add(group)
         lesson.save()

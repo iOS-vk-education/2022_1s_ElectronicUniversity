@@ -12,29 +12,42 @@ from django.core.paginator import Paginator, InvalidPage
 # Create your views here.
 
 
-def get_group_lessons(request, group_name):
+def group_lessons(request, group_id, day_offset_from_today=None):
     try:
-        group = Group.objects.get(name=group_name)
+        group = Group.objects.get(pk=group_id)
     except Group.DoesNotExist:
-        return Http404("Couldn't find group with name {}".format(group_name))
+        return Http404("Couldn't find group with id {}".format(group_id))
 
-    day_offset_from_today = request.GET.get('page')
     if day_offset_from_today is None:
-        day_offset_from_today = 1
-
-    day = date.today() + timedelta(days=(day_offset_from_today - 1))
+        day_offset_from_today = 0
+    day = date.today() + timedelta(days=day_offset_from_today)
     print(day)
     lessons_now = Lesson.objects \
         .filter(groups__in=[group]) \
         .filter(start_time__gte=day) \
         .filter(end_time__lte=(day + timedelta(days=1)))
+    # print(serializers.serialize("json", lessons_now)[0]["fields"])
+    json_response = list()
+    for i in range(len(lessons_now)):
+        lesson = lessons_now[i]
+        json_response.append(model_to_dict(lesson))
+        json_response[i]["teachers"] = list(lesson.teachers.values_list("pk", flat=True))
+        json_response[i]["groups"] = list(lesson.groups.values_list("pk", flat=True))
 
-    return JsonResponse(list(lessons_now), safe=False)
+    return JsonResponse(json_response, safe=False)
 
 
-def get_groups(request):
+def groups(request):
     pass
 
 
-def get_group_info(request):
+def group(request):
+    pass
+
+
+def teacher(request):
+    pass
+
+
+def streams(request):
     pass

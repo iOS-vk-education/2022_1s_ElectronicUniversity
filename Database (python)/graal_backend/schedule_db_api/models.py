@@ -3,6 +3,7 @@ from django.db import models
 
 # Create your models here.
 
+
 class StudyStream(models.Model):
     semester = models.IntegerField()
     specialty = models.CharField(max_length=255)
@@ -56,7 +57,7 @@ class Lesson(models.Model):
 
     subject = models.ForeignKey("Subject", on_delete=models.RESTRICT)
     place = models.ForeignKey("Place", on_delete=models.SET_NULL, null=True)
-    teacher = models.ManyToManyField("Teacher")
+    teachers = models.ManyToManyField("Teacher")
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
     lesson_type = models.TextField(max_length=8, choices=LessonType.choices)
