@@ -1,9 +1,6 @@
+from datetime import datetime, timedelta
 from django.core.management.base import BaseCommand
 from schedule_db_api.models import *
-from django.conf import settings
-from django.core.files import File
-import random
-from datetime import datetime, timedelta
 
 
 class Command(BaseCommand):
