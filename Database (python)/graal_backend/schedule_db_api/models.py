@@ -56,16 +56,8 @@ class Lesson(models.Model):
 
     subject = models.ForeignKey("Subject", on_delete=models.RESTRICT)
     place = models.ForeignKey("Place", on_delete=models.SET_NULL, null=True)
-    teacher = models.ManyToManyField("Teacher", null=True)
+    teacher = models.ManyToManyField("Teacher")
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
     lesson_type = models.TextField(max_length=8, choices=LessonType.choices)
-
-
-class LessonDay(models.Model):
-    group = models.ForeignKey("Group", on_delete=models.CASCADE)
-    date = models.DateField()
-
-
-
-
+    groups = models.ManyToManyField("Group")

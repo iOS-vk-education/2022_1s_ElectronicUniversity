@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    "graal_backend.apps.ScheduleDbApiConfig"
+    "schedule_db_api.apps.ScheduleDbApiConfig"
 ]
 
 MIDDLEWARE = [
