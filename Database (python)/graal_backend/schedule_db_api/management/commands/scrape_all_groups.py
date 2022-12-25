@@ -93,9 +93,11 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         groups_urls = get_all_groups_urls()
         i = 0
-        while i < 150 and i < len(groups_urls):
-            group = groups_urls[i]
-            print("Group:", group[0])
-            upload_group_data(scrape_group(group))
+        while i < len(groups_urls):
+            group_name = groups_urls[i][0]
+            if "ИУ" in group_name or "СМ" in group_name or "ФН" in group_name or "БМТ" in group_name or "ИБМ" in group_name or ("РК" in group_name and "РКТ" not in group_name) or "Э" in group_name:
+                group = groups_urls[i]
+                print("Group:", group[0])
+                upload_group_data(scrape_group(group))
             i += 1
 

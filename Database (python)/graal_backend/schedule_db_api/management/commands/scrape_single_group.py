@@ -1,4 +1,5 @@
 import datetime
+from django.utils import timezone
 from django.core.management.base import BaseCommand
 import requests
 from bs4 import BeautifulSoup
@@ -230,7 +231,7 @@ def time_calc(semester_start, semester_week_offset, offset_from_monday_midnight,
 
 
 def get_semester_start():
-    now_sc = datetime.datetime.now()
+    now_sc = timezone.now()
     return datetime.datetime(now_sc.year, 9, 1)
 
 

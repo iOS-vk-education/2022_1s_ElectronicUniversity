@@ -5,14 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ca60903e-16d8-4820-8d03-e6a6ea625244" name="Changes" comment="backend work in progress">
-      <change beforePath="$PROJECT_DIR$/.idea/Database (python).iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Database (python).iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/graal_backend/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/graal_backend/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graal_backend/requerements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/graal_backend/requerements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graal_backend/graal_backend/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/graal_backend/graal_backend/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/graal_backend/schedule_db_api/management/commands/scrape_all_groups.py" beforeDir="false" afterPath="$PROJECT_DIR$/graal_backend/schedule_db_api/management/commands/scrape_all_groups.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/graal_backend/schedule_db_api/management/commands/scrape_single_group.py" beforeDir="false" afterPath="$PROJECT_DIR$/graal_backend/schedule_db_api/management/commands/scrape_single_group.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graal_backend/schedule_db_api/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/graal_backend/schedule_db_api/models.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -226,7 +223,7 @@
       <workItem from="1671964019411" duration="12137000" />
       <workItem from="1671977535837" duration="156000" />
       <workItem from="1671977742218" duration="4666000" />
-      <workItem from="1671982430963" duration="2683000" />
+      <workItem from="1671982430963" duration="3871000" />
     </task>
     <task id="LOCAL-00001" summary="добавлен файербейз в проект + начал писать скрипт закачки данных на сервер (админский)">
       <created>1671066685352</created>
@@ -319,7 +316,14 @@
       <option name="project" value="LOCAL" />
       <updated>1671981678930</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="backend work in progress">
+      <created>1671985438104</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1671985438104</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
