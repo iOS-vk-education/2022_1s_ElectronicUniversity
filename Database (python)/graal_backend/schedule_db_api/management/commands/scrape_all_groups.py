@@ -1,6 +1,9 @@
 import os
 import sys
 import requests
+from bs4 import BeautifulSoup
+from scrape_single_group import scrape_group, upload_group_data
+
 
 if sys.version_info.major < 3:
     from urllib import url2pathname
@@ -63,9 +66,16 @@ def get_all_groups_urls():
     requests_session = requests.session()
     requests_session.mount('file://', LocalFileAdapter())
     r = requests_session.get("file:///Users/tinartem/Developer/VK/2022_1s_ElectronicUniversity/Database (python)/graal_backend/schedule_db_api/management/commands/Личный кабинет обучающегося.html")
-    # soup = BeautifulSoup(r.content, "html5lib")
-    print(r.content)
+    soup = BeautifulSoup(r.content, "html5lib")
+    groups = soup.find_all(class_="btn btn-primary col-1 rounded schedule-indent", href=True)
+    ans = []
+    for group in groups:
+        ans.append((group.contents[0].strip(), "https://lks.bmstu.ru{}".format(group["href"])))
+    return ans
 
 
 if __name__ == '__main__':
-    get_all_groups_urls()
+    groups_urls = get_all_groups_urls()
+    for group in groups_urls:
+        group_data = scrape_group(group)
+        upload_group_data(group_data)
