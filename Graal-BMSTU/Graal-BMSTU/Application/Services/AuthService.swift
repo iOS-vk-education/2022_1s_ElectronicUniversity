@@ -14,26 +14,25 @@ protocol AuthService {
 }
 
 class AuthServiceMockup: AuthService {
-    static var loggedUser: User? = nil
-    static private let validTestUsersCredentials = [("Artem", "12345"), ("Maria", "54321"), ("Egor",
-            "Bmstu")] // test data
+    static let userVaultKey = "loggedUser"
+    static private let validTestUsersCredentials = [("Artem", "12345"), ("Maria", "54321"),
+                                                    ("Egor", "bmstu")] // test data
 
     func authenticate(login: String, password: String) -> User? {
-        if let validCredentials = AuthServiceMockup.validTestUsersCredentials
-                .first(where: { $0.0 == login && $0.1 == password }) {
-            AuthServiceMockup.loggedUser = User(name: validCredentials.0, familyName: "Tikhonenko")
+        if let validCredentials = AuthServiceMockup.validTestUsersCredentials.first(where: { $0.0 == login && $0.1 == password }) {
+            UserDefaults.standard.set(User(name: validCredentials.0, familyName: "Tikhonenko"), forKey: AuthServiceMockup.userVaultKey)
             AppCoordinator.setNotFirstLaunch()
         } else {
-            AuthServiceMockup.loggedUser = nil
+            UserDefaults.standard.removeObject(forKey: AuthServiceMockup.userVaultKey)
         }
-        return AuthServiceMockup.loggedUser
+        return UserDefaults.standard.value(forKey: AuthServiceMockup.userVaultKey) as? User
     }
 
     func getUserData() -> User? {
-        return AuthServiceMockup.loggedUser
+        return UserDefaults.standard.value(forKey: AuthServiceMockup.userVaultKey) as? User
     }
 
     func logout() {
-        AuthServiceMockup.loggedUser = nil
+        UserDefaults.standard.removeObject(forKey: AuthServiceMockup.userVaultKey)
     }
 }

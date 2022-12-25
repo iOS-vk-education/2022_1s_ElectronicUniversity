@@ -10,11 +10,11 @@ protocol ScheduleService {
 }
 
 final class ScheduleServiceImpl: ScheduleService {
-    func getSelectedGroupSchedule() -> Schedule {
+    func getGroupSchedule(group: Group, forDay: Int) -> Schedule {
         
     }
 
-    func getSelectedGroup() -> Group {
+    func getGroupsList() -> [Group] {
 
     }
  }

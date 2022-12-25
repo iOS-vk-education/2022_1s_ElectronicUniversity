@@ -10,5 +10,5 @@ import Foundation
 struct User {
     var name: String?
     var familyName: String?
-    var group: Group
+    var group: Group?
 }
