@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta
 from django.core.management.base import BaseCommand
-from schedule_db_api.models import *
+from graal_backend.schedule_db_api.models import *
 
 
 class Command(BaseCommand):

@@ -7,9 +7,13 @@ from django.db import models
 class StudyStream(models.Model):
 
     class StudyLevel(models.TextChoices):
-        BACH = "BACHELOR"
-        MAST = "MASTER"
-        POSTGR = "POSTGRADUATE"
+        BACHELOR = "BACHELOR"
+        MASTER = "MASTER"
+        POSTGRAGUDATE = "POSTGRADUATE"
+        SPECIALIST = "SPECIALIST"
+
+    class Meta:
+        unique_together = ("semester", "faculty", "study_level")
 
     semester = models.IntegerField()
     faculty = models.CharField(max_length=255)
@@ -63,11 +67,13 @@ class Lesson(models.Model):
         LEC = "LEC"
         PRACTICE = "PRACTICE"
         PHYSICAL = "PHYSICAL"
+        VUC = "VUC"
 
-    subject = models.ForeignKey("Subject", on_delete=models.RESTRICT)
+    subject = models.ForeignKey("Subject", on_delete=models.CASCADE)
     place = models.ForeignKey("Place", on_delete=models.SET_NULL, null=True)
-    teachers = models.ManyToManyField("Teacher")
+    teacher = models.ForeignKey("Teacher", on_delete=models.SET_NULL, null=True)
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
+    pair_num = models.IntegerField()
     lesson_type = models.TextField(max_length=8, choices=LessonType.choices)
     groups = models.ManyToManyField("Group")

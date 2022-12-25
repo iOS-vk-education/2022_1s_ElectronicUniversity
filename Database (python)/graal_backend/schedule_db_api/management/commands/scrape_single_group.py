@@ -1,5 +1,9 @@
+import datetime
+
 import requests
 from bs4 import BeautifulSoup
+from graal_backend.schedule_db_api.models import *
+from django.db import *
 
 
 def convert_time_to_minutes_from_midnight(str):
@@ -37,7 +41,7 @@ def decode_lesson_cell(lesson_cell):
                 cabinet = cabinet.strip()
             else:
                 cabinet = None
-            name_of_subject = None
+            name_of_subject = "ВУЦ"
             teacher = None
             ans = {"type": type_of_lesson, "subject": name_of_subject, "cabinet": cabinet, "teacher": teacher}
         elif "Измайлово" in str(type_of_lesson):
@@ -80,9 +84,21 @@ def decode_lesson_cell(lesson_cell):
                     type_of_lesson = data[0]
                     name_of_subject = cell[0].contents[0]
                     cabinet = cell[1].contents[0].strip()
+                    try:
+                        teacher = cell[2].contents[0].strip()
+                    except IndexError:
+                        teacher = None
                     ans = {"type": type_of_lesson, "subject": name_of_subject, "cabinet": cabinet, "teacher": teacher}
-            else:
-                    raise Exception
+                else:
+                    print("error:", cell)
+                    type_of_lesson = "сем"
+                    name_of_subject = cell[0].contents[0]
+                    cabinet = cell[1].contents[0].strip()
+                    try:
+                        teacher = cell[2].contents[0].strip()
+                    except IndexError:
+                        teacher = None
+                    ans = {"type": type_of_lesson, "subject": name_of_subject, "cabinet": cabinet, "teacher": teacher}
         return ans
 
 
@@ -92,18 +108,20 @@ def decode_lesson(lesson_found):
     if len(tds) == 2:
         less_1 = decode_lesson_cell(tds[1])
         if less_1 is not None:
-            less_1["repeatance"] = ["по числителям", "по знаменателям"]
+            less_1["repeatance"] = "по числителям"
             ans = [less_1]
+            less_1["repeatance"] = "по знаменателям"
+            ans.append(less_1)
     else:
         less_1 = decode_lesson_cell(tds[1])
         less_2 = decode_lesson_cell(tds[2])
         if less_1 is not None or less_2 is not None:
             ans = []
             if less_1 is not None:
-                less_1["repeatance"] = ["по числителям"]
+                less_1["repeatance"] = "по числителям"
                 ans.append(less_1)
             if less_2 is not None:
-                less_2["repeatance"] = ["по знаменателям"]
+                less_2["repeatance"] = "по знаменателям"
                 ans.append(less_2)
     if ans is not None:
         time_raw = tds[0].contents[0]
@@ -142,11 +160,112 @@ def scrape_group(group_name_and_url):
                     day_data[i - 1] = lesson_list
         if len(day_data) != 0:
             ans[day] = day_data
+    ans = {"group_name": name, "data": ans}
     return ans
 
 
+def decide_study_level(name_parts):
+    if "Б" in name_parts[1]:
+        return "BACHELOR"
+    elif "М" in name_parts[1]:
+        return "MASTER"
+    elif "А" in name_parts[1]:
+        return "POSTGRADUATE"
+    else:
+        return "SPECIALIST"
+
+
+def get_offset_from_monday_midnight(str) -> int:
+    if str == "ПН":
+        return 0
+    elif str == "ВТ":
+        return 1440 * 1
+    elif str == "СР":
+        return 1440 * 2
+    elif str == "ЧТ":
+        return 1440 * 3
+    elif str == "ПТ":
+        return 1440 * 4
+    elif str == "СБ":
+        return 1440 * 5
+
+
+def decide_if_place_is_generic(str_in) -> bool:
+    return "каф" in str_in
+
+
+def decide_week_offset(str_in) -> int:
+    if str_in == "по знаменателям":
+        return 10080
+    else:
+        return 0
+
+def decide_lesson_type(str_in) -> str:
+    if str_in == "лек":
+        return "LEC"
+    elif str_in == "ВУЦ":
+        return "VUC"
+    elif str_in == "сем":
+        return "SEM"
+    elif str_in == "УТП":
+        return "PRACTICE"
+    elif str_in == "лаб":
+        return "LAB"
+    elif str_in == "КР":
+        return "SEM"
+    else:
+        return "SEM"
+
+
+def time_calc(semester_start, semester_week_offset, offset_from_monday_midnight, week_offset, time_from_day_start) -> datetime.datetime:
+    return semester_start + datetime.timedelta(seconds=(semester_week_offset + offset_from_monday_midnight + week_offset + time_from_day_start))
+
+
+def get_semester_start():
+    now_sc = datetime.datetime.now()
+    return datetime.datetime(now_sc.year, 9, 1)
+
+
+def get_semester_end():
+    return get_semester_start() + datetime.timedelta(days=7*18) # 18 недель
+
+
 def upload_group_data(group_data):
-    pass
+    name_parts = group_data["group_name"].split("-")
+
+    semester = int(name_parts[1][0])
+    faculty = name_parts[0]
+    study_level = decide_study_level(name_parts)
+    semester_start = get_semester_start()
+    semester_end = get_semester_end()
+    stream = StudyStream.objects.get_or_create(semester=semester, faculty=faculty, study_level=study_level, semester_start=semester_start, semester_end=semester_end)
+
+    group = Group.objects.create(name=group_data["group_name"], stream=stream)
+    for i in range(9):
+        semester_week_offset = i * 14 * 24 * 60  # two weeks in once
+        for day_key in group_data["data"].keys():  # итерируемся по дням недели
+            offset_from_monday_midnight = get_offset_from_monday_midnight(day_key)
+            for pair_num in group_data["data"]["day_key"]:  # итерируемся по занятием внутри дня
+                data_list = group_data  # may be two lessons inside
+                for lesson_data in data_list:
+                    week_offset = decide_week_offset(lesson_data["repeatance"])
+                    start_time = time_calc(semester_start, semester_week_offset, offset_from_monday_midnight, week_offset, lesson_data["start_time"])
+                    end_time = time_calc(semester_start, semester_week_offset, offset_from_monday_midnight, week_offset, lesson_data["end_time"])
+                    lesson_type = decide_lesson_type(lesson_data["type"])
+                    subject_name = lesson_data["subject"]
+                    subject = Subject.objects.get_or_create(name=subject_name, stream=stream)
+                    cabinet_name = lesson_data["cabinet"]
+                    cabinet = Place.objects.get_or_create(name=cabinet_name,
+                                                          is_generic=decide_if_place_is_generic(cabinet_name))
+                    teacher_name = lesson_data["teacher"]
+                    if teacher_name is not None:
+                        teacher = Teacher.objects.get_or_create(display_name=teacher_name, study_streams=stream)
+                    else:
+                        teacher = None
+                    lesson = Lesson.objects.get_or_create(subject=subject, place=cabinet, teacher=teacher,
+                                                          pair_num=pair_num, lesson_type=lesson_type,
+                                                          start_time=start_time, end_time=end_time)
+                    lesson.groups__set.add(group)
 
 
 def main():
