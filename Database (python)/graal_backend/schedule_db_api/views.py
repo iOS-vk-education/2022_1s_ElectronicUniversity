@@ -22,7 +22,6 @@ def group_lessons(request, group_id, day_offset_from_today=None):
     for i in range(len(lessons_now)):
         lesson = lessons_now[i]
         json_response.append(model_to_dict(lesson))
-        json_response[i]["teachers"] = list(lesson.teachers.values_list("pk", flat=True))
         json_response[i]["groups"] = list(lesson.groups.values_list("pk", flat=True))
 
     return JsonResponse(json_response, safe=False)

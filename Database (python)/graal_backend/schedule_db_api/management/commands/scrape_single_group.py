@@ -131,7 +131,7 @@ def decode_lesson(lesson_found):
         for lesson in ans:
             if "start_time" not in lesson:
                 lesson["start_time"] = convert_time_to_minutes_from_midnight(time[0])
-            lesson["end_time"] = lesson["start_time"] + 125
+            lesson["end_time"] = lesson["start_time"] + 95
     return ans
 
 
@@ -188,15 +188,15 @@ def get_offset_from_monday_midnight(str) -> int:
     if str == "ПН":
         return 0
     elif str == "ВТ":
-        return 60 * 60 * 1
+        return 24 * 60 * 60 * 1
     elif str == "СР":
-        return 60 * 60 * 2
+        return 24 * 60 * 60 * 2
     elif str == "ЧТ":
-        return 60 * 60 * 3
+        return 24 * 60 * 60 * 3
     elif str == "ПТ":
-        return 60 * 60 * 4
+        return 24 * 60 * 60 * 4
     elif str == "СБ":
-        return 60 * 60 * 5
+        return 24 * 60 * 60 * 5
 
 
 def decide_if_place_is_generic(str_in) -> bool:
@@ -232,7 +232,7 @@ def time_calc(semester_start, semester_week_offset, offset_from_monday_midnight,
 
 def get_semester_start():
     now_sc = timezone.now()
-    return datetime.datetime(now_sc.year, 9, 1)
+    return datetime.datetime(now_sc.year, 8, 29)
 
 
 def get_semester_end():
