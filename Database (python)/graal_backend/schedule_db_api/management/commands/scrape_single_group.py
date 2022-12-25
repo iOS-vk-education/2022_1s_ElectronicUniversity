@@ -1,8 +1,8 @@
 import datetime
-
+from django.core.management.base import BaseCommand
 import requests
 from bs4 import BeautifulSoup
-from graal_backend.schedule_db_api.models import *
+from schedule_db_api.models import *
 from django.db import *
 
 
@@ -239,14 +239,14 @@ def upload_group_data(group_data):
     semester_start = get_semester_start()
     semester_end = get_semester_end()
     stream = StudyStream.objects.get_or_create(semester=semester, faculty=faculty, study_level=study_level, semester_start=semester_start, semester_end=semester_end)
-
+    print(stream)
     group = Group.objects.create(name=group_data["group_name"], stream=stream)
     for i in range(9):
-        semester_week_offset = i * 14 * 24 * 60  # two weeks in once
+        semester_week_offset = i * 14 * 24 * 60  # сразу две недели обрабатываем
         for day_key in group_data["data"].keys():  # итерируемся по дням недели
             offset_from_monday_midnight = get_offset_from_monday_midnight(day_key)
             for pair_num in group_data["data"]["day_key"]:  # итерируемся по занятием внутри дня
-                data_list = group_data  # may be two lessons inside
+                data_list = group_data  # внутри две пары, если мигаюшая с заменой(не окном) или не мигающая
                 for lesson_data in data_list:
                     week_offset = decide_week_offset(lesson_data["repeatance"])
                     start_time = time_calc(semester_start, semester_week_offset, offset_from_monday_midnight, week_offset, lesson_data["start_time"])
@@ -266,6 +266,7 @@ def upload_group_data(group_data):
                                                           pair_num=pair_num, lesson_type=lesson_type,
                                                           start_time=start_time, end_time=end_time)
                     lesson.groups__set.add(group)
+                    lesson.save()
 
 
 def main():
@@ -277,4 +278,16 @@ def main():
 
 if __name__ == '__main__':
     url = "https://lks.bmstu.ru/schedule/f9833d8f-8a79-11ec-b81a-0de102063aa5"
-    print(scrape_group(("ИУ7-35Б", url)))
+    upload_group_data(scrape_group(("ИУ7-14Б", url)))
+
+
+class Command(BaseCommand):
+    help = "loads single group in db"
+    def add_arguments(self, parser):
+        parser.add_argument("group_name", nargs=1, type=str)
+        parser.add_argument("url", nargs=1, type=str)
+
+    def handle(self, *args, **options):
+        group_name = options["group_name"][0]
+        url = options["url"][0]
+        upload_group_data(scrape_group([group_name, url]))
