@@ -9,13 +9,13 @@ enum LessonType {
 }
 
 struct Lesson {
-    var dbPrimaryKey: Int
-    var subject: Subject
-    var place: Place
-    var teacher: Teacher?
-    var startTime: Date
-    var endTime: Date
-    var pairSeqNum: Int
-    var lessonType: LessonType
-    var groups: [Group]
+    let dbPrimaryKey: Int
+    let subject: Subject
+    let place: Place
+    let teacher: Teacher?
+    let startTime: Date
+    let endTime: Date
+    let pairSeqNum: Int
+    let lessonType: LessonType
+    let groups: [Group]
 }

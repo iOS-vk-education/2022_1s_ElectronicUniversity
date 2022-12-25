@@ -8,11 +8,11 @@ import Foundation
 
 struct LessonsDay {
     var lessons: [Lesson]
-    var date: Date
+    let date: Date
 }
 
 struct Schedule {
     let group: Group
-    let today: LessonsDay
-    let nextDay: LessonsDay
+    var today: LessonsDay
+    var nextDay: LessonsDay
 }

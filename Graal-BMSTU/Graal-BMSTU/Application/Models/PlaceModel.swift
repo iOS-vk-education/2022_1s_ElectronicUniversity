@@ -6,7 +6,7 @@ import Foundation
 
 
 struct Place {
-    var dbPrimaryKey: Int
-    var name: String
-    var is_generic: Bool
+    let dbPrimaryKey: Int
+    let name: String
+    let is_generic: Bool
 }

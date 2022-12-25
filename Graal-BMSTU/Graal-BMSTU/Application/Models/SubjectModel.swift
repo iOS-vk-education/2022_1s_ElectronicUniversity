@@ -5,7 +5,7 @@
 import Foundation
 
 struct Subject {
-    var dbPrimaryKey: Int
-    var name: String
-    var stream: StudyStream
+    let dbPrimaryKey: Int
+    let name: String
+    let stream: StudyStream
 }

@@ -5,7 +5,7 @@
 import Foundation
 
 struct Teacher {
-    var dbPrimaryKey: Int
-    var displayName: String
+    let dbPrimaryKey: Int
+    let displayName: String
 }
 

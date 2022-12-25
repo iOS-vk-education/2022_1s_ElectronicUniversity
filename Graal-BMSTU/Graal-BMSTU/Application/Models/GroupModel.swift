@@ -9,16 +9,16 @@ enum StudyLevel {
 }
 
 struct StudyStream {
-    var dbPrimaryKey: Int
-    var semester: Int
-    var faculty: String
-    var studyLevel: StudyLevel
-    var semesterStart: Date
-    var semesterEnd: Date
+    let dbPrimaryKey: Int
+    let semester: Int
+    let faculty: String
+    let studyLevel: StudyLevel
+    let semesterStart: Date
+    let semesterEnd: Date
 }
 
 struct Group {
-    var dbPrimaryKey: Int
-    var name: String
-    var stream: StudyStream
+    let dbPrimaryKey: Int
+    let name: String
+    let stream: StudyStream
 }
