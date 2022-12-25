@@ -8,7 +8,7 @@
 import Foundation
 
 struct User {
-    let name: String
-    let familyName: String
-    let group: Group = Group(name: "ИУ7-35Б", stream: mock_stream)
+    var name: String?
+    var familyName: String?
+    var group: Group
 }

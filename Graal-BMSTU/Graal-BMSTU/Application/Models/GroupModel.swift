@@ -1,24 +1,24 @@
 //
 // Created by Артём on 06.12.2022.
 //
-s
+
 import Foundation
 
-struct StudyStream {
-    var semester: Int
-    var specialty: String
-    var faculty: String
+enum StudyLevel {
+    case bachelor, master, specialist, postgraduate
 }
 
-let mock_stream = StudyStream(semester: 3, specialty: "09.03.04", faculty: "ИУ7")
-
+struct StudyStream {
+    var dbPrimaryKey: Int
+    var semester: Int
+    var faculty: String
+    var studyLevel: StudyLevel
+    var semesterStart: Date
+    var semesterEnd: Date
+}
 
 struct Group {
+    var dbPrimaryKey: Int
     var name: String
     var stream: StudyStream
 }
-
-let mock_group = Group(name: "ИУ7-35Б", stream: mock_stream)
-
-
-

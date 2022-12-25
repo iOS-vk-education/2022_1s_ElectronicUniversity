@@ -4,11 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ca60903e-16d8-4820-8d03-e6a6ea625244" name="Changes" comment="backend scraping done (minor bugs, например с МТ8-11БВ)">
+    <list default="true" id="ca60903e-16d8-4820-8d03-e6a6ea625244" name="Changes" comment="backend scraping fixes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graal_backend/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/graal_backend/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graal_backend/schedule_db_api/management/commands/scrape_single_group.py" beforeDir="false" afterPath="$PROJECT_DIR$/graal_backend/schedule_db_api/management/commands/scrape_single_group.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graal_backend/schedule_db_api/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/graal_backend/schedule_db_api/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graal_backend/schedule_db_api/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/graal_backend/schedule_db_api/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Graal-BMSTU/Graal-BMSTU.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/../Graal-BMSTU/Graal-BMSTU.xcodeproj/project.pbxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Graal-BMSTU/Graal-BMSTU/Application/Models/GroupModel.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../Graal-BMSTU/Graal-BMSTU/Application/Models/GroupModel.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Graal-BMSTU/Graal-BMSTU/Application/Models/LessonModel.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../Graal-BMSTU/Graal-BMSTU/Application/Models/LessonModel.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Graal-BMSTU/Graal-BMSTU/Application/Models/LessonsDayModel.swift" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Graal-BMSTU/Graal-BMSTU/Application/Models/PlaceModel.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../Graal-BMSTU/Graal-BMSTU/Application/Models/PlaceModel.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Graal-BMSTU/Graal-BMSTU/Application/Models/ScheduleModel.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../Graal-BMSTU/Graal-BMSTU/Application/Models/ScheduleModel.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Graal-BMSTU/Graal-BMSTU/Application/Models/SubjectModel.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../Graal-BMSTU/Graal-BMSTU/Application/Models/SubjectModel.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Graal-BMSTU/Graal-BMSTU/Application/Models/TeacherModel.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../Graal-BMSTU/Graal-BMSTU/Application/Models/TeacherModel.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Graal-BMSTU/Graal-BMSTU/Application/Models/UserModel.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../Graal-BMSTU/Graal-BMSTU/Application/Models/UserModel.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Graal-BMSTU/Graal-BMSTU/Application/Services/ScheduleService.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../Graal-BMSTU/Graal-BMSTU/Application/Services/ScheduleService.swift" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -222,7 +230,9 @@
       <workItem from="1671964019411" duration="12137000" />
       <workItem from="1671977535837" duration="156000" />
       <workItem from="1671977742218" duration="4666000" />
-      <workItem from="1671982430963" duration="6417000" />
+      <workItem from="1671982430963" duration="7545000" />
+      <workItem from="1671996641488" duration="1256000" />
+      <workItem from="1671999486161" duration="395000" />
     </task>
     <task id="LOCAL-00001" summary="добавлен файербейз в проект + начал писать скрипт закачки данных на сервер (админский)">
       <created>1671066685352</created>
@@ -329,7 +339,14 @@
       <option name="project" value="LOCAL" />
       <updated>1671986515312</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="backend scraping fixes">
+      <created>1671989118560</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1671989118560</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -340,7 +357,8 @@
     <MESSAGE value="backend models change" />
     <MESSAGE value="backend work in progress" />
     <MESSAGE value="backend scraping done (minor bugs, например с МТ8-11БВ)" />
-    <option name="LAST_COMMIT_MESSAGE" value="backend scraping done (minor bugs, например с МТ8-11БВ)" />
+    <MESSAGE value="backend scraping fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="backend scraping fixes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
