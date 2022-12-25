@@ -2,7 +2,8 @@ import os
 import sys
 import requests
 from bs4 import BeautifulSoup
-from scrape_single_group import scrape_group, upload_group_data
+from schedule_db_api.management.commands.scrape_single_group import scrape_group, upload_group_data
+from django.core.management.base import BaseCommand
 
 
 if sys.version_info.major < 3:
@@ -81,4 +82,20 @@ if __name__ == '__main__':
         for group in groups_urls:
             group_data = scrape_group(group)
             print(group_data, file=f)
+
+
+class Command(BaseCommand):
+    help = "loads all groups in db"
+
+    def add_arguments(self, parser):
+        pass
+
+    def handle(self, *args, **options):
+        groups_urls = get_all_groups_urls()
+        i = 0
+        while i < 150 and i < len(groups_urls):
+            group = groups_urls[i]
+            print("Group:", group[0])
+            upload_group_data(scrape_group(group))
+            i += 1
 

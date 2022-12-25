@@ -99,7 +99,8 @@ def decode_lesson_cell(lesson_cell):
                     except IndexError:
                         teacher = None
                     ans = {"type": type_of_lesson, "subject": name_of_subject, "cabinet": cabinet, "teacher": teacher}
-        return ans
+                    print("result:", ans)
+    return ans
 
 
 def decode_lesson(lesson_found):
@@ -164,39 +165,46 @@ def scrape_group(group_name_and_url):
     return ans
 
 
-def decide_study_level(name_parts):
+def decide_semester_and_study_level(name_parts):
+    study_level = None
     if "Б" in name_parts[1]:
-        return "BACHELOR"
+        study_level = "BACHELOR"
     elif "М" in name_parts[1]:
-        return "MASTER"
+        study_level = "MASTER"
     elif "А" in name_parts[1]:
-        return "POSTGRADUATE"
+        study_level = "POSTGRADUATE"
     else:
-        return "SPECIALIST"
+        study_level = "SPECIALIST"
+    if study_level != "SPECIALIST":
+        name_parts[1] = name_parts[1][:-1]
+    group_seq = name_parts[1][-1]
+    semester = int(name_parts[1][:-1])
+    print(name_parts, study_level, semester, group_seq)
+    return (semester, study_level)
 
 
 def get_offset_from_monday_midnight(str) -> int:
     if str == "ПН":
         return 0
     elif str == "ВТ":
-        return 1440 * 1
+        return 60 * 60 * 1
     elif str == "СР":
-        return 1440 * 2
+        return 60 * 60 * 2
     elif str == "ЧТ":
-        return 1440 * 3
+        return 60 * 60 * 3
     elif str == "ПТ":
-        return 1440 * 4
+        return 60 * 60 * 4
     elif str == "СБ":
-        return 1440 * 5
+        return 60 * 60 * 5
 
 
 def decide_if_place_is_generic(str_in) -> bool:
-    return "каф" in str_in
+    return "каф" in str_in or "Измайлово" in str_in
 
 
 def decide_week_offset(str_in) -> int:
     if str_in == "по знаменателям":
-        return 10080
+        return 7 * 24 * 60 * 60
     else:
         return 0
 
@@ -218,7 +226,7 @@ def decide_lesson_type(str_in) -> str:
 
 
 def time_calc(semester_start, semester_week_offset, offset_from_monday_midnight, week_offset, time_from_day_start) -> datetime.datetime:
-    return semester_start + datetime.timedelta(seconds=(semester_week_offset + offset_from_monday_midnight + week_offset + time_from_day_start))
+    return semester_start + datetime.timedelta(seconds=(semester_week_offset + offset_from_monday_midnight + week_offset + time_from_day_start * 60))
 
 
 def get_semester_start():
@@ -227,58 +235,46 @@ def get_semester_start():
 
 
 def get_semester_end():
-    return get_semester_start() + datetime.timedelta(days=7*18) # 18 недель
+    return get_semester_start() + datetime.timedelta(days=(7*18)) # 18 недель
 
 
 def upload_group_data(group_data):
     name_parts = group_data["group_name"].split("-")
 
-    semester = int(name_parts[1][0])
+    semester, study_level = decide_semester_and_study_level(name_parts)
     faculty = name_parts[0]
-    study_level = decide_study_level(name_parts)
     semester_start = get_semester_start()
     semester_end = get_semester_end()
-    stream = StudyStream.objects.get_or_create(semester=semester, faculty=faculty, study_level=study_level, semester_start=semester_start, semester_end=semester_end)
-    print(stream)
-    group = Group.objects.create(name=group_data["group_name"], stream=stream)
+    stream, _ = StudyStream.objects.get_or_create(semester=semester, faculty=faculty, study_level=study_level, semester_start=semester_start, semester_end=semester_end)
+    group, _ = Group.objects.get_or_create(name=group_data["group_name"], stream=stream)
     for i in range(9):
-        semester_week_offset = i * 14 * 24 * 60  # сразу две недели обрабатываем
+        semester_week_offset = i * 14 * 24 * 60 * 60  # сразу две недели обрабатываем
         for day_key in group_data["data"].keys():  # итерируемся по дням недели
             offset_from_monday_midnight = get_offset_from_monday_midnight(day_key)
-            for pair_num in group_data["data"]["day_key"]:  # итерируемся по занятием внутри дня
-                data_list = group_data  # внутри две пары, если мигаюшая с заменой(не окном) или не мигающая
+            for pair_num in group_data["data"][day_key].keys():  # итерируемся по занятием внутри дня
+                data_list = group_data["data"][day_key][pair_num] # внутри две пары, если мигаюшая с заменой(не окном) или не мигающая
+                # print(data_list)
                 for lesson_data in data_list:
                     week_offset = decide_week_offset(lesson_data["repeatance"])
                     start_time = time_calc(semester_start, semester_week_offset, offset_from_monday_midnight, week_offset, lesson_data["start_time"])
                     end_time = time_calc(semester_start, semester_week_offset, offset_from_monday_midnight, week_offset, lesson_data["end_time"])
                     lesson_type = decide_lesson_type(lesson_data["type"])
                     subject_name = lesson_data["subject"]
-                    subject = Subject.objects.get_or_create(name=subject_name, stream=stream)
+                    subject, _ = Subject.objects.get_or_create(name=subject_name, stream=stream)
                     cabinet_name = lesson_data["cabinet"]
-                    cabinet = Place.objects.get_or_create(name=cabinet_name,
+                    cabinet, _ = Place.objects.get_or_create(name=cabinet_name,
                                                           is_generic=decide_if_place_is_generic(cabinet_name))
                     teacher_name = lesson_data["teacher"]
                     if teacher_name is not None:
-                        teacher = Teacher.objects.get_or_create(display_name=teacher_name, study_streams=stream)
+                        teacher, _ = Teacher.objects.get_or_create(display_name=teacher_name)
+                        teacher.study_streams.add(stream)
                     else:
                         teacher = None
-                    lesson = Lesson.objects.get_or_create(subject=subject, place=cabinet, teacher=teacher,
+                    lesson, _ = Lesson.objects.get_or_create(subject=subject, place=cabinet, teacher=teacher,
                                                           pair_num=pair_num, lesson_type=lesson_type,
                                                           start_time=start_time, end_time=end_time)
-                    lesson.groups__set.add(group)
+                    lesson.groups.add(group)
                     lesson.save()
-
-
-def main():
-    r = requests.get(url)
-    soup = BeautifulSoup(r.content, "html5lib")
-
-    # print(r.content)
-
-
-if __name__ == '__main__':
-    url = "https://lks.bmstu.ru/schedule/f9833d8f-8a79-11ec-b81a-0de102063aa5"
-    upload_group_data(scrape_group(("ИУ7-14Б", url)))
 
 
 class Command(BaseCommand):

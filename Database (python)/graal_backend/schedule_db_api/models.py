@@ -22,6 +22,7 @@ class StudyStream(models.Model):
     semester_end = models.DateField()
 
 
+
 class Group(models.Model):
     name = models.CharField(max_length=255)
     stream = models.ForeignKey("StudyStream", on_delete=models.CASCADE)
