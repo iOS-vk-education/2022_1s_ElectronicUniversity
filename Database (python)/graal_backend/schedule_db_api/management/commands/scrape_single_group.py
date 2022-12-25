@@ -112,8 +112,9 @@ def decode_lesson(lesson_found):
         if less_1 is not None:
             less_1["repeatance"] = "по числителям"
             ans = [less_1]
-            less_1["repeatance"] = "по знаменателям"
-            ans.append(less_1)
+            less_2 = less_1.copy()
+            less_2["repeatance"] = "по знаменателям"
+            ans.append(less_2)
     else:
         less_1 = decode_lesson_cell(tds[1])
         less_2 = decode_lesson_cell(tds[2])
@@ -254,7 +255,7 @@ def upload_group_data(group_data):
             offset_from_monday_midnight = get_offset_from_monday_midnight(day_key)
             for pair_num in group_data["data"][day_key].keys():  # итерируемся по занятием внутри дня
                 data_list = group_data["data"][day_key][pair_num] # внутри две пары, если мигаюшая с заменой(не окном) или не мигающая
-                # print(data_list)
+                print(data_list)
                 for lesson_data in data_list:
                     week_offset = decide_week_offset(lesson_data["repeatance"])
                     start_time = time_calc(semester_start, semester_week_offset, offset_from_monday_midnight, week_offset, lesson_data["start_time"])

@@ -14,6 +14,7 @@ def group_lessons(request, group_id, day_offset_from_today=None):
         day_offset_from_today = 0
     day = date.today() + timedelta(days=day_offset_from_today)
     print(day)
+    print(day)
     lessons_now = Lesson.objects \
         .filter(groups__in=[group]) \
         .filter(start_time__gte=day) \

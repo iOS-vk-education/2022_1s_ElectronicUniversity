@@ -8,7 +8,7 @@ enum StudyLevel {
     case bachelor, master, specialist, postgraduate
 }
 
-struct StudyStream {
+struct StudyStream: Hashable {
     let dbPrimaryKey: Int
     let semester: Int
     let faculty: String

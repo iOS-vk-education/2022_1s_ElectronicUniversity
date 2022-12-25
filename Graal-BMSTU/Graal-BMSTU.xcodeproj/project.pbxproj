@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		704C5C86293C009B00C2F3F9 /* Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 704C5C85293C009B00C2F3F9 /* Buttons.swift */; };
+		704D9324295902DD004E22B1 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 704D9323295902DD004E22B1 /* SwiftyJSON */; };
 		70576429291322B7006555E2 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70576428291322B7006555E2 /* ProfileView.swift */; };
 		705B6A55291E88A500C5FB63 /* AuthFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 705B6A54291E88A500C5FB63 /* AuthFlowCoordinator.swift */; };
 		705B6A57291E8AAF00C5FB63 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 705B6A56291E8AAF00C5FB63 /* AppCoordinator.swift */; };
@@ -127,6 +128,7 @@
 				708CF780291C550A0036AEA2 /* SFSafeSymbols in Frameworks */,
 				70F653AF2915F3DC0024EA1D /* SnapKit in Frameworks */,
 				70B0553829350A7C00ED3A54 /* RswiftLibrary in Frameworks */,
+				704D9324295902DD004E22B1 /* SwiftyJSON in Frameworks */,
 				70E3215A294A4590009939E5 /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -351,6 +353,7 @@
 				708CF77F291C550A0036AEA2 /* SFSafeSymbols */,
 				70B0553729350A7C00ED3A54 /* RswiftLibrary */,
 				70E32159294A4590009939E5 /* FirebaseAuth */,
+				704D9323295902DD004E22B1 /* SwiftyJSON */,
 			);
 			productName = "Graal-BMSTU";
 			productReference = 708E76C729005E4A00D23E70 /* Graal-BMSTU.app */;
@@ -386,6 +389,7 @@
 				708CF77E291C550A0036AEA2 /* XCRemoteSwiftPackageReference "SFSafeSymbols" */,
 				70B0553629350A7C00ED3A54 /* XCRemoteSwiftPackageReference "R" */,
 				70E32158294A4590009939E5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				704D9322295902DD004E22B1 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
 			);
 			productRefGroup = 708E76C829005E4A00D23E70 /* Products */;
 			projectDirPath = "";
@@ -689,6 +693,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		704D9322295902DD004E22B1 /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON#integration";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 		708CF77E291C550A0036AEA2 /* XCRemoteSwiftPackageReference "SFSafeSymbols" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SFSafeSymbols/SFSafeSymbols";
@@ -724,6 +736,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		704D9323295902DD004E22B1 /* SwiftyJSON */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 704D9322295902DD004E22B1 /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
+			productName = SwiftyJSON;
+		};
 		708CF77F291C550A0036AEA2 /* SFSafeSymbols */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 708CF77E291C550A0036AEA2 /* XCRemoteSwiftPackageReference "SFSafeSymbols" */;
