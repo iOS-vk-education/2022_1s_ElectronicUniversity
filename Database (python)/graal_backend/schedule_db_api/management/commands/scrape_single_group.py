@@ -76,6 +76,7 @@ def scrape_group(group_name_and_url):
     r = requests.get(url)
     soup = BeautifulSoup(r.content, "html5lib")
     tables = soup.find_all(class_="table-responsive")
+    ans = {}
     monday_table = tables[0]
     tuesday_table = tables[1]
     wednesday_table = tables[2]
@@ -84,20 +85,19 @@ def scrape_group(group_name_and_url):
     saturday_table = tables[5]
     week_tables = [monday_table, tuesday_table, wednesday_table, thursday_table, friday_table, saturday_table]
     for table in week_tables:
-        print("Table:-------------------------------------------------")
-        # print(table)
         lessons_found = table.find_all("tr")
-        # every day consists
+        day_data = {}
         for i in range(len(lessons_found)):
             lesson_found = lessons_found[i]
             if i == 0:
-                # it's header
-                print("Day: {}".format(lesson_found.contents[1].contents[0].contents[0]))
+                day = lesson_found.contents[1].contents[0].contents[0]
             elif i != 1:
                 lesson_list = decode_lesson(lesson_found)
                 if lesson_list is not None:
-                    print("Lesson {}:-------".format(i - 1))
-                    print(lesson_list, sep="\n")
+                    day_data[i - 1] = lesson_list
+        if len(day_data) != 0:
+            ans[day] = day_data
+    return ans
 
 
 
@@ -114,4 +114,4 @@ def main():
 
 if __name__ == '__main__':
     url = "https://lks.bmstu.ru/schedule/a9910e6e-81ca-11eb-b2f4-005056960017"
-    scrape_group(("ИУ7-35Б", url))
+    print(scrape_group(("ИУ7-35Б", url)))
