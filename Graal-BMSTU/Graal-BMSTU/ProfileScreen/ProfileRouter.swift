@@ -11,8 +11,7 @@ final class ProfileRouterImpl: ProfileRouter {
 
 
     private let window: UIWindow
-    var parentCoordinator: Coordinator?
-    var childCoordinators = [Coordinator]()
+    var parentRouter: Router?
     var navigationController: UINavigationController
 
     private weak var viewController: UIViewController?
@@ -47,7 +46,7 @@ final class ProfileRouterImpl: ProfileRouter {
         flowAfterFirstAuth?.start()
     }
 
-    // MARK: - navigation actions
+    // MARK: - navigation
     func navigateToProfileDetails() {
         print("navigate")
         let placeholder = UIViewController()

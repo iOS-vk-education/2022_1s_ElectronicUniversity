@@ -20,7 +20,7 @@ protocol ProfilePresenter {
     func navigateToSettings()
 }
 
-protocol ProfileRouter: Coordinator {
+protocol ProfileRouter: Router {
     init(window: UIWindow, navigationController: UINavigationController,
          flowAfterFirstAuth: Coordinator)
     func start()
@@ -35,12 +35,6 @@ protocol ProfileViewControllerProtocol: AnyObject {
     func setUserName(str: String)
     func setUserGroup(str: String)
     func setState(toView: ProfileViewState)
-}
-
-protocol AuthService {
-    func authenticate(login: String, password: String) -> User?
-    func getUserData() -> User?
-    func logout()
 }
 
 protocol ProfileBuilder {

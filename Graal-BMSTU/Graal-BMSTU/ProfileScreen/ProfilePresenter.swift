@@ -46,7 +46,7 @@ final class ProfilePresenterImpl: ProfilePresenter {
         let user = service?.getUserData()
         if let user = user {
             vc?.setUserName(str: user.name + " " + user.familyName)
-            vc?.setUserGroup(str: user.group)
+            vc?.setUserGroup(str: user.group.name)
             vc?.setState(toView: .profile)
         } else {
             vc?.setState(toView: .auth)
