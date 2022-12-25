@@ -76,6 +76,10 @@ def get_all_groups_urls():
 
 if __name__ == '__main__':
     groups_urls = get_all_groups_urls()
+    data = []
     for group in groups_urls:
         group_data = scrape_group(group)
-        upload_group_data(group_data)
+        data.append({"group_name": group[0], "data": group_data})
+        # upload_group_data(group_data)
+    with open("output.txt", "w") as f:
+        print(f, data)

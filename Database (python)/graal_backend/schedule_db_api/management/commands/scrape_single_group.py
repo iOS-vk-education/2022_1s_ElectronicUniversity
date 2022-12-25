@@ -2,6 +2,17 @@ import requests
 from bs4 import BeautifulSoup
 
 
+def convert_time_to_minutes_from_midnight(str):
+    if "." in str:
+        data = str.split(".")
+    elif ":" in str:
+        data = str.split(":")
+    else:
+        raise Exception
+    ans = int(data[0]) * 60 + int(data[1])
+    return ans
+
+
 def decode_lesson_cell(lesson_cell):
     cell = lesson_cell.contents
 
@@ -16,6 +27,7 @@ def decode_lesson_cell(lesson_cell):
     if len(cell) == 0:
         return None  # окно
     else:
+        ans = {}
         type_of_lesson = cell[0].contents[0]
         if type_of_lesson == "Самостоятельная работа":
             return None
@@ -27,19 +39,51 @@ def decode_lesson_cell(lesson_cell):
                 cabinet = None
             name_of_subject = None
             teacher = None
+            ans = {"type": type_of_lesson, "subject": name_of_subject, "cabinet": cabinet, "teacher": teacher}
+        elif "Измайлово" in str(type_of_lesson):
+            data = cell[0].contents[0].split()
+            type_of_lesson = "сем"
+            name_of_subject = "Физическая культура и спорт"
+            teacher = None
+            cabinet = "Измайлово"
+            ans = {"type": type_of_lesson, "subject": name_of_subject, "cabinet": cabinet, "teacher": teacher,
+                   "start_time": convert_time_to_minutes_from_midnight(data[1])}
         else:
-            type_of_lesson = type_of_lesson[1:-1]
-            name_of_subject = cell[1].contents[0]
-            cabinet = cell[2].contents[0]
-            if len(cabinet) != 0:
-                cabinet = cabinet.strip()
-            teacher = cell[3].contents
-            if len(teacher) != 0:
-                teacher = teacher[0]
+            try:
+                name_of_subject = cell[1].contents[0]
+                cabinet = cell[2].contents[0]
+                if len(cabinet) != 0:
+                    cabinet = cabinet.strip()
+                teacher = cell[3].contents
+                if len(teacher) != 0:
+                    teacher = teacher[0]
+                else:
+                    teacher = None
+                type_of_lesson = type_of_lesson[1:-1]
+                ans = {"type": type_of_lesson, "subject": name_of_subject, "cabinet": cabinet, "teacher": teacher}
+            except IndexError:
+                if "КР" in str(type_of_lesson) or "КП" in str(type_of_lesson):
+                    data = cell[0].contents[0].split()
+                    type_of_lesson = data[0]
+                    name_of_subject = ""
+                    for part in data[1:]:
+                        name_of_subject += part + " "
+                    name_of_subject.strip()
+                    cabinet = cell[1].contents[0].strip()
+                    try:
+                        teacher = cell[3].contents[0].strip()
+                    except IndexError:
+                        teacher = None
+                    ans = {"type": type_of_lesson, "subject": name_of_subject, "cabinet": cabinet, "teacher": teacher}
+                elif "УТП" in str(type_of_lesson):
+                    data = cell[0].contents[0].split()
+                    type_of_lesson = data[0]
+                    name_of_subject = cell[0].contents[0]
+                    cabinet = cell[1].contents[0].strip()
+                    ans = {"type": type_of_lesson, "subject": name_of_subject, "cabinet": cabinet, "teacher": teacher}
             else:
-                teacher = None
-
-        return {"type": type_of_lesson, "subject": name_of_subject, "cabinet": cabinet, "teacher": teacher}
+                    raise Exception
+        return ans
 
 
 def decode_lesson(lesson_found):
@@ -65,8 +109,9 @@ def decode_lesson(lesson_found):
         time_raw = tds[0].contents[0]
         time = time_raw.strip().split()
         for lesson in ans:
-            lesson["start_time"] = time[0]
-            lesson["end_time"] = time[2]
+            if "start_time" not in lesson:
+                lesson["start_time"] = convert_time_to_minutes_from_midnight(time[0])
+            lesson["end_time"] = lesson["start_time"] + 125
     return ans
 
 
@@ -100,7 +145,6 @@ def scrape_group(group_name_and_url):
     return ans
 
 
-
 def upload_group_data(group_data):
     pass
 
@@ -113,5 +157,5 @@ def main():
 
 
 if __name__ == '__main__':
-    url = "https://lks.bmstu.ru/schedule/a9910e6e-81ca-11eb-b2f4-005056960017"
+    url = "https://lks.bmstu.ru/schedule/f9833d8f-8a79-11ec-b81a-0de102063aa5"
     print(scrape_group(("ИУ7-35Б", url)))
