@@ -27,6 +27,10 @@ def group_lessons(request, group_id, day_offset_from_today=None):
     return JsonResponse(json_response, safe=False)
 
 
+def group_lessons_reverse(request, group_id, day_offset_from_today):
+    return group_lessons(request, group_id, -day_offset_from_today)
+
+
 def groups(request):
     groups = Group.objects.all()
     json_response = list()
