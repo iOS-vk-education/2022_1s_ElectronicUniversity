@@ -4,8 +4,21 @@
 
 import Foundation
 
-struct Group {
-    var name: String
+enum StudyLevel {
+    case bachelor, master, specialist, postgraduate
 }
 
-let mock_group = Group(name: "ИУ7-35Б")
+struct StudyStream {
+    let dbPrimaryKey: Int
+    let semester: Int
+    let faculty: String
+    let studyLevel: StudyLevel
+    let semesterStart: Date
+    let semesterEnd: Date
+}
+
+struct Group {
+    let dbPrimaryKey: Int
+    let name: String
+    let stream: StudyStream
+}

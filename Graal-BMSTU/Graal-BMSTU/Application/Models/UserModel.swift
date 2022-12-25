@@ -8,7 +8,7 @@
 import Foundation
 
 struct User {
-    let name: String
-    let familyName: String
-    let group: Group = Group(name: "IU7-35B")
+    var name: String?
+    var familyName: String?
+    var group: Group
 }

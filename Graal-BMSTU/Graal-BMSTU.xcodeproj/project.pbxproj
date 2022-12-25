@@ -30,6 +30,8 @@
 		7092B999291C2AAD000D8D3C /* TrainingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7092B998291C2AAD000D8D3C /* TrainingView.swift */; };
 		7092B99B291C2ABB000D8D3C /* TrainingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7092B99A291C2ABB000D8D3C /* TrainingModel.swift */; };
 		70B0553829350A7C00ED3A54 /* RswiftLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 70B0553729350A7C00ED3A54 /* RswiftLibrary */; };
+		70E3215A294A4590009939E5 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 70E32159294A4590009939E5 /* FirebaseAuth */; };
+		70E3215D294A45FD009939E5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 70E3215C294A45FD009939E5 /* GoogleService-Info.plist */; };
 		70F653AF2915F3DC0024EA1D /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 70F653AE2915F3DC0024EA1D /* SnapKit */; };
 		70F83A5F291E81F90087CC01 /* MainFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F83A5E291E81F90087CC01 /* MainFlowCoordinator.swift */; };
 		70F83A61291E82540087CC01 /* CoordinatorsProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F83A60291E82540087CC01 /* CoordinatorsProtocols.swift */; };
@@ -47,7 +49,6 @@
 		85B83540A1DC1F4722627DCA /* MainMenuBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B83A48E253D5BBB51C5B6F /* MainMenuBuilder.swift */; };
 		85B835D5F7E5BB48E9C0FB1F /* LessonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B83022711B66DCBEFBC923 /* LessonModel.swift */; };
 		85B83625C3779268CC1818C3 /* DetailProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B83A2ECBF4266C824A8652 /* DetailProfileView.swift */; };
-		85B83689DFB54D776526C9AD /* LessonsDayModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B8334F3F7D4635DA27DACA /* LessonsDayModel.swift */; };
 		85B836C71BE4E27C54B1D5BE /* DetailProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B8382BFD6E0E0DB86602F2 /* DetailProfileCoordinator.swift */; };
 		85B8372335764421894C7775 /* ScheduleService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B83FC129B162DFBC1778BA /* ScheduleService.swift */; };
 		85B838E40181A4047A9F3EB4 /* SubjectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B83C27376C7E5777A507A8 /* SubjectModel.swift */; };
@@ -88,6 +89,7 @@
 		7092B996291C2AA1000D8D3C /* TrainingPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingPresenter.swift; sourceTree = "<group>"; };
 		7092B998291C2AAD000D8D3C /* TrainingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingView.swift; sourceTree = "<group>"; };
 		7092B99A291C2ABB000D8D3C /* TrainingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingModel.swift; sourceTree = "<group>"; };
+		70E3215C294A45FD009939E5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		70F83A5E291E81F90087CC01 /* MainFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFlowCoordinator.swift; sourceTree = "<group>"; };
 		70F83A60291E82540087CC01 /* CoordinatorsProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorsProtocols.swift; sourceTree = "<group>"; };
 		85B83022711B66DCBEFBC923 /* LessonModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LessonModel.swift; sourceTree = "<group>"; };
@@ -96,7 +98,6 @@
 		85B83211E2D6C9AD39BCAD20 /* DetailProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailProfileViewController.swift; sourceTree = "<group>"; };
 		85B83223529F87099EB53A2E /* DetailProfileModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailProfileModel.swift; sourceTree = "<group>"; };
 		85B832FE9A620E030CA8BB0D /* TeacherModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeacherModel.swift; sourceTree = "<group>"; };
-		85B8334F3F7D4635DA27DACA /* LessonsDayModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LessonsDayModel.swift; sourceTree = "<group>"; };
 		85B833C12362EDF7756DE07F /* ScheduleModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleModel.swift; sourceTree = "<group>"; };
 		85B8345E1551B82C7186FF92 /* DetailProfilePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailProfilePresenter.swift; sourceTree = "<group>"; };
 		85B8378FD3C7A96626638BFC /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
@@ -126,6 +127,7 @@
 				708CF780291C550A0036AEA2 /* SFSafeSymbols in Frameworks */,
 				70F653AF2915F3DC0024EA1D /* SnapKit in Frameworks */,
 				70B0553829350A7C00ED3A54 /* RswiftLibrary in Frameworks */,
+				70E3215A294A4590009939E5 /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -173,7 +175,6 @@
 			isa = PBXGroup;
 			children = (
 				85B83C27376C7E5777A507A8 /* SubjectModel.swift */,
-				85B8334F3F7D4635DA27DACA /* LessonsDayModel.swift */,
 				85B8317AE5C7A6D62DD2E851 /* PlaceModel.swift */,
 				85B832FE9A620E030CA8BB0D /* TeacherModel.swift */,
 				85B830CF88BB50EDDC925ED5 /* GroupModel.swift */,
@@ -200,6 +201,7 @@
 				708E76C929005E4A00D23E70 /* Graal-BMSTU */,
 				708E76C829005E4A00D23E70 /* Products */,
 				85B83B1056CFCF2D1E3ED5A5 /* .gitignore */,
+				70E7FC48294A66CE00982C1D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -214,6 +216,7 @@
 		708E76C929005E4A00D23E70 /* Graal-BMSTU */ = {
 			isa = PBXGroup;
 			children = (
+				70E3215C294A45FD009939E5 /* GoogleService-Info.plist */,
 				70198EBA2926976700B45C3A /* Graal-BMSTU.entitlements */,
 				708E76D829005E4D00D23E70 /* Info.plist */,
 				7092B9A6291C2B17000D8D3C /* Application */,
@@ -286,6 +289,13 @@
 			path = Application;
 			sourceTree = "<group>";
 		};
+		70E7FC48294A66CE00982C1D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		70F83A56291E7FD10087CC01 /* Coordinators */ = {
 			isa = PBXGroup;
 			children = (
@@ -340,6 +350,7 @@
 				70F653AE2915F3DC0024EA1D /* SnapKit */,
 				708CF77F291C550A0036AEA2 /* SFSafeSymbols */,
 				70B0553729350A7C00ED3A54 /* RswiftLibrary */,
+				70E32159294A4590009939E5 /* FirebaseAuth */,
 			);
 			productName = "Graal-BMSTU";
 			productReference = 708E76C729005E4A00D23E70 /* Graal-BMSTU.app */;
@@ -374,6 +385,7 @@
 				70F653AD2915F3DC0024EA1D /* XCRemoteSwiftPackageReference "SnapKit" */,
 				708CF77E291C550A0036AEA2 /* XCRemoteSwiftPackageReference "SFSafeSymbols" */,
 				70B0553629350A7C00ED3A54 /* XCRemoteSwiftPackageReference "R" */,
+				70E32158294A4590009939E5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 708E76C829005E4A00D23E70 /* Products */;
 			projectDirPath = "";
@@ -391,6 +403,7 @@
 			files = (
 				708E76D729005E4D00D23E70 /* LaunchScreen.storyboard in Resources */,
 				708CF77A291C4A3F0036AEA2 /* Localizable.strings in Resources */,
+				70E3215D294A45FD009939E5 /* GoogleService-Info.plist in Resources */,
 				708E76D429005E4D00D23E70 /* Assets.xcassets in Resources */,
 				85B83D7D168C76D3DC5C699E /* .gitignore in Resources */,
 			);
@@ -444,7 +457,6 @@
 				85B8329B1EB39F69A8E19F20 /* AuthService.swift in Sources */,
 				85B8372335764421894C7775 /* ScheduleService.swift in Sources */,
 				85B838E40181A4047A9F3EB4 /* SubjectModel.swift in Sources */,
-				85B83689DFB54D776526C9AD /* LessonsDayModel.swift in Sources */,
 				85B83127233AA4E86C242039 /* PlaceModel.swift in Sources */,
 				85B83CAA431356245705BAFD /* TeacherModel.swift in Sources */,
 				85B83F670357DC40F44BBFAC /* Router.swift in Sources */,
@@ -605,7 +617,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Graal-BMSTU/Graal-BMSTU.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = V88X9S6G23;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Graal-BMSTU/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -633,7 +645,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Graal-BMSTU/Graal-BMSTU.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = V88X9S6G23;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Graal-BMSTU/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -693,6 +705,14 @@
 				minimumVersion = 7.0.0;
 			};
 		};
+		70E32158294A4590009939E5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
 		70F653AD2915F3DC0024EA1D /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit";
@@ -717,6 +737,11 @@
 		70B0553929350ABB00ED3A54 /* RswiftGenerateInternalResources */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = "plugin:RswiftGenerateInternalResources";
+		};
+		70E32159294A4590009939E5 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 70E32158294A4590009939E5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
 		};
 		70F653AE2915F3DC0024EA1D /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;

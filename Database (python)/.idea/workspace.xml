@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="ca60903e-16d8-4820-8d03-e6a6ea625244" name="Changes" comment="backend scraping fixes">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graal_backend/schedule_db_api/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/graal_backend/schedule_db_api/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Graal-BMSTU/Graal-BMSTU.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/../Graal-BMSTU/Graal-BMSTU.xcodeproj/project.pbxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Graal-BMSTU/Graal-BMSTU/Application/Models/GroupModel.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../Graal-BMSTU/Graal-BMSTU/Application/Models/GroupModel.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Graal-BMSTU/Graal-BMSTU/Application/Models/LessonModel.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../Graal-BMSTU/Graal-BMSTU/Application/Models/LessonModel.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Graal-BMSTU/Graal-BMSTU/Application/Models/LessonsDayModel.swift" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Graal-BMSTU/Graal-BMSTU/Application/Models/PlaceModel.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../Graal-BMSTU/Graal-BMSTU/Application/Models/PlaceModel.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Graal-BMSTU/Graal-BMSTU/Application/Models/ScheduleModel.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../Graal-BMSTU/Graal-BMSTU/Application/Models/ScheduleModel.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Graal-BMSTU/Graal-BMSTU/Application/Models/SubjectModel.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../Graal-BMSTU/Graal-BMSTU/Application/Models/SubjectModel.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Graal-BMSTU/Graal-BMSTU/Application/Models/TeacherModel.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../Graal-BMSTU/Graal-BMSTU/Application/Models/TeacherModel.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Graal-BMSTU/Graal-BMSTU/Application/Models/UserModel.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../Graal-BMSTU/Graal-BMSTU/Application/Models/UserModel.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Graal-BMSTU/Graal-BMSTU/Application/Services/ScheduleService.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../Graal-BMSTU/Graal-BMSTU/Application/Services/ScheduleService.swift" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
+    <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/.." value="feature/schedule_layout" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2IvQ5PIV37YsujSV6nYqq84o4Fn" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="autoscrollToSource" value="true" />
+    <option name="compactDirectories" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="showMembers" value="true" />
+    <option name="showVisibilityIcons" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;TODO_SCOPE&quot;: &quot;All Places&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;sqlite&quot;
+    ]
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/graal_backend/schedule_db_api/management/commands" />
+      <recent name="$PROJECT_DIR$/graal_backend/schedule_db_api/management" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/graal_backend" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Django Server.Run server">
+    <configuration name="fill_db" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="Database (python)" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/fill_db.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="Database (python)" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="scrape_all_groups" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Database (python)" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/graal_backend/schedule_db_api/management/commands" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/graal_backend/schedule_db_api/management/commands/scrape_all_groups.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="scrape_single_group" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Database (python)" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/graal_backend/schedule_db_api/management/commands" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/graal_backend/schedule_db_api/management/commands/scrape_single_group.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Run server" type="Python.DjangoServer" factoryName="Django server">
+      <module name="Database (python)" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="DJANGO_SETTINGS_MODULE" value="graal_backend.settings" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <option name="port" value="8000" />
+      <option name="host" value="" />
+      <option name="additionalOptions" value="" />
+      <option name="browserUrl" value="" />
+      <option name="runTestServer" value="false" />
+      <option name="runNoReload" value="false" />
+      <option name="useCustomRunCommand" value="false" />
+      <option name="customRunCommand" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Django Server.Run server" />
+      <item itemvalue="Python.fill_db" />
+      <item itemvalue="Python.main" />
+      <item itemvalue="Python.scrape_all_groups" />
+      <item itemvalue="Python.scrape_single_group" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.scrape_single_group" />
+        <item itemvalue="Python.scrape_all_groups" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ca60903e-16d8-4820-8d03-e6a6ea625244" name="Changes" comment="" />
+      <created>1671059393299</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1671059393299</updated>
+      <workItem from="1671059428305" duration="7632000" />
+      <workItem from="1671731675148" duration="280000" />
+      <workItem from="1671784013449" duration="5871000" />
+      <workItem from="1671808716965" duration="19310000" />
+      <workItem from="1671831447526" duration="920000" />
+      <workItem from="1671832398593" duration="3395000" />
+      <workItem from="1671919609197" duration="2122000" />
+      <workItem from="1671960824812" duration="2199000" />
+      <workItem from="1671964019411" duration="12137000" />
+      <workItem from="1671977535837" duration="156000" />
+      <workItem from="1671977742218" duration="4666000" />
+      <workItem from="1671982430963" duration="7545000" />
+      <workItem from="1671996641488" duration="1256000" />
+      <workItem from="1671999486161" duration="395000" />
+    </task>
+    <task id="LOCAL-00001" summary="добавлен файербейз в проект + начал писать скрипт закачки данных на сервер (админский)">
+      <created>1671066685352</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1671066685352</updated>
+    </task>
+    <task id="LOCAL-00002" summary="backend work in progress">
+      <created>1671792388637</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1671792388637</updated>
+    </task>
+    <task id="LOCAL-00003" summary="backend work in progress">
+      <created>1671821578040</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1671821578040</updated>
+    </task>
+    <task id="LOCAL-00004" summary="backend work in progress">
+      <created>1671828812310</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1671828812310</updated>
+    </task>
+    <task id="LOCAL-00005" summary="backend work in progress">
+      <created>1671830764143</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1671830764143</updated>
+    </task>
+    <task id="LOCAL-00006" summary="backend work in progress">
+      <created>1671831419410</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1671831419410</updated>
+    </task>
+    <task id="LOCAL-00007" summary="backend work in progress">
+      <created>1671835318329</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1671835318329</updated>
+    </task>
+    <task id="LOCAL-00008" summary="backend models change">
+      <created>1671922051064</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1671922051064</updated>
+    </task>
+    <task id="LOCAL-00009" summary="backend work in progress">
+      <created>1671968539733</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1671968539733</updated>
+    </task>
+    <task id="LOCAL-00010" summary="backend work in progress">
+      <created>1671969103097</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1671969103097</updated>
+    </task>
+    <task id="LOCAL-00011" summary="backend work in progress">
+      <created>1671972375243</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1671972375243</updated>
+    </task>
+    <task id="LOCAL-00012" summary="backend work in progress">
+      <created>1671980452654</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1671980452654</updated>
+    </task>
+    <task id="LOCAL-00013" summary="backend work in progress">
+      <created>1671981678930</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1671981678930</updated>
+    </task>
+    <task id="LOCAL-00014" summary="backend work in progress">
+      <created>1671985438104</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1671985438104</updated>
+    </task>
+    <task id="LOCAL-00015" summary="backend scraping done (minor bugs, например с МТ8-11БВ)">
+      <created>1671986515312</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1671986515312</updated>
+    </task>
+    <task id="LOCAL-00016" summary="backend scraping fixes">
+      <created>1671989118560</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1671989118560</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="добавлен файербейз в проект + начал писать скрипт закачки данных на сервер (админский)" />
+    <MESSAGE value="backend models change" />
+    <MESSAGE value="backend work in progress" />
+    <MESSAGE value="backend scraping done (minor bugs, например с МТ8-11БВ)" />
+    <MESSAGE value="backend scraping fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="backend scraping fixes" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/graal_backend/schedule_db_api/views.py</url>
+          <line>20</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Database__python_$scrape_single_group.coverage" NAME="scrape_single_group Coverage Results" MODIFIED="1671981749832" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/graal_backend/schedule_db_api/management/commands" />
+    <SUITE FILE_PATH="coverage/Database__python_$fill_db.coverage" NAME="fill_db Coverage Results" MODIFIED="1671066593577" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Database__python_$scrape_all_groups.coverage" NAME="scrape_all_groups Coverage Results" MODIFIED="1671974506189" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/graal_backend/schedule_db_api/management/commands" />
+  </component>
+</project>
