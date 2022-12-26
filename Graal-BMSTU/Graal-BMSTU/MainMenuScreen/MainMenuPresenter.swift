@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 final class MainMenuPresenterImpl: MainMenuPresenter {
     private weak var vc: MainMenuViewControllerProtocol?
     private var dataService: ScheduleService
@@ -21,6 +20,7 @@ final class MainMenuPresenterImpl: MainMenuPresenter {
         self.router = router
         self.dataService = dataService
         self.authService = authService
+        self.update()
     }
 
     func setVC(vc: MainMenuViewControllerProtocol) {
@@ -28,7 +28,12 @@ final class MainMenuPresenterImpl: MainMenuPresenter {
     }
 
     func update() {
-        vc?.reload()
+        DispatchQueue.main.async { [self] in
+            Task {
+                await updateData()
+            }
+            vc?.reload()
+        }
     }
 
     func navigateToGroupSelection() {
@@ -57,16 +62,24 @@ extension MainMenuPresenterImpl {
         return authService.getUserData()?.group
     }
 
+    func updateData() async {
+        if let group = authService.getUserData()?.group {
+            self.daysLessons = await dataService.getGroupSchedule(group: group, forDay: self.currentDayOffset)?.lessons
+        } else {
+            self.daysLessons = nil
+        }
+    }
+
     func getToNextDay() {
         self.previousDayOffset = currentDayOffset
         self.currentDayOffset += 1
-        vc?.reload()
+        self.update()
     }
 
     func getToPreviousDay() {
         self.previousDayOffset = currentDayOffset
         self.currentDayOffset -= 1
-        vc?.reload()
+        self.update()
     }
 
     func getTransitionDirection() -> Int {

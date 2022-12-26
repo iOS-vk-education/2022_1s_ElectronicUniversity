@@ -8,6 +8,7 @@ import SwiftyJSON
 protocol ScheduleService {
     func getGroupSchedule(group: Group, forDay: Int) async -> LessonsDay?
     func getGroupsList() async -> [StudyStream: [Group]]?
+    func getGroupInfo() async -> (Group, StudyStream)?
 }
 
 final class ScheduleServiceImpl: ScheduleService {

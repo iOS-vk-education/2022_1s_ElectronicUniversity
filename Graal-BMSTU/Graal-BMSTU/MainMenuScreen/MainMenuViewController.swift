@@ -16,12 +16,10 @@ final class MainMenuViewController: UIViewController {
     init(presenter: MainMenuPresenter) {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
-
         titleConf()
         setupActions()
         mainMenuView.setDataSource(dataSource: self)
         view = mainMenuView
-
         self.presenter.setVC(vc: self)
         self.presenter.update()
     }
@@ -40,6 +38,7 @@ final class MainMenuViewController: UIViewController {
 }
 
 // MARK: - table view data source
+
 extension MainMenuViewController: MainMenuViewControllerProtocol {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return presenter.getLessonsCnt()
@@ -53,8 +52,9 @@ extension MainMenuViewController: MainMenuViewControllerProtocol {
     }
 
     // MARK: - animation
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt
-    indexPath: IndexPath) {
+
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell,
+                   forRowAt indexPath: IndexPath) {
         let direction = presenter.getTransitionDirection()
         switch (direction) {
             case -1:
@@ -73,8 +73,8 @@ private extension MainMenuViewController {
     func setupActions() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemSymbol: .gear),
                 style: .plain, target: self, action: #selector(groupSelectButtonTapped))
-        mainMenuView.setupNextDayAction(presenter.getToNextDay())
-        mainMenuView.setupPreviousDayAction
+        mainMenuView.setupNextDayAction(presenter.getToNextDay)
+        mainMenuView.setupPreviousDayAction(presenter.getToPreviousDay)
     }
 
     func titleConf() {
@@ -84,10 +84,10 @@ private extension MainMenuViewController {
             navigationItem.title = R.string.localizable.main_menu_title()
         }
     }
-
 }
 
 // MARK: - buttons actions
+
 private extension MainMenuViewController {
     @objc func groupSelectButtonTapped() {
         self.presenter.navigateToGroupSelection()

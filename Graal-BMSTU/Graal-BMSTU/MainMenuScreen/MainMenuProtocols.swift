@@ -26,7 +26,6 @@ protocol MainMenuPresenter {
     // 0 = first selection
     func getTransitionDirection() -> Int
     func getDayInfo() -> (Int, Date) // weekSeqNum, selectedDay
-
 }
 
 protocol MainMenuRouter: Router {
