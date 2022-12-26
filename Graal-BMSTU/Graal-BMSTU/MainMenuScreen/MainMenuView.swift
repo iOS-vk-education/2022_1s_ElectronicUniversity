@@ -122,6 +122,7 @@ private extension MainMenuView {
     func scheduleTableConf() {
         scheduleTable.register(LessonCell.self, forCellReuseIdentifier: "LessonCell")
         scheduleTable.backgroundColor = .systemGray5
+        scheduleTable.allowsSelection = false
     }
 
     func nextDayButtonConf() {
