@@ -4,12 +4,13 @@
 
 import Foundation
 
-enum LessonType {
+enum LessonType: String {
     case LAB, SEM, LEC, PRACTICE, PHYSICAL, VUC
 }
 
+typealias LessonID =  Int
 struct Lesson {
-    let dbPrimaryKey: Int
+    let dbPrimaryKey: LessonID
     let subject: Subject
     let place: Place
     let teacher: Teacher?
@@ -17,5 +18,5 @@ struct Lesson {
     let endTime: Date
     let pairSeqNum: Int
     let lessonType: LessonType
-    let groups: [Group]
+    let groups: [GroupID]
 }

@@ -8,8 +8,9 @@ enum StudyLevel {
     case bachelor, master, specialist, postgraduate
 }
 
+typealias StudyStreamID = Int
 struct StudyStream: Hashable {
-    let dbPrimaryKey: Int
+    let dbPrimaryKey: StudyStreamID
     let semester: Int
     let faculty: String
     let studyLevel: StudyLevel
@@ -17,8 +18,9 @@ struct StudyStream: Hashable {
     let semesterEnd: Date
 }
 
+typealias GroupID = Int
 struct Group {
-    let dbPrimaryKey: Int
+    let dbPrimaryKey: GroupID
     let name: String
     let stream: StudyStream
 }

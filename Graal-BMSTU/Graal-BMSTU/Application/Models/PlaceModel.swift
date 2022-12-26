@@ -4,9 +4,9 @@
 
 import Foundation
 
-
+typealias PlaceID = Int
 struct Place {
-    let dbPrimaryKey: Int
+    let dbPrimaryKey: PlaceID
     let name: String
     let is_generic: Bool
 }

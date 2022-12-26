@@ -10,9 +10,3 @@ struct LessonsDay {
     var lessons: [Lesson]
     let date: Date
 }
-
-struct Schedule {
-    let group: Group
-    var today: LessonsDay
-    var nextDay: LessonsDay
-}
