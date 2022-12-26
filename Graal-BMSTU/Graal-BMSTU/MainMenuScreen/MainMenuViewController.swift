@@ -45,7 +45,7 @@ extension MainMenuViewController: MainMenuViewControllerProtocol {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let lesson = presenter.getLesson(seqNum: indexPath.row)
+        let lesson = presenter.getLesson(seqNum: indexPath.row + 1)
         let cell = tableView.dequeueReusableCell(withIdentifier: "LessonCell") as! LessonCell
         cell.lesson = lesson // if nil, some placeholder is created
         return cell

@@ -19,20 +19,39 @@ class AuthServiceMockup: AuthService {
                                                     ("Egor", "bmstu")] // test data
 
     func authenticate(login: String, password: String) -> User? {
+        let defaults = UserDefaults.standard
+        let encoder = JSONEncoder()
+
         if let validCredentials = AuthServiceMockup.validTestUsersCredentials.first(where: { $0.0 == login && $0.1 == password }) {
-            UserDefaults.standard.set(User(name: validCredentials.0, familyName: "Tikhonenko"), forKey: AuthServiceMockup.userVaultKey)
+            let user = User(name: validCredentials.0, familyName: "Tikhonenko", group: Group(dbPrimaryKey: 1, name: "ИУ7-35Б", stream:1))
+            if let encoded = try? encoder.encode(user) {
+                defaults.set(encoded, forKey: AuthServiceMockup.userVaultKey)
+            }
             AppCoordinator.setNotFirstLaunch()
         } else {
-            UserDefaults.standard.removeObject(forKey: AuthServiceMockup.userVaultKey)
+            logout()
         }
-        return UserDefaults.standard.value(forKey: AuthServiceMockup.userVaultKey) as? User
+        return getUserData()
     }
 
     func getUserData() -> User? {
-        return UserDefaults.standard.value(forKey: AuthServiceMockup.userVaultKey) as? User
+        let defaults = UserDefaults.standard
+        let decoder = JSONDecoder()
+        guard let savedPerson = defaults.object(forKey: AuthServiceMockup.userVaultKey) as? Data else { return nil }
+        guard let user = try? decoder.decode(User.self, from: savedPerson) else { return nil }
+        return user
     }
 
     func logout() {
         UserDefaults.standard.removeObject(forKey: AuthServiceMockup.userVaultKey)
     }
 }
+//let user = User(name: validCredentials.0, familyName: "Tikhonenko")
+//UserDefaults.standard.set(user.name, forKey: AuthServiceMockup.userVaultKey + "name")
+//UserDefaults.standard.set(user.familyName, forKey: AuthServiceMockup.userVaultKey +
+//        "familyName")
+//let group = user.group
+//let groupUserKey = AuthServiceMockup.userVaultKey + "group"
+//UserDefaults.standard.set(group?.name, forKey: groupUserKey + "name")
+//UserDefaults.standard.set(group?.dbPrimaryKey, forKey: groupUserKey + "dbPrimaryKey")
+//UserDefaults.standard.set(group?.stream, forKey: groupUserKey + "stream")

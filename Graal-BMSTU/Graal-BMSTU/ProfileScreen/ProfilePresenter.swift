@@ -44,9 +44,10 @@ final class ProfilePresenterImpl: ProfilePresenter {
 
     func update() {
         let user = service?.getUserData()
-        if let user = user {
-            vc?.setUserName(str: user.name + " " + user.familyName)
-            vc?.setUserGroup(str: user.group.name)
+        if let user = user, let name = user.name, let familyName = user.familyName, let group =
+        user.group {
+            vc?.setUserName(str: name + " " + familyName)
+            vc?.setUserGroup(str: group.name)
             vc?.setState(toView: .profile)
         } else {
             vc?.setState(toView: .auth)

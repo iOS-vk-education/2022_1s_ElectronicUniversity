@@ -15,6 +15,7 @@ final class MainMenuPresenterImpl: MainMenuPresenter {
     private var currentDayOffset: Int = 0
     private var previousDayOffset: Int = 0
     private var daysLessons: [Lesson]?
+    private var nowDate: Date = Date.now
 
     init(router: MainMenuRouter, dataService: ScheduleService, authService: AuthService) {
         self.router = router
@@ -28,11 +29,11 @@ final class MainMenuPresenterImpl: MainMenuPresenter {
     }
 
     func update() {
-        DispatchQueue.main.async { [self] in
-            Task {
-                await updateData()
+        Task {
+            await updateData()
+            DispatchQueue.main.async { [self] in
+                vc?.reload()
             }
-            vc?.reload()
         }
     }
 
@@ -58,16 +59,13 @@ extension MainMenuPresenterImpl {
         return daysLessons?.first(where: { $0.pairSeqNum == seqNum })
     }
 
-    func getSelectedGroup() -> Group? {
-        return authService.getUserData()?.group
+    func getDayInfo() -> (Int, Date) {
+        return (18, nowDate.addingTimeInterval(TimeInterval(currentDayOffset * 24 * 60 * 60))) //
+        // TODO
     }
 
-    func updateData() async {
-        if let group = authService.getUserData()?.group {
-            self.daysLessons = await dataService.getGroupSchedule(group: group, forDay: self.currentDayOffset)?.lessons
-        } else {
-            self.daysLessons = nil
-        }
+    func getSelectedGroup() -> Group? {
+        return authService.getUserData()?.group
     }
 
     func getToNextDay() {
@@ -84,5 +82,16 @@ extension MainMenuPresenterImpl {
 
     func getTransitionDirection() -> Int {
         return self.currentDayOffset - self.previousDayOffset
+    }
+}
+
+private extension MainMenuPresenterImpl {
+    func updateData() async {
+        if let group = authService.getUserData()?.group {
+            let tmp = await dataService.getGroupSchedule(group: group, forDay: self.currentDayOffset)
+            self.daysLessons = tmp?.lessons
+        } else {
+            self.daysLessons = nil
+        }
     }
 }

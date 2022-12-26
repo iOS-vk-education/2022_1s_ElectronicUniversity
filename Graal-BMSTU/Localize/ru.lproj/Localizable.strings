@@ -24,13 +24,10 @@
 "skip_auth_button_text" = "Продолжить без входа";
 "hint_label_text" = "Введите логин/пароль от учетной записи университета";
 
-"full_schedule_title" = "Полное расписание";
 "select_group_title" = "Выбор группы";
 
-"gz_building_name" = "Главное здание";
-"ulk_building_name" = "УЛК";
-"lt_building_name" = "Лесотехнический";
-"e_building_name" = "Корпус Э";
-"sm_building_name" = "Корпус СМ";
-"mt_building_name" = "Корпус МТ";
-"mf_building_name" = "Мытищинский";
+"denominator" = "знаменатель";
+"numerator" = "числитель";
+
+"main_menu_title" = "Расписание";
+"week" = "Неделя";

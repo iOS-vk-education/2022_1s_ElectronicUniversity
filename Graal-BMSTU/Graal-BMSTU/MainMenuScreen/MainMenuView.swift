@@ -19,7 +19,6 @@ final class MainMenuView: UIView {
     private var nextDayButton = UIButton(frame: .zero)
     private var previousDayButton = UIButton(frame: .zero)
     private var scheduleTable = UITableView(frame: .zero)
-
     private var nextDayAction: NextDayAction?
     private var previousDayAction: PreviousDayAction?
 
@@ -41,11 +40,24 @@ final class MainMenuView: UIView {
     }
 
     func setWeekSeqNum(seqNum: Int) {
-
+        let result = """
+            \(R.string
+               .localizable.week()) \(seqNum), \(seqNum % 2 == 1 ? R.string.localizable.numerator() : R.string.localizable.denominator())
+            """
+        self.weekLabel.text = result
     }
 
     func setDate(date: Date) {
+        let result = date.formatted(.dateTime.day().month(.wide))
+        self.dateLabel.text = result
+    }
 
+    func setupNextDayAction(_ action: @escaping NextDayAction) {
+        self.nextDayAction = action
+    }
+
+    func setupPreviousDayAction(_ action: @escaping PreviousDayAction) {
+        self.previousDayAction = action
     }
 }
 
@@ -54,7 +66,6 @@ private extension MainMenuView {
         self.backgroundColor = .white
         weekLabelConf()
         scheduleTableConf()
-
         let elems = [weekLabel, scheduleTable]
         elems.forEach { box in
             self.addSubview(box)
@@ -67,7 +78,6 @@ private extension MainMenuView {
             make.centerX.equalToSuperview()
             make.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(20)
         }
-
         scheduleTable.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(weekLabel.snp.bottom).offset(10)
@@ -75,7 +85,7 @@ private extension MainMenuView {
             make.left.equalTo(safeAreaLayoutGuide.snp.left)
             make.right.equalTo(safeAreaLayoutGuide.snp.right)
         }
-//        scheduleTable.rowHeight = 140
+        //        scheduleTable.rowHeight = 140
     }
 
     func weekLabelConf() {
@@ -90,10 +100,8 @@ private extension MainMenuView {
 
 private extension MainMenuView {
     @objc func nextDayButtonTapped() {
-
     }
 
     @objc func previousDayButtonTapped() {
-
     }
 }

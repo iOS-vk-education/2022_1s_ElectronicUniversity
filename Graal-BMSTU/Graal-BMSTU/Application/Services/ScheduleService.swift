@@ -8,7 +8,7 @@ import SwiftyJSON
 protocol ScheduleService {
     func getGroupSchedule(group: Group, forDay: Int) async -> LessonsDay?
     func getGroupsList() async -> [StudyStream: [Group]]?
-    func getGroupInfo() async -> (Group, StudyStream)?
+    func getGroupInfo(groupID: GroupID) async -> (Group, StudyStream)?
 }
 
 final class ScheduleServiceImpl: ScheduleService {
@@ -22,7 +22,6 @@ final class ScheduleServiceImpl: ScheduleService {
     // отступа от сегодня, 0 = сегодня, 1 = завтра, -1 = вчера
     func getGroupSchedule(group: Group, forDay: Int) async -> LessonsDay? {
         guard let url = decideURLforDay(group: group, forDay: forDay) else { return nil }
-
         var lessons: [Lesson] = []
         var data: Data?
         do {
@@ -36,17 +35,16 @@ final class ScheduleServiceImpl: ScheduleService {
             tmp.append(self.decodeLesson(json: subJSON))
         }
         lessons = tmp.compactMap { $0 }
-
         guard let dayStart = getDayStart(forDay: forDay) else { return nil }
         let result = LessonsDay(lessons: lessons, date: dayStart)
         return result
     }
 
     // получить список всех групп на сервере, причем запиханных каждая в свой учебный поток
+
     func getGroupsList() async -> [StudyStream: [Group]]? {
         guard let allGroupsURL = getAllGroupsURL() else { return nil }
         guard let allStreamsURL = getAllStreamsURL() else { return nil }
-
         var streamsData: Data?
         var groupsData: Data?
         do {
@@ -59,7 +57,6 @@ final class ScheduleServiceImpl: ScheduleService {
                     let (data, _) = try await URLSession.shared.data(from: allGroupsURL)
                     return (allGroupsURL, data)
                 }
-
                 for try await (url, data) in group {
                     if url == allStreamsURL {
                         streamsData = data
@@ -77,10 +74,14 @@ final class ScheduleServiceImpl: ScheduleService {
         guard let groups = decodeGroups(json: groupsJson) else { return nil }
         return composeGroupsList(streams: streams, groups: groups, groupsInStream: groupsInStream)
     }
+
+    func getGroupInfo(groupID: GroupID) async -> (Group, StudyStream)? {
+        return nil
+    }
 }
 
-
 // MARK:- for getAllGroups
+
 private extension ScheduleServiceImpl {
     // конструктор урл для страницы с данными всех групп
     func getAllGroupsURL() -> URL? {
@@ -89,16 +90,17 @@ private extension ScheduleServiceImpl {
     }
 
     // конструктор урл для страницы с данными всех потоков
+
     func getAllStreamsURL() -> URL? {
         let str = "\(Self.serverAddress)\(Self.streamsURL)"
         return URL(string: str)
     }
 
     // процессит каждый учебный поток в массиве потоков, достает соответствие группы - поток
+
     func decodeStreams(json: JSON) -> ([StudyStreamID: [GroupID]], [StudyStream])? {
         var groupsInStream: [StudyStreamID: [GroupID]] = [:]
         var streams: [StudyStream] = []
-
         for (_, subJSON) in json {
             guard let (stream, groupsInside) = decodeStream(json: subJSON) else { return nil }
             groupsInStream[stream.dbPrimaryKey] = groupsInside
@@ -108,9 +110,9 @@ private extension ScheduleServiceImpl {
     }
 
     // процессит все группы в массиве групп
+
     func decodeGroups(json: JSON) -> [Group]? {
         var groups: [Group] = []
-
         for (_, subJSON) in json {
             guard let group = decodeGroup(json: subJSON) else { return nil }
             groups.append(group)
@@ -119,6 +121,7 @@ private extension ScheduleServiceImpl {
     }
 
     // соединяет потоки и группы в словарь
+
     func composeGroupsList(streams: [StudyStream], groups: [Group],
                            groupsInStream: [StudyStreamID: [GroupID]]) -> [StudyStream: [Group]] {
         var ans: [StudyStream: [Group]] = [:]
@@ -131,11 +134,12 @@ private extension ScheduleServiceImpl {
             }
             ans[stream] = groupList
         }
+        return ans
     }
 }
 
-
 // MARK:- for decodeStreams
+
 private extension ScheduleServiceImpl {
     // расшировывает конкретный учебный поток (поля)
     func decodeStream(json: JSON) -> (StudyStream, [GroupID])? {
@@ -187,6 +191,7 @@ private extension ScheduleServiceImpl {
 }
 
 // MARK:- for decodeGroups
+
 private extension ScheduleServiceImpl {
     func decodeGroup(json: JSON) -> Group? {
         guard json["id"] != JSON.null, let id = json["id"].int else { return nil }
@@ -197,6 +202,7 @@ private extension ScheduleServiceImpl {
 }
 
 // MARK:- for getGroupSchedule
+
 private extension ScheduleServiceImpl {
     // начало дня (0:00 утра)
     func getDayStart(forDay: Int) -> Date? {
@@ -210,6 +216,7 @@ private extension ScheduleServiceImpl {
     }
 
     // для просмотра предыдущих учебных дней используется другой урл, тк джанго не умеет в
+
     // отрицательные числа в урл
     func decideURLforDay(group: Group, forDay: Int) -> URL? {
         if forDay >= 0 {
@@ -220,7 +227,6 @@ private extension ScheduleServiceImpl {
             return URL(string: str)
         }
     }
-
 
     func decodeLesson(json: JSON) -> Lesson? {
         guard json["id"] != JSON.null, let id = json["id"].int else { return nil }
@@ -240,14 +246,14 @@ private extension ScheduleServiceImpl {
     }
 
     // MARK:- extractors
+
     func extractTeacher(json: JSON) -> Teacher? {
-        if json["teacher"] != JSON.null {
-            let subJson = json["teacher"]
-            if let id = subJson["id"].int, let name = subJson["display_name"].string {
-                return Teacher(dbPrimaryKey: id, displayName: name)
-            } else {
-                return nil
-            }
+        guard json["teacher"] != JSON.null else { return nil }
+        let subJson = json["teacher"]
+        if let id = subJson["id"].int, let name = subJson["display_name"].string {
+            return Teacher(dbPrimaryKey: id, displayName: name)
+        } else {
+            return nil
         }
     }
 
@@ -302,6 +308,7 @@ private extension ScheduleServiceImpl {
                 return nil
             }
         }
+        return groups
     }
 }
 

@@ -22,7 +22,7 @@ final class LessonCell: UITableViewCell {
             finishTimeLabel.text = lesson.endTime
                     .formatted(.dateTime.hour(.defaultDigits(amPM: .omitted)).minute())
             placeLabel.text = lesson.place.name
-            teacherLabel.text = lesson.teacher.name
+            teacherLabel.text = lesson.teacher?.displayName
         }
     }
 
@@ -70,37 +70,37 @@ private extension LessonCell {
         //stack.distribution = .fillEqually
         //stack.spacing = 4
               
-        subjectNameLabel.snp.makeConstraints { make in
-            make.top.equalTo(self.stack.snp.top).offset(5)
-            make.left.equalTo(self.stack.snp.left).offset(5)
-            make.right.equalTo(self.stack.snp.right).offset(5)
-            make.height.equalTo(20)
-        }
-       startTimeLabel.snp.makeConstraints { make in
-            make.top.equalTo(self.subjectNameLabel.snp.bottom).offset(5)
-            make.left.equalTo(self.stack.snp.left).offset(5)
-            make.right.equalTo(self.stack.snp.right).offset(5)
-            make.height.equalTo(20)
-        }
-       finishTimeLabel.snp.makeConstraints { make in
-           make.top.equalTo(self.startTimeLabel.snp.bottom).offset(5)
-           make.left.equalTo(self.startTimeLabel.snp.left).offset(8)
-           make.right.equalTo(self.stack.snp.right).offset(5)
-           make.height.equalTo(20)        }
-       placeLabel.snp.makeConstraints { make in
-            make.top.equalTo(self.finishTimeLabel.snp.bottom).offset(5)
-            make.left.equalTo(self.stack.snp.left).offset(5)
-            make.right.equalTo(self.stack.snp.right).offset(5)
-            make.height.equalTo(20)
-        }      teacherLabel.snp.makeConstraints { make in
-            make.top.equalTo(self.placeLabel.snp.bottom).offset(5)
-            make.left.equalTo(self.stack.snp.left).offset(5)
-            make.right.equalTo(self.stack.snp.right).offset(5)
-            make.height.equalTo(20)
-        }
+//        subjectNameLabel.snp.makeConstraints { make in
+//            make.top.equalTo(self.stack.snp.top).offset(5)
+//            make.left.equalTo(self.stack.snp.left).offset(5)
+//            make.right.equalTo(self.stack.snp.right).offset(5)
+//            make.height.equalTo(20)
+//        }
+//       startTimeLabel.snp.makeConstraints { make in
+//            make.top.equalTo(self.subjectNameLabel.snp.bottom).offset(5)
+//            make.left.equalTo(self.stack.snp.left).offset(5)
+//            make.right.equalTo(self.stack.snp.right).offset(5)
+//            make.height.equalTo(20)
+//        }
+//       finishTimeLabel.snp.makeConstraints { make in
+//           make.top.equalTo(self.startTimeLabel.snp.bottom).offset(5)
+//           make.left.equalTo(self.startTimeLabel.snp.left).offset(8)
+//           make.right.equalTo(self.stack.snp.right).offset(5)
+//           make.height.equalTo(20)        }
+//       placeLabel.snp.makeConstraints { make in
+//            make.top.equalTo(self.finishTimeLabel.snp.bottom).offset(5)
+//            make.left.equalTo(self.stack.snp.left).offset(5)
+//            make.right.equalTo(self.stack.snp.right).offset(5)
+//            make.height.equalTo(20)
+//        }
+//        teacherLabel.snp.makeConstraints { make in
+//            make.top.equalTo(self.placeLabel.snp.bottom).offset(5)
+//            make.left.equalTo(self.stack.snp.left).offset(5)
+//            make.right.equalTo(self.stack.snp.right).offset(5)
+//            make.height.equalTo(20)
+//        }
     }
 }
-///////////
 
 private extension LessonCell {
     func setupStack() {

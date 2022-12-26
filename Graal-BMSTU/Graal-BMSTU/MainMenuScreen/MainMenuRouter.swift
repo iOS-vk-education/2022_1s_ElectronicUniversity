@@ -27,15 +27,8 @@ final class MainMenuRouterImpl: MainMenuRouter {
         self.window.makeKeyAndVisible()
     }
 
-    // MARK: - navigation
-    func navigateToFullSchedule(group: Group, position: SchedulePosition) {
-        print("navigate")
-        let placeholder = UIViewController()
-        placeholder.view.backgroundColor = .darkGray
-        let placeholderLabel = UILabel()
-        placeholderLabel.text = R.string.localizable.full_schedule_title()
-        placeholder.view.addSubview(placeholderLabel)
-        navigationController.pushViewController(placeholder, animated: true)
+    func navigateToLessonDetails(lesson: Lesson) {
+        print("navigate to lesson")
     }
 
     func navigateToGroupSelection() {

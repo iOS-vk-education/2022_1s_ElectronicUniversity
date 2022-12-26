@@ -19,7 +19,7 @@ struct StudyStream: Hashable {
 }
 
 typealias GroupID = Int
-struct Group {
+struct Group: Codable {
     let dbPrimaryKey: GroupID
     let name: String
     let stream: StudyStreamID
