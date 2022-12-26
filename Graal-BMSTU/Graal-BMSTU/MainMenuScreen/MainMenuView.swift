@@ -66,7 +66,9 @@ private extension MainMenuView {
         self.backgroundColor = .white
         weekLabelConf()
         scheduleTableConf()
-        let elems = [weekLabel, scheduleTable]
+        nextDayButtonConf()
+        previousDayButtonConf()
+        let elems = [weekLabel, scheduleTable, nextDayButton, previousDayButton]
         elems.forEach { box in
             self.addSubview(box)
         }
@@ -78,12 +80,24 @@ private extension MainMenuView {
             make.centerX.equalToSuperview()
             make.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(20)
         }
+        previousDayButton.snp.makeConstraints { make in
+            make.right.equalTo(safeAreaLayoutGuide.snp.centerX).inset(10)
+            make.left.equalTo(safeAreaLayoutGuide.snp.left).offset(10)
+            make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).inset(10)
+            make.height.equalTo(50)
+        }
+        nextDayButton.snp.makeConstraints { make in
+            make.right.equalTo(safeAreaLayoutGuide.snp.right).inset(10)
+            make.left.equalTo(safeAreaLayoutGuide.snp.centerX).offset(10)
+            make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).inset(10)
+            make.height.equalTo(50)
+        }
         scheduleTable.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(weekLabel.snp.bottom).offset(10)
-            make.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom)
             make.left.equalTo(safeAreaLayoutGuide.snp.left)
             make.right.equalTo(safeAreaLayoutGuide.snp.right)
+            make.bottom.equalTo(nextDayButton.snp.top).inset(10)
         }
         //        scheduleTable.rowHeight = 140
     }
@@ -96,12 +110,28 @@ private extension MainMenuView {
     func scheduleTableConf() {
         scheduleTable.register(LessonCell.self, forCellReuseIdentifier: "LessonCell")
     }
+
+    func nextDayButtonConf() {
+        var config = basicButtonConf(button: nextDayButton)
+        config.title = R.string.localizable.next_day_button()
+        nextDayButton.configuration = config
+        nextDayButton.addTarget(self, action: #selector(nextDayButtonTapped), for: .touchUpInside)
+    }
+
+    func previousDayButtonConf() {
+        var config = basicButtonConf(button: nextDayButton)
+        config.title = R.string.localizable.previous_day_button()
+        previousDayButton.configuration = config
+        previousDayButton.addTarget(self, action: #selector(previousDayButtonTapped), for: .touchUpInside)
+    }
 }
 
 private extension MainMenuView {
     @objc func nextDayButtonTapped() {
+        self.nextDayAction?()
     }
 
     @objc func previousDayButtonTapped() {
+        self.previousDayAction?()
     }
 }

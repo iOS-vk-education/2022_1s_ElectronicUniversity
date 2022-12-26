@@ -14,6 +14,11 @@ final class LessonCell: UITableViewCell {
     var lesson: Lesson? {
         didSet {
             guard let lesson = lesson else {
+                subjectNameLabel.text = nil
+                startTimeLabel.text = nil
+                finishTimeLabel.text = nil
+                placeLabel.text = nil
+                teacherLabel.text = nil
                 return
             }
             subjectNameLabel.text = lesson.subject.name
@@ -62,7 +67,7 @@ private extension LessonCell {
 
     func setupConstraints() {
         stack.snp.makeConstraints { make in
-            make.left.equalTo(self.contentView.snp.left).offset(30)
+            make.left.equalTo(self.contentView.snp.left).offset(15)
             make.right.equalTo(self.contentView.snp.right).inset(15)
             make.top.equalTo(self.contentView.snp.top).offset(5)
             make.bottom.equalTo(self.contentView.snp.bottom).inset(10)

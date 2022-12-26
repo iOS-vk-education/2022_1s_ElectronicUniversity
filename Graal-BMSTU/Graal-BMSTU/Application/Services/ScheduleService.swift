@@ -223,7 +223,7 @@ private extension ScheduleServiceImpl {
             let str = "\(Self.serverAddress)\(Self.groupsURL)\(group.dbPrimaryKey)\(Self.lessonsURL)\(forDay)/"
             return URL(string: str)
         } else {
-            let str = "\(Self.serverAddress)\(Self.groupsURL)\(group.dbPrimaryKey)\(Self.pastLessonsURL)\(forDay)/"
+            let str = "\(Self.serverAddress)\(Self.groupsURL)\(group.dbPrimaryKey)\(Self.pastLessonsURL)\(forDay.magnitude)/"
             return URL(string: str)
         }
     }

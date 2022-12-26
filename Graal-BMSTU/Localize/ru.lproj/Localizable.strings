@@ -31,3 +31,5 @@
 
 "main_menu_title" = "Расписание";
 "week" = "Неделя";
+"next_day_button" = "Вперёд";
+"previous_day_button" = "Назад";

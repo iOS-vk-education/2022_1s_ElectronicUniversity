@@ -31,3 +31,5 @@
 
 "main_menu_title" = "Schedule";
 "week" = "Week";
+"next_day_button" = "Next day";
+"previous_day_button" = "Previous day";
