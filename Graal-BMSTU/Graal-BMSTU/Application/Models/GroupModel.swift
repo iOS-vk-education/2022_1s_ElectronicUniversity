@@ -10,6 +10,7 @@ enum StudyLevel {
 
 typealias StudyStreamID = Int
 struct StudyStream: Hashable {
+
     let dbPrimaryKey: StudyStreamID
     let semester: Int
     let faculty: String
@@ -20,6 +21,7 @@ struct StudyStream: Hashable {
 
 typealias GroupID = Int
 struct Group {
+
     let dbPrimaryKey: GroupID
     let name: String
     let stream: StudyStream

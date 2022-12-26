@@ -24,6 +24,21 @@ def group_lessons(request, group_id, day_offset_from_today=None):
         lesson = lessons_now[i]
         json_response.append(model_to_dict(lesson))
         json_response[i]["groups"] = list(lesson.groups.values_list("pk", flat=True))
+        if lesson.teacher is not None:
+            tmp = lesson.teacher.__dict__
+            del tmp["_state"]
+            print(tmp)
+            json_response[i]["teacher"] = tmp
+        if lesson.subject is not None:
+            tmp = lesson.subject.__dict__
+            del tmp["_state"]
+            print(tmp)
+            json_response[i]["subject"] = tmp
+        if lesson.place is not None:
+            tmp = lesson.place.__dict__
+            del tmp["_state"]
+            print(tmp)
+            json_response[i]["place"] = tmp
 
     return JsonResponse(json_response, safe=False)
 

@@ -10,6 +10,7 @@ enum LessonType: String {
 
 typealias LessonID =  Int
 struct Lesson {
+
     let dbPrimaryKey: LessonID
     let subject: Subject
     let place: Place

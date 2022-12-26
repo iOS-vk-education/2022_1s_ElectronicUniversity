@@ -6,6 +6,7 @@ import Foundation
 
 typealias TeacherID = Int
 struct Teacher {
+
     let dbPrimaryKey: TeacherID
     let displayName: String
 }

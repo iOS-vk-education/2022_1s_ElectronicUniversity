@@ -6,6 +6,7 @@ import Foundation
 
 typealias SubjectID = Int
 struct Subject {
+
     let dbPrimaryKey: SubjectID
     let name: String
     let stream_id: Int
