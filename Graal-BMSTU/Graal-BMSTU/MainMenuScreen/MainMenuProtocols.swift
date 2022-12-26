@@ -5,26 +5,36 @@
 import UIKit
 
 protocol MainMenuPresenter {
-    init(router: MainMenuRouter, service: ScheduleService)
+    init(router: MainMenuRouter, dataService: ScheduleService, authService: AuthService)
     func update()
     func setVC(vc: MainMenuViewControllerProtocol)
 
     // MARK: - связка с роутером
-    func navigateToFullSchedule(position: SchedulePosition)
     func navigateToGroupSelection()
+    func navigateToLessonDetails(seqNum: Int)
 
     // MARK: - работа с данными
-    func getLessonsCnt(day: SchedulePosition) -> Int
-    func getLesson(day: SchedulePosition, _ num: Int) -> Lesson?
+    func getLessonsCnt() -> Int // константа, т.к. пустые тоже показываем
+    func getLesson(seqNum: Int) -> Lesson?
+    func getSelectedGroup() -> Group?
+
+    // MARK: - работа с состоянием
+    func getToNextDay()
+    func getToPreviousDay()
+    // +1 = new day is "tomorrow" for previously selected
+    // -1 = new day is "yesterday" for previously selected
+    // 0 = first selection
+    func getTransitionDirection() -> Int
+
 }
 
 protocol MainMenuRouter: Router {
-    func navigateToFullSchedule(group: Group, position: SchedulePosition)
+    func navigateToLessonDetails(lesson: Lesson)
     func navigateToGroupSelection()
 }
 
 protocol MainMenuViewControllerProtocol: AnyObject, UITableViewDataSource, UITableViewDelegate {
-
+    func reload()
 }
 
 

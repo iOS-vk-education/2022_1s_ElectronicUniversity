@@ -10,25 +10,25 @@ import Foundation
 
 final class MainMenuPresenterImpl: MainMenuPresenter {
     private weak var vc: MainMenuViewControllerProtocol?
-    private var service: ScheduleService?
+    private var dataService: ScheduleService
+    private var authService: AuthService
     private let router: MainMenuRouter
+    private var currentDayOffset: Int = 0
+    private var previousDayOffset: Int = 0
+    private var daysLessons: [Lesson]?
 
-    init(router: MainMenuRouter, service: ScheduleService) {
+    init(router: MainMenuRouter, dataService: ScheduleService, authService: AuthService) {
         self.router = router
-        self.service = service
+        self.dataService = dataService
+        self.authService = authService
     }
+
     func setVC(vc: MainMenuViewControllerProtocol) {
         self.vc = vc
     }
 
     func update() {
-        print("update main menu")
-    }
-
-    func navigateToFullSchedule(position: SchedulePosition) {
-        if let group = service?.getSelectedGroup() {
-            router.navigateToFullSchedule(group: group, position: position)
-        }
+        vc?.reload()
     }
 
     func navigateToGroupSelection() {
@@ -37,28 +37,39 @@ final class MainMenuPresenterImpl: MainMenuPresenter {
 }
 
 extension MainMenuPresenterImpl {
-    func getLessonsCnt(day: SchedulePosition) -> Int {
-        guard let service = service else {
-            return 0
-        }
-        switch (day) {
-        case .today:
-            return service.getSelectedGroupSchedule().today.lessons.count
-        case .nextDay:
-            return service.getSelectedGroupSchedule().nextDay.lessons.count
+    func navigateToLessonDetails(seqNum: Int) {
+        if let lesson = daysLessons?[seqNum] {
+            router.navigateToLessonDetails(lesson: lesson)
+        } else {
+            print("No such lesson!")
         }
     }
 
-    func getLesson(day: SchedulePosition, _ num: Int) -> Lesson? {
-        guard let service = service else {
-            return nil
-        }
-        let schedule = service.getSelectedGroupSchedule()
-        switch (day) {
-        case .today:
-            return schedule.today.lessons[num]
-        case .nextDay:
-            return schedule.nextDay.lessons[num]
-        }
+    func getLessonsCnt() -> Int {
+        return 7
+    }
+
+    func getLesson(seqNum: Int) -> Lesson? {
+        return daysLessons?.first(where: { $0.pairSeqNum == seqNum })
+    }
+
+    func getSelectedGroup() -> Group? {
+        return authService.getUserData()?.group
+    }
+
+    func getToNextDay() {
+        self.previousDayOffset = currentDayOffset
+        self.currentDayOffset += 1
+        vc?.reload()
+    }
+
+    func getToPreviousDay() {
+        self.previousDayOffset = currentDayOffset
+        self.currentDayOffset -= 1
+        vc?.reload()
+    }
+
+    func getTransitionDirection() -> Int {
+        return self.currentDayOffset - self.previousDayOffset
     }
 }

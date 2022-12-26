@@ -3,6 +3,7 @@
 //
 
 import UIKit
+import RswiftResources
 
 enum SchedulePosition: Int {
     case today = 0, nextDay
@@ -16,7 +17,7 @@ final class MainMenuViewController: UIViewController {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
 
-        navigationConf()
+        titleConf()
         setupActions()
         mainMenuView.setDataSource(dataSource: self)
         view = mainMenuView
@@ -33,52 +34,63 @@ final class MainMenuViewController: UIViewController {
 // MARK: - table view data source
 extension MainMenuViewController: MainMenuViewControllerProtocol {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let day = SchedulePosition(rawValue: section) else {
-            return 0
-        }
-        return presenter.getLessonsCnt(day: day) // а может
-        // оставлять пустые и писать в них только время?
+        return presenter.getLessonsCnt()
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let day = SchedulePosition(rawValue: indexPath.section) else {
-            return UITableViewCell()
-        } //? нормально такое возвращать при ошибке?
-        let lesson = presenter.getLesson(day: day, indexPath.row)
+        let lesson = presenter.getLesson(seqNum: indexPath.row)
         let cell = tableView.dequeueReusableCell(withIdentifier: "LessonCell") as! LessonCell
-        cell.lesson = lesson
+        cell.lesson = lesson // if nil, some placeholder is created
         return cell
     }
 
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
-    }
-    public func tableView(_ tableView: UITableView,
-                          titleForHeaderInSection section: Int) -> String? {
-        guard let day = SchedulePosition(rawValue: section) else {
-            return nil
+    // MARK: - animation
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt
+    indexPath: IndexPath) {
+        let direction = presenter.getTransitionDirection()
+        switch (direction) {
+            case -1:
+                print("-1")
+            case +1:
+                print("1")
+            case 0:
+                print("0")
+            default:
+                return
         }
-        return "test"
     }
 }
 
 private extension MainMenuViewController {
     func setupActions() {
-        //        mainMenuView.setSeeFullScheduleAction(self.presenter.navigateToFullSchedule)
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemSymbol: .gear),
                 style: .plain, target: self, action: #selector(groupSelectButtonTapped))
+        // to tomorrow button
+        // to yesterday button
     }
 
-    func navigationConf() {
-        navigationItem.title = "Расписание"
-        navigationItem.title.font = UIFont.systemFont(ofSize: 30, weight: .bold)
+    func titleConf() {
+        if let group = presenter.getSelectedGroup() {
+            navigationItem.title = group.name
+        } else {
+            navigationItem.title = R.string.localizable.main_menu_title()
+        }
     }
 
 }
 
+// MARK: - buttons actions
 private extension MainMenuViewController {
     @objc func groupSelectButtonTapped() {
         self.presenter.navigateToGroupSelection()
+    }
+
+    @objc func nextDayButtonTapped() {
+        self.presenter.getToNextDay()
+    }
+
+    @objc func previousDayButtonTapped() {
+        self.presenter.getToPreviousDay()
     }
 }
 
