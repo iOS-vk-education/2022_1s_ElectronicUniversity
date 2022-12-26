@@ -15,6 +15,7 @@ final class ScheduleServiceImpl: ScheduleService {
     static let groupsURL = "/group/"
     static let lessonsURL = "/lessons/"
     static let pastLessonsURL = "/lessons/reverse_seq/"
+    static let streamsURL = "/streams/"
 
     func getGroupSchedule(group: Group, forDay: Int) async -> LessonsDay? {
         guard let url = decideURLforDay(group: group, forDay: forDay) else {
@@ -58,6 +59,8 @@ final class ScheduleServiceImpl: ScheduleService {
         // (которые не в модели, т.к. в модели стрима нет ссылок на группы, только из группы на
         // стрим)
         // потом грузятся группы и метчатся в результатный словарь
+        var streams: [StudyStream] = []
+        var groups: [Group] = []
 
         var streamsData: Data?
         var groupsData: Data?
@@ -83,9 +86,25 @@ final class ScheduleServiceImpl: ScheduleService {
         } catch is Error {
             return nil
         }
+        (groupsInStream, streams) = decodeStreams(data: streamsData)
+        groups = decodeGroups(data: groupsData)
+        return composeGroupsListResult(streams, groups, groupsInStream)
     }
 }
 
+
+// MARK:- for getAllGroups
+private extension ScheduleServiceImpl {
+    func getAllGroupsURL() -> URL? {
+        let str = "\(Self.serverAddress)\(Self.groupsURL)"
+        return URL(string: str)
+    }
+
+    func getAllStreamsURL() -> URL? {
+        let str = "\(Self.serverAddress)\(Self.streamsURL)"
+        return URL(string: str)
+    }
+}
 
 // MARK:- for getGroupSchedule
 private extension ScheduleServiceImpl {
