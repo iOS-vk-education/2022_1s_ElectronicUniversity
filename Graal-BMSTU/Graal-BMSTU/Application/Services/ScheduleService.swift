@@ -7,7 +7,7 @@ import SwiftyJSON
 
 protocol ScheduleService {
     func getGroupSchedule(group: Group, forDay: Int) async -> LessonsDay?
-    func getGroupsList() -> [StudyStream: [Group]]
+    func getGroupsList() async -> [StudyStream: [Group]]?
 }
 
 final class ScheduleServiceImpl: ScheduleService {
@@ -17,7 +17,9 @@ final class ScheduleServiceImpl: ScheduleService {
     static let pastLessonsURL = "/lessons/reverse_seq/"
 
     func getGroupSchedule(group: Group, forDay: Int) async -> LessonsDay? {
-        guard let url = decideURLforDay(group: group, forDay: forDay) else { return nil }
+        guard let url = decideURLforDay(group: group, forDay: forDay) else {
+            return nil
+        }
 
         var lessons: [Lesson] = []
         var data: Data?
@@ -37,17 +39,55 @@ final class ScheduleServiceImpl: ScheduleService {
             $0
         }
 
-        guard let dayStart = getDayStart(forDay: forDay) else { return nil }
+        guard let dayStart = getDayStart(forDay: forDay) else {
+            return nil
+        }
         let result = LessonsDay(lessons: lessons, date: dayStart)
         return result
     }
 
-    func getGroupsList() -> [StudyStream: [Group]] {
+    func getGroupsList() async -> [StudyStream: [Group]]? {
+        guard let allGroupsURL = getAllGroupsURL() else {
+            return nil
+        }
+        guard let allStreamsURL = getAllStreamsURL() else {
+            return nil
+        }
 
+        var groupsInStream: [StudyStreamID: [GroupID]] = [:] // сюда попадут данные с allStreams
+        // (которые не в модели, т.к. в модели стрима нет ссылок на группы, только из группы на
+        // стрим)
+        // потом грузятся группы и метчатся в результатный словарь
+
+        var streamsData: Data?
+        var groupsData: Data?
+        do {
+            try await withThrowingTaskGroup(of: (URL, Data).self) { group in
+                group.addTask {
+                    let (data, _) = try await URLSession.shared.data(from: allStreamsURL)
+                    return (allStreamsURL, data)
+                }
+                group.addTask {
+                    let (data, _) = try await URLSession.shared.data(from: allGroupsURL)
+                    return (allGroupsURL, data)
+                }
+
+                for try await (url, data) in group {
+                    if url == allStreamsURL {
+                        streamsData = data
+                    } else {
+                        groupsData = data
+                    }
+                }
+            }
+        } catch is Error {
+            return nil
+        }
     }
 }
 
 
+// MARK:- for getGroupSchedule
 private extension ScheduleServiceImpl {
     func getDayStart(forDay: Int) -> Date? {
         let date = Date.now
