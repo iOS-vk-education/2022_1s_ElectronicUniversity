@@ -18,9 +18,7 @@ final class ScheduleServiceImpl: ScheduleService {
     static let streamsURL = "/streams/"
 
     func getGroupSchedule(group: Group, forDay: Int) async -> LessonsDay? {
-        guard let url = decideURLforDay(group: group, forDay: forDay) else {
-            return nil
-        }
+        guard let url = decideURLforDay(group: group, forDay: forDay) else { return nil }
 
         var lessons: [Lesson] = []
         var data: Data?
@@ -29,38 +27,21 @@ final class ScheduleServiceImpl: ScheduleService {
         } catch is Error {
             return nil
         }
-        guard let data, let json = try? JSON(data: data) else {
-            return nil
-        }
+        guard let data, let json = try? JSON(data: data) else { return nil }
         var tmp: [Lesson?] = [] // compactMap after
         for (_, subJSON): (String, JSON) in json { // iterate over list of lessons
             tmp.append(self.decodeLesson(json: subJSON))
         }
-        lessons = tmp.compactMap {
-            $0
-        }
+        lessons = tmp.compactMap { $0 }
 
-        guard let dayStart = getDayStart(forDay: forDay) else {
-            return nil
-        }
+        guard let dayStart = getDayStart(forDay: forDay) else { return nil }
         let result = LessonsDay(lessons: lessons, date: dayStart)
         return result
     }
 
     func getGroupsList() async -> [StudyStream: [Group]]? {
-        guard let allGroupsURL = getAllGroupsURL() else {
-            return nil
-        }
-        guard let allStreamsURL = getAllStreamsURL() else {
-            return nil
-        }
-
-        var groupsInStream: [StudyStreamID: [GroupID]] = [:] // сюда попадут данные с allStreams
-        // (которые не в модели, т.к. в модели стрима нет ссылок на группы, только из группы на
-        // стрим)
-        // потом грузятся группы и метчатся в результатный словарь
-        var streams: [StudyStream] = []
-        var groups: [Group] = []
+        guard let allGroupsURL = getAllGroupsURL() else { return nil }
+        guard let allStreamsURL = getAllStreamsURL() else { return nil }
 
         var streamsData: Data?
         var groupsData: Data?
@@ -86,9 +67,11 @@ final class ScheduleServiceImpl: ScheduleService {
         } catch is Error {
             return nil
         }
-        (groupsInStream, streams) = decodeStreams(data: streamsData)
-        groups = decodeGroups(data: groupsData)
-        return composeGroupsListResult(streams, groups, groupsInStream)
+        guard let streamsData, let groupsData, let groupsJson = try? JSON(data: groupsData),
+              let streamsJson = try? JSON(data: streamsData) else { return nil }
+        guard let (groupsInStream, streams) = decodeStreams(json: streamsJson) else { return nil }
+        guard let groups = decodeGroups(json: groupsJson) else { return nil }
+        return composeGroupsList(streams: streams, groups: groups, groupsInStream: groupsInStream)
     }
 }
 
@@ -103,6 +86,111 @@ private extension ScheduleServiceImpl {
     func getAllStreamsURL() -> URL? {
         let str = "\(Self.serverAddress)\(Self.streamsURL)"
         return URL(string: str)
+    }
+
+    func decodeStreams(json: JSON) -> ([StudyStreamID: [GroupID]], [StudyStream])? {
+        var groupsInStream: [StudyStreamID: [GroupID]] = [:]
+        var streams: [StudyStream] = []
+
+        for (_, subJSON) in json {
+            guard let (stream, groupsInside) = decodeStream(json: subJSON) else { return nil }
+            groupsInStream[stream.dbPrimaryKey] = groupsInside
+            streams.append(stream)
+        }
+        return (groupsInStream, streams)
+    }
+
+    func decodeGroups(json: JSON) -> [Group]? {
+        var groups: [Group] = []
+
+        for (_, subJSON) in json {
+            guard let group = decodeGroup(json: subJSON) else { return nil }
+            groups.append(group)
+        }
+        return groups
+    }
+
+
+    func composeGroupsList(streams: [StudyStream], groups: [Group],
+                           groupsInStream: [StudyStreamID: [GroupID]]) -> [StudyStream: [Group]] {
+
+//        var groupsInStream: [StudyStreamID: [GroupID]] = [:] // сюда попадут данные с allStreams
+//        // (которые не в модели, т.к. в модели стрима нет ссылок на группы, только из группы на
+//        // стрим)
+//        // потом грузятся группы и метчатся в результатный словарь
+//        var streams: [StudyStream] = []
+//        var groups: [Group] = []
+        var ans: [StudyStream: [Group]] = [:]
+        for stream in streams {
+            var groupList: [Group] = []
+            if let tmpGroupIDs = groupsInStream[stream.dbPrimaryKey] {
+                groupList = groups.filter { groupElem in
+                    return tmpGroupIDs.contains(groupElem.dbPrimaryKey)
+                }
+            }
+            ans[stream] = groupList
+        }
+    }
+}
+
+
+// MARK:- for decodeStreams
+private extension ScheduleServiceImpl {
+    func decodeStream(json: JSON) -> (StudyStream, [GroupID])? {
+        guard json["id"] != JSON.null, let id = json["id"].int else { return nil }
+        guard json["semester"] != JSON.null, let semester = json["semester"].int else { return nil }
+        guard json["faculty"] != JSON.null, let faculty = json["faculty"].string else { return nil }
+        guard let studyLevel = decodeStudyLevel(json: json) else { return nil }
+        guard let semesterStart = decodeSemesterStart(json: json) else { return nil }
+        guard let semesterEnd = decodeSemesterEnd(json: json) else { return nil }
+        guard let groups = decodeGroupsID(json: json) else { return nil }
+        let stream = StudyStream(dbPrimaryKey: id, semester: semester, faculty: faculty,
+                studyLevel: studyLevel, semesterStart: semesterStart, semesterEnd: semesterEnd)
+        return (stream, groups)
+    }
+
+    func decodeStudyLevel(json: JSON) -> StudyLevel? {
+        guard json["study_level"] != JSON.null,
+              let str = json["study_level"].string else { return nil }
+        return StudyLevel(rawValue: str)
+    }
+
+    func decodeSemesterStart(json: JSON) -> Date? {
+        guard json["semester_start"] != JSON.null,
+              let start_time_str = json["semester_start"].string else {
+            return nil
+        }
+        let formatter = ISO8601DateFormatter()
+        return formatter.date(from: start_time_str)
+    }
+
+    func decodeSemesterEnd(json: JSON) -> Date? {
+        guard json["semester_end"] != JSON.null,
+              let start_time_str = json["semester_end"].string else {
+            return nil
+        }
+        let formatter = ISO8601DateFormatter()
+        return formatter.date(from: start_time_str)
+    }
+
+    func decodeGroupsID(json: JSON) -> [GroupID]? {
+        var ans: [GroupID] = []
+        guard json["groups"] != JSON.null else { return nil }
+        for (_, subJson) in json["groups"] {
+            guard let id = subJson.int else { return nil }
+            ans.append(id)
+        }
+        return ans
+    }
+}
+
+// MARK:- for decodeGroups
+private extension ScheduleServiceImpl {
+    func decodeGroup(json: JSON) -> Group? {
+        guard json["id"] != JSON.null, let id = json["id"].int else { return nil }
+        guard json["name"] != JSON.null, let name = json["name"].string else { return nil }
+        guard json["stream"] != JSON.null, let streamID = json["stream"].int else { return nil }
+        return Group(dbPrimaryKey: id, name: name, stream: streamID)
     }
 }
 
@@ -213,8 +301,8 @@ private extension ScheduleServiceImpl {
     }
 
     func extractLessonType(json: JSON) -> LessonType? {
-        guard json["lesson_type"] != JSON.null, let lesson_type_str = json["lesson_type"].string
-        else {
+        guard json["lesson_type"] != JSON.null,
+              let lesson_type_str = json["lesson_type"].string else {
             return nil
         }
         return LessonType(rawValue: lesson_type_str)

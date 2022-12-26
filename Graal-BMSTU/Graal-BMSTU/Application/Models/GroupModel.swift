@@ -4,8 +4,8 @@
 
 import Foundation
 
-enum StudyLevel {
-    case bachelor, master, specialist, postgraduate
+enum StudyLevel: String {
+    case BACHELOR, MASTER, SPECIALIST, POSTGRADUATE
 }
 
 typealias StudyStreamID = Int
@@ -22,5 +22,5 @@ typealias GroupID = Int
 struct Group {
     let dbPrimaryKey: GroupID
     let name: String
-    let stream: StudyStream
+    let stream: StudyStreamID
 }
