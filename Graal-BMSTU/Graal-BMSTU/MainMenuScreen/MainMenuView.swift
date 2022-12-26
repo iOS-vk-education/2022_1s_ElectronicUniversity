@@ -10,72 +10,18 @@ import SnapKit
 import SFSafeSymbols
 import RswiftResources
 
-
-//let TableView = UIView.init(frame: CGRect.zero, style: .grouped)
-
-//
-//class TableViewController: UITableViewController {
-//
-//    private var data = ["Электроника", "Дискретная математика", "Физика", "Базы данных"]
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        self.view?.backgroundColor = UIColor.white
-//        self.navigationItem.title = "Расписание"
-//        self.navigationController?.navigationBar.prefersLargeTitles = true
-//
-//        self.view.addSubview(self.tableView)
-//        self.tableView.register(TableViewCell.self, forCellReuseIdentifier: "TableVieCell")
-//        self.tableView.dataSource = self
-//
-//        self.updateLayout(with: self.view.frame.size)
-//    }
-//
-//    override func viewWillTransition(to size: CGSize, with coordinator:
-//                                     UIViewControllerTransitionCoordinator) {
-//        super.viewWillTransition(to: size, with: coordinator)
-//        coordinator.animate(alongsideTransition: { (contex) in
-//            self.updateLayout(with: size)
-//        }, completion: nil)
-//    }
-//
-//    private func updateLayout(with size: CGSize) {
-//        self.tableView.frame = CGRect.init(origin: .zero, size: size)
-//    }
-//}
-//
-//extension TableViewController: UITableViewDataSource {
-//    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        switch tableView {
-//        case self.tableView:
-//            return self.data.count
-//        default:
-//            return 0
-//        }
-//    }
-//
-//    func tableView(tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = self.tableView.dequeueReusableCell(withIdentifier: "TableViewCell",
-//                for: indexPath) as! TableViewCell
-//        cell.textLabel?.text = self.data[indexPath.row]
-//        if indexPath.row == 0 {
-//            cell.accessoryType = .disclosureIndicator
-//        }
-//        return cell
-//    }
-//}
-//
-//class TableViewCell: UITableViewCell {
-//    override func prepareForReuse() {
-//        super.prepareForReuse()
-//        self.accessoryType = .none
-//    }
-//}
-
-// -----------------------------------------------------
+typealias NextDayAction = () -> Void
+typealias PreviousDayAction = () -> Void
 
 final class MainMenuView: UIView {
     private var weekLabel = UILabel(frame: .zero)
+    private var dateLabel = UILabel(frame: .zero)
+    private var nextDayButton = UIButton(frame: .zero)
+    private var previousDayButton = UIButton(frame: .zero)
     private var scheduleTable = UITableView(frame: .zero)
+
+    private var nextDayAction: NextDayAction?
+    private var previousDayAction: PreviousDayAction?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -90,6 +36,17 @@ final class MainMenuView: UIView {
         self.scheduleTable.dataSource = dataSource
     }
 
+    func reload() {
+        scheduleTable.reloadData()
+    }
+
+    func setWeekSeqNum(seqNum: Int) {
+
+    }
+
+    func setDate(date: Date) {
+
+    }
 }
 
 private extension MainMenuView {
@@ -128,5 +85,15 @@ private extension MainMenuView {
 
     func scheduleTableConf() {
         scheduleTable.register(LessonCell.self, forCellReuseIdentifier: "LessonCell")
+    }
+}
+
+private extension MainMenuView {
+    @objc func nextDayButtonTapped() {
+
+    }
+
+    @objc func previousDayButtonTapped() {
+
     }
 }

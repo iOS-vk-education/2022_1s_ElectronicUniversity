@@ -29,6 +29,14 @@ final class MainMenuViewController: UIViewController {
     required init?(coder: NSCoder) {
         return nil
     }
+
+    func reload() {
+        titleConf()
+        let (weekSeqNum, dayDate) = presenter.getDayInfo()
+        mainMenuView.setWeekSeqNum(seqNum: weekSeqNum)
+        mainMenuView.setDate(date: dayDate)
+        mainMenuView.reload()
+    }
 }
 
 // MARK: - table view data source
@@ -65,8 +73,8 @@ private extension MainMenuViewController {
     func setupActions() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemSymbol: .gear),
                 style: .plain, target: self, action: #selector(groupSelectButtonTapped))
-        // to tomorrow button
-        // to yesterday button
+        mainMenuView.setupNextDayAction(presenter.getToNextDay())
+        mainMenuView.setupPreviousDayAction
     }
 
     func titleConf() {
@@ -83,14 +91,6 @@ private extension MainMenuViewController {
 private extension MainMenuViewController {
     @objc func groupSelectButtonTapped() {
         self.presenter.navigateToGroupSelection()
-    }
-
-    @objc func nextDayButtonTapped() {
-        self.presenter.getToNextDay()
-    }
-
-    @objc func previousDayButtonTapped() {
-        self.presenter.getToPreviousDay()
     }
 }
 

@@ -25,6 +25,7 @@ protocol MainMenuPresenter {
     // -1 = new day is "yesterday" for previously selected
     // 0 = first selection
     func getTransitionDirection() -> Int
+    func getDayInfo() -> (Int, Date) // weekSeqNum, selectedDay
 
 }
 
