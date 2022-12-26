@@ -17,6 +17,8 @@ final class ScheduleServiceImpl: ScheduleService {
     static let pastLessonsURL = "/lessons/reverse_seq/"
     static let streamsURL = "/streams/"
 
+    // получить расписание конкретной группы на конкретный день (день указывается с помощью
+    // отступа от сегодня, 0 = сегодня, 1 = завтра, -1 = вчера
     func getGroupSchedule(group: Group, forDay: Int) async -> LessonsDay? {
         guard let url = decideURLforDay(group: group, forDay: forDay) else { return nil }
 
@@ -39,6 +41,7 @@ final class ScheduleServiceImpl: ScheduleService {
         return result
     }
 
+    // получить список всех групп на сервере, причем запиханных каждая в свой учебный поток
     func getGroupsList() async -> [StudyStream: [Group]]? {
         guard let allGroupsURL = getAllGroupsURL() else { return nil }
         guard let allStreamsURL = getAllStreamsURL() else { return nil }
@@ -78,16 +81,19 @@ final class ScheduleServiceImpl: ScheduleService {
 
 // MARK:- for getAllGroups
 private extension ScheduleServiceImpl {
+    // конструктор урл для страницы с данными всех групп
     func getAllGroupsURL() -> URL? {
         let str = "\(Self.serverAddress)\(Self.groupsURL)"
         return URL(string: str)
     }
 
+    // конструктор урл для страницы с данными всех потоков
     func getAllStreamsURL() -> URL? {
         let str = "\(Self.serverAddress)\(Self.streamsURL)"
         return URL(string: str)
     }
 
+    // процессит каждый учебный поток в массиве потоков, достает соответствие группы - поток
     func decodeStreams(json: JSON) -> ([StudyStreamID: [GroupID]], [StudyStream])? {
         var groupsInStream: [StudyStreamID: [GroupID]] = [:]
         var streams: [StudyStream] = []
@@ -100,6 +106,7 @@ private extension ScheduleServiceImpl {
         return (groupsInStream, streams)
     }
 
+    // процессит все группы в массиве групп
     func decodeGroups(json: JSON) -> [Group]? {
         var groups: [Group] = []
 
@@ -110,16 +117,9 @@ private extension ScheduleServiceImpl {
         return groups
     }
 
-
+    // соединяет потоки и группы в словарь
     func composeGroupsList(streams: [StudyStream], groups: [Group],
                            groupsInStream: [StudyStreamID: [GroupID]]) -> [StudyStream: [Group]] {
-
-//        var groupsInStream: [StudyStreamID: [GroupID]] = [:] // сюда попадут данные с allStreams
-//        // (которые не в модели, т.к. в модели стрима нет ссылок на группы, только из группы на
-//        // стрим)
-//        // потом грузятся группы и метчатся в результатный словарь
-//        var streams: [StudyStream] = []
-//        var groups: [Group] = []
         var ans: [StudyStream: [Group]] = [:]
         for stream in streams {
             var groupList: [Group] = []
@@ -136,6 +136,7 @@ private extension ScheduleServiceImpl {
 
 // MARK:- for decodeStreams
 private extension ScheduleServiceImpl {
+    // расшировывает конкретный учебный поток (поля)
     func decodeStream(json: JSON) -> (StudyStream, [GroupID])? {
         guard json["id"] != JSON.null, let id = json["id"].int else { return nil }
         guard json["semester"] != JSON.null, let semester = json["semester"].int else { return nil }
@@ -196,6 +197,7 @@ private extension ScheduleServiceImpl {
 
 // MARK:- for getGroupSchedule
 private extension ScheduleServiceImpl {
+    // начало дня (0:00 утра)
     func getDayStart(forDay: Int) -> Date? {
         let date = Date.now
         let dateComponents = Calendar.current.dateComponents([.year, .month, .day], from: date)
@@ -206,6 +208,8 @@ private extension ScheduleServiceImpl {
         return newDate
     }
 
+    // для просмотра предыдущих учебных дней используется другой урл, тк джанго не умеет в
+    // отрицательные числа в урл
     func decideURLforDay(group: Group, forDay: Int) -> URL? {
         if forDay >= 0 {
             let str = "\(Self.serverAddress)\(Self.groupsURL)\(group.dbPrimaryKey)\(Self.lessonsURL)\(forDay)/"
@@ -216,32 +220,19 @@ private extension ScheduleServiceImpl {
         }
     }
 
+
     func decodeLesson(json: JSON) -> Lesson? {
-        guard json["id"] != JSON.null, let id = json["id"].int else {
-            return nil
-        }
+        guard json["id"] != JSON.null, let id = json["id"].int else { return nil }
         let teacher: Teacher? = extractTeacher(json: json)
-        guard let place = extractPlace(json: json) else {
-            return nil
-        }
-        guard let subject = extractSubject(json: json) else {
-            return nil
-        }
-        guard let startTime = extractStartTime(json: json) else {
-            return nil
-        }
-        guard let endTime = extractEndTime(json: json) else {
-            return nil
-        }
+        guard let place = extractPlace(json: json) else { return nil }
+        guard let subject = extractSubject(json: json) else { return nil }
+        guard let startTime = extractStartTime(json: json) else { return nil }
+        guard let endTime = extractEndTime(json: json) else { return nil }
         guard json["pair_num"] != JSON.null, let pairSeqNum = json["pair_num"].int else {
             return nil
         }
-        guard let lessonType = extractLessonType(json: json) else {
-            return nil
-        }
-        guard let groups = extractGroups(json: json) else {
-            return nil
-        }
+        guard let lessonType = extractLessonType(json: json) else { return nil }
+        guard let groups = extractGroups(json: json) else { return nil }
         return Lesson(dbPrimaryKey: id, subject: subject, place: place, teacher: teacher,
                 startTime: startTime, endTime: endTime, pairSeqNum: pairSeqNum,
                 lessonType: lessonType, groups: groups)
@@ -260,27 +251,19 @@ private extension ScheduleServiceImpl {
     }
 
     func extractPlace(json: JSON) -> Place? {
-        guard json["place"] != JSON.null else {
-            return nil
-        }
+        guard json["place"] != JSON.null else { return nil }
         let place_subJson = json["place"]
         guard let place_id = place_subJson["id"].int, let place_name = place_subJson["name"].string,
-              let place_is_generic = place_subJson["is_generic"].bool else {
-            return nil
-        }
+              let place_is_generic = place_subJson["is_generic"].bool else { return nil }
         return Place(dbPrimaryKey: place_id, name: place_name, is_generic: place_is_generic)
     }
 
     func extractSubject(json: JSON) -> Subject? {
-        guard json["subject"] != JSON.null else {
-            return nil
-        }
+        guard json["subject"] != JSON.null else { return nil }
         let subject_subJson = json["subject"]
         guard let subject_id = subject_subJson["id"].int,
               let subject_name = subject_subJson["name"].string,
-              let subject_stream = subject_subJson["stream_id"].int else {
-            return nil
-        }
+              let subject_stream = subject_subJson["stream_id"].int else { return nil }
         return Subject(dbPrimaryKey: subject_id, name: subject_name, stream_id: subject_stream)
     }
 
@@ -302,9 +285,7 @@ private extension ScheduleServiceImpl {
 
     func extractLessonType(json: JSON) -> LessonType? {
         guard json["lesson_type"] != JSON.null,
-              let lesson_type_str = json["lesson_type"].string else {
-            return nil
-        }
+              let lesson_type_str = json["lesson_type"].string else { return nil }
         return LessonType(rawValue: lesson_type_str)
     }
 
