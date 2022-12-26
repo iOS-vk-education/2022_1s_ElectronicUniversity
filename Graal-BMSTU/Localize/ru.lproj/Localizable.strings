@@ -26,8 +26,8 @@
 
 "select_group_title" = "Выбор группы";
 
-"denominator" = "знаменатель";
-"numerator" = "числитель";
+"denominator" = "ЗН";
+"numerator" = "ЧС";
 
 "main_menu_title" = "Расписание";
 "week" = "Неделя";

@@ -48,7 +48,7 @@ final class MainMenuView: UIView {
     }
 
     func setDate(date: Date) {
-        let result = date.formatted(.dateTime.day().month(.wide))
+        let result = date.formatted(.dateTime.day().month(.wide).weekday())
         self.dateLabel.text = result
     }
 
@@ -68,7 +68,7 @@ private extension MainMenuView {
         scheduleTableConf()
         nextDayButtonConf()
         previousDayButtonConf()
-        let elems = [weekLabel, scheduleTable, nextDayButton, previousDayButton]
+        let elems = [weekLabel, scheduleTable, nextDayButton, previousDayButton, dateLabel]
         elems.forEach { box in
             self.addSubview(box)
         }
@@ -77,7 +77,13 @@ private extension MainMenuView {
 
     func setupConstraints() {
         weekLabel.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
+            make.right.equalTo(safeAreaLayoutGuide.snp.right).inset(15)
+            make.left.equalTo(safeAreaLayoutGuide.snp.centerX).offset(10)
+            make.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(20)
+        }
+        dateLabel.snp.makeConstraints { make in
+            make.right.equalTo(safeAreaLayoutGuide.snp.centerX).inset(10)
+            make.left.equalTo(safeAreaLayoutGuide.snp.left).offset(15)
             make.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(20)
         }
         previousDayButton.snp.makeConstraints { make in
@@ -97,18 +103,25 @@ private extension MainMenuView {
             make.top.equalTo(weekLabel.snp.bottom).offset(10)
             make.left.equalTo(safeAreaLayoutGuide.snp.left)
             make.right.equalTo(safeAreaLayoutGuide.snp.right)
-            make.bottom.equalTo(nextDayButton.snp.top).inset(10)
+            make.bottom.equalTo(nextDayButton.snp.top).offset(-10)
         }
-        //        scheduleTable.rowHeight = 140
     }
 
     func weekLabelConf() {
-        weekLabel.text = "Неделя 16, знаменатель" // placeholder
         weekLabel.numberOfLines = 1
+        weekLabel.textAlignment = .right
+        // font?
+    }
+
+    func dateLabelConf() {
+        dateLabel.numberOfLines = 1
+        dateLabel.textAlignment = .left
+        // font?
     }
 
     func scheduleTableConf() {
         scheduleTable.register(LessonCell.self, forCellReuseIdentifier: "LessonCell")
+        scheduleTable.backgroundColor = .systemGray5
     }
 
     func nextDayButtonConf() {

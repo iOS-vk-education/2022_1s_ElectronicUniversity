@@ -60,7 +60,10 @@ extension MainMenuPresenterImpl {
     }
 
     func getDayInfo() -> (Int, Date) {
-        return (18, nowDate.addingTimeInterval(TimeInterval(currentDayOffset * 24 * 60 * 60))) //
+        let calendar = Calendar.current
+        let weekOfYear = calendar.component(.weekOfYear, from: nowDate.addingTimeInterval(TimeInterval(currentDayOffset * 24 * 60 * 60)))
+        return (weekOfYear - 34, nowDate.addingTimeInterval(TimeInterval(currentDayOffset * 24 *
+                60 * 60))) //
         // TODO
     }
 
