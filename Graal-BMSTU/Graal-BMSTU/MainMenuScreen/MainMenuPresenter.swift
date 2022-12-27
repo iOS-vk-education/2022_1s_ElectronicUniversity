@@ -22,7 +22,8 @@ final class MainMenuPresenterImpl: MainMenuPresenter {
         self.dataService = dataService
         self.authService = authService
         self.update()
-        NotificationCenter.default.addObserver(self, selector: #selector(groupChangeOccurred), name: NSNotification.Name("selectedgroup.changeoccurred"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(groupChangeOccurred),
+                name: NSNotification.Name("selectedgroup.changeoccurred"), object: nil)
     }
 
     func setVC(vc: MainMenuViewControllerProtocol) {
@@ -39,8 +40,8 @@ final class MainMenuPresenterImpl: MainMenuPresenter {
     }
 
     func navigateToGroupSelection() {
-        let popup = GroupSelectorViewController(dataService: self.dataService, authService: self
-                .authService)
+        let popup = GroupSelectorViewController(dataService: self.dataService,
+                authService: self.authService)
         vc?.pushViewController(vc: popup)
     }
 }
@@ -64,9 +65,10 @@ extension MainMenuPresenterImpl {
 
     func getDayInfo() -> (Int, Date) {
         let calendar = Calendar.current
-        let weekOfYear = calendar.component(.weekOfYear, from: nowDate.addingTimeInterval(TimeInterval(currentDayOffset * 24 * 60 * 60)))
-        return (weekOfYear - 34, nowDate.addingTimeInterval(TimeInterval(currentDayOffset * 24 *
-                60 * 60))) //
+        let weekOfYear = calendar.component(.weekOfYear, from: nowDate.addingTimeInterval(
+                TimeInterval((currentDayOffset - 1) * 24 * 60 * 60)))
+        return (weekOfYear - 35,
+                nowDate.addingTimeInterval(TimeInterval(currentDayOffset * 24 * 60 * 60))) //
         // TODO
     }
 
@@ -94,7 +96,8 @@ extension MainMenuPresenterImpl {
 private extension MainMenuPresenterImpl {
     func updateData() async {
         if let group = authService.getUserData()?.group {
-            let tmp = await dataService.getGroupSchedule(group: group, forDay: self.currentDayOffset)
+            let tmp = await dataService.getGroupSchedule(group: group,
+                    forDay: self.currentDayOffset)
             self.daysLessons = tmp?.lessons
         } else {
             self.daysLessons = nil

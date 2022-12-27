@@ -31,6 +31,7 @@ final class GroupSelectorViewController: UIViewController {
 
 private extension GroupSelectorViewController {
     func setupUI() {
+        view.backgroundColor = .white
         view.addSubview(table)
         setupConstraints()
     }
