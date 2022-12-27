@@ -14,8 +14,12 @@ final class GroupSelectorViewController: UIViewController {
     private var orderedGroups: [Group]?
 
     init(dataService: ScheduleService, authService: AuthService) {
+        self.dataService = dataService
+        self.authService = authService
         super.init(nibName: nil, bundle: nil)
         table.dataSource = self
+        table.delegate = self
+        table.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         setupUI()
         update()
     }
@@ -66,27 +70,43 @@ private extension GroupSelectorViewController {
     }
 
     func loadData() async {
-        // call data sevice
+        if let data = await dataService.getGroupsList() {
+            self.data = data
+        } else {
+            self.data = nil
+        }
     }
 }
 
-extension GroupSelectorViewController: UITableViewDataSource {
+extension GroupSelectorViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // depends on section
-        <#code#>
+        return orderedGroups?.count ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // default
-        <#code#>
+        guard let group = orderedGroups?[indexPath.row] else {
+            return UITableViewCell()
+        }
+        guard let cell = tableView.dequeueReusableCell(
+                withIdentifier: "Cell") else { return UITableViewCell() }
+        cell.textLabel?.text = group.name
+        return cell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        authService.changeGroup(to: self.groups[?])
+        if let selectedGroup = self.orderedGroups?[indexPath.row] {
+            authService.changeGroup(to: selectedGroup)
+        }
         self.navigationController?.popViewController(animated: true)
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
-
+//        return orderedData?.count ?? 0
+        1
     }
+
+//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        return "\(orderedData?[section].0.faculty ?? "")"
+//    }
 }

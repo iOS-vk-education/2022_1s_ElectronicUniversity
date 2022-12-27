@@ -35,6 +35,7 @@ protocol MainMenuRouter: Router {
 
 protocol MainMenuViewControllerProtocol: AnyObject, UITableViewDataSource, UITableViewDelegate {
     func reload()
+    func pushViewController(vc: UIViewController)
 }
 
 

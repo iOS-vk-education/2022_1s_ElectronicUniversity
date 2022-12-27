@@ -65,6 +65,7 @@ class AuthServiceMockup: AuthService {
             defaults.set(encoded, forKey: AuthServiceMockup.userVaultKey)
         }
         AppCoordinator.setNotFirstLaunch()
+        NotificationCenter.default.post(name: NSNotification.Name("selectedgroup.changeoccurred"), object: nil)
     }
 }
 //let user = User(name: validCredentials.0, familyName: "Tikhonenko")

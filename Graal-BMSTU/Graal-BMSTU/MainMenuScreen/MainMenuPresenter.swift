@@ -39,7 +39,9 @@ final class MainMenuPresenterImpl: MainMenuPresenter {
     }
 
     func navigateToGroupSelection() {
-        router.navigateToGroupSelection()
+        let popup = GroupSelectorViewController(dataService: self.dataService, authService: self
+                .authService)
+        vc?.pushViewController(vc: popup)
     }
 }
 

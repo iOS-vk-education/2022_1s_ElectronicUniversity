@@ -31,6 +31,10 @@ final class MainMenuViewController: UIViewController {
         mainMenuView.setDate(date: dayDate)
         mainMenuView.reload()
     }
+
+    func pushViewController(vc: UIViewController) {
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }
 
 // MARK: - table view data source
@@ -46,9 +50,6 @@ extension MainMenuViewController: MainMenuViewControllerProtocol {
         cell.lesson = lesson // if nil, some placeholder is created
         return cell
     }
-
-//    func tableView()
-
     // MARK: - animation
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell,
@@ -88,10 +89,7 @@ private extension MainMenuViewController {
 
 private extension MainMenuViewController {
     @objc func groupSelectButtonTapped() {
-        let tmp = UIViewController()
-        tmp.view.backgroundColor = .systemYellow
-        //         NotificationCenter.default.post(name: NSNotification.Name("selectedgroup.changeoccurred"), object: nil)        NotificationCenter.default.post(name: NSNotification.Name("selectedgroup.changeoccurred"), object: nil)
-        self.navigationController?.pushViewController(tmp, animated: true)
+        self.presenter.navigateToGroupSelection()
     }
 }
 

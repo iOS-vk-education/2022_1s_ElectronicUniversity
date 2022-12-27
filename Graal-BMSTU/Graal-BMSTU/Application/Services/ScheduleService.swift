@@ -68,10 +68,18 @@ final class ScheduleServiceImpl: ScheduleService {
         } catch is Error {
             return nil
         }
-        guard let streamsData, let groupsData, let groupsJson = try? JSON(data: groupsData),
-              let streamsJson = try? JSON(data: streamsData) else { return nil }
-        guard let (groupsInStream, streams) = decodeStreams(json: streamsJson) else { return nil }
-        guard let groups = decodeGroups(json: groupsJson) else { return nil }
+        guard let streamsData, let groupsData else { return nil }
+        var groupsJson: JSON?
+        var streamsJson: JSON?
+        do {
+            groupsJson = try JSON(data: groupsData)
+            streamsJson = try JSON(data: streamsData)
+        } catch {
+            print("Error:\(error)")
+            return nil
+        }
+        guard let (groupsInStream, streams) = decodeStreams(json: streamsJson!) else { return nil }
+        guard let groups = decodeGroups(json: groupsJson!) else { return nil }
         return composeGroupsList(streams: streams, groups: groups, groupsInStream: groupsInStream)
     }
 
@@ -86,14 +94,16 @@ private extension ScheduleServiceImpl {
     // конструктор урл для страницы с данными всех групп
     func getAllGroupsURL() -> URL? {
         let str = "\(Self.serverAddress)\(Self.groupsURL)"
-        return URL(string: str)
+        let tmp = URL(string: str)
+        return tmp
     }
 
     // конструктор урл для страницы с данными всех потоков
 
     func getAllStreamsURL() -> URL? {
         let str = "\(Self.serverAddress)\(Self.streamsURL)"
-        return URL(string: str)
+        let tmp = URL(string: str)
+        return tmp
     }
 
     // процессит каждый учебный поток в массиве потоков, достает соответствие группы - поток
@@ -166,7 +176,8 @@ private extension ScheduleServiceImpl {
               let start_time_str = json["semester_start"].string else {
             return nil
         }
-        let formatter = ISO8601DateFormatter()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
         return formatter.date(from: start_time_str)
     }
 
@@ -175,7 +186,8 @@ private extension ScheduleServiceImpl {
               let start_time_str = json["semester_end"].string else {
             return nil
         }
-        let formatter = ISO8601DateFormatter()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
         return formatter.date(from: start_time_str)
     }
 

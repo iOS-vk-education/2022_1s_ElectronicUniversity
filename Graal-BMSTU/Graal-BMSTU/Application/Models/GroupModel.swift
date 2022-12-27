@@ -34,6 +34,8 @@ struct StudyStream: Hashable, Comparable {
             return lhs.semester < rhs.semester
         } else if lhs.studyLevel != rhs.studyLevel {
             return lhs.studyLevel < rhs.studyLevel
+        } else {
+            return true
         }
     }
 
