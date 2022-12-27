@@ -7,58 +7,104 @@
 
 import Foundation
 
-
 final class MainMenuPresenterImpl: MainMenuPresenter {
     private weak var vc: MainMenuViewControllerProtocol?
-    private var service: ScheduleService?
+    private var dataService: ScheduleService
+    private var authService: AuthService
     private let router: MainMenuRouter
+    private var currentDayOffset: Int = 0
+    private var previousDayOffset: Int = 0
+    private var daysLessons: [Lesson]?
+    private var nowDate: Date = Date.now
 
-    init(router: MainMenuRouter, service: ScheduleService) {
+    init(router: MainMenuRouter, dataService: ScheduleService, authService: AuthService) {
         self.router = router
-        self.service = service
+        self.dataService = dataService
+        self.authService = authService
+        self.update()
+        NotificationCenter.default.addObserver(self, selector: #selector(groupChangeOccurred),
+                name: NSNotification.Name("selectedgroup.changeoccurred"), object: nil)
     }
+
     func setVC(vc: MainMenuViewControllerProtocol) {
         self.vc = vc
     }
 
     func update() {
-        print("update main menu")
-    }
-
-    func navigateToFullSchedule(position: SchedulePosition) {
-        if let group = service?.getSelectedGroup() {
-            router.navigateToFullSchedule(group: group, position: position)
+        Task {
+            await updateData()
+            DispatchQueue.main.async { [self] in
+                vc?.reload()
+            }
         }
     }
 
     func navigateToGroupSelection() {
-        router.navigateToGroupSelection()
+        let popup = GroupSelectorViewController(dataService: self.dataService,
+                authService: self.authService)
+        vc?.pushViewController(vc: popup)
     }
 }
 
 extension MainMenuPresenterImpl {
-    func getLessonsCnt(day: SchedulePosition) -> Int {
-        guard let service = service else {
-            return 0
-        }
-        switch (day) {
-        case .today:
-            return service.getSelectedGroupSchedule().today.lessons.count
-        case .nextDay:
-            return service.getSelectedGroupSchedule().nextDay.lessons.count
+    func navigateToLessonDetails(seqNum: Int) {
+        if let lesson = daysLessons?[seqNum] {
+            router.navigateToLessonDetails(lesson: lesson)
+        } else {
+            print("No such lesson!")
         }
     }
 
-    func getLesson(day: SchedulePosition, _ num: Int) -> Lesson? {
-        guard let service = service else {
-            return nil
+    func getLessonsCnt() -> Int {
+        return 7
+    }
+
+    func getLesson(seqNum: Int) -> Lesson? {
+        return daysLessons?.first(where: { $0.pairSeqNum == seqNum })
+    }
+
+    func getDayInfo() -> (Int, Date) {
+        let calendar = Calendar.current
+        let weekOfYear = calendar.component(.weekOfYear, from: nowDate.addingTimeInterval(
+                TimeInterval((currentDayOffset - 1) * 24 * 60 * 60)))
+        return (weekOfYear - 35,
+                nowDate.addingTimeInterval(TimeInterval(currentDayOffset * 24 * 60 * 60))) //
+        // TODO
+    }
+
+    func getSelectedGroup() -> Group? {
+        return authService.getUserData()?.group
+    }
+
+    func getToNextDay() {
+        self.previousDayOffset = currentDayOffset
+        self.currentDayOffset += 1
+        self.update()
+    }
+
+    func getToPreviousDay() {
+        self.previousDayOffset = currentDayOffset
+        self.currentDayOffset -= 1
+        self.update()
+    }
+
+    func getTransitionDirection() -> Int {
+        return self.currentDayOffset - self.previousDayOffset
+    }
+}
+
+private extension MainMenuPresenterImpl {
+    func updateData() async {
+        if let group = authService.getUserData()?.group {
+            let tmp = await dataService.getGroupSchedule(group: group,
+                    forDay: self.currentDayOffset)
+            self.daysLessons = tmp?.lessons
+        } else {
+            self.daysLessons = nil
         }
-        let schedule = service.getSelectedGroupSchedule()
-        switch (day) {
-        case .today:
-            return schedule.today.lessons[num]
-        case .nextDay:
-            return schedule.nextDay.lessons[num]
-        }
+    }
+
+    @objc func groupChangeOccurred() {
+        self.update()
     }
 }

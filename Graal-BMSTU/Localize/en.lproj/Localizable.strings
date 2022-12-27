@@ -24,13 +24,12 @@
 "skip_auth_button_text" = "Skip authentication";
 "hint_label_text" = "Enter your login and password from BMSTU account";
 
-"full_schedule_title" = "Full schedule";
 "select_group_title" = "Select group";
 
-"gz_building_name" = "Main Building";
-"ulk_building_name" = "Uchebno-Laboratorniy Kompleks";
-"lt_building_name" = "Lesotekhnicheskiy";
-"e_building_name" = "Energo";
-"sm_building_name" = "Special'noe machinostroenie";
-"mt_building_name" = "Machinostroitelniy";
-"mf_building_name" = "Mitschinskiy";
+"denominator" = "denominator";
+"numerator" = "numerator";
+
+"main_menu_title" = "Schedule";
+"week" = "Week";
+"next_day_button" = "Next day";
+"previous_day_button" = "Previous day";

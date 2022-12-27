@@ -99,7 +99,7 @@ private extension AuthView {
     func setupConstraints() {
         bmstuImage.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.size.equalTo(200)
+            make.size.equalTo(150)
             make.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(20)
         }
         hint.snp.makeConstraints { make in
@@ -109,7 +109,7 @@ private extension AuthView {
             make.height.equalTo(50)
         }
         loginField.snp.makeConstraints { make in
-            make.top.equalTo(hint.snp.bottom).offset(55)
+            make.top.equalTo(hint.snp.bottom).offset(40)
             make.centerX.equalToSuperview()
             make.left.equalTo(safeAreaLayoutGuide.snp.left).offset(25)
             make.right.equalTo(safeAreaLayoutGuide.snp.right).inset(25)
@@ -123,7 +123,7 @@ private extension AuthView {
         loginButton.snp.makeConstraints { make in
             make.left.equalTo(self.safeAreaLayoutGuide.snp.left).offset(30)
             make.right.equalTo(self.safeAreaLayoutGuide.snp.right).inset(30)
-           
+            make.top.equalTo(passwordField.snp.bottom).offset(25)
             make.height.equalTo(50)
         }
         if AppCoordinator.isFirstLaunch() {

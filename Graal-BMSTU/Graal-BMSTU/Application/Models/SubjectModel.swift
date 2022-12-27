@@ -4,8 +4,10 @@
 
 import Foundation
 
+typealias SubjectID = Int
 struct Subject {
-    let dbPrimaryKey: Int
+
+    let dbPrimaryKey: SubjectID
     let name: String
-    let stream: StudyStream
+    let stream_id: Int
 }

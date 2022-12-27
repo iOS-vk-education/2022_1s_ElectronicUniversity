@@ -3,10 +3,7 @@
 //
 
 import UIKit
-
-enum SchedulePosition: Int {
-    case today = 0, nextDay
-}
+import RswiftResources
 
 final class MainMenuViewController: UIViewController {
     private let presenter: MainMenuPresenter
@@ -15,12 +12,10 @@ final class MainMenuViewController: UIViewController {
     init(presenter: MainMenuPresenter) {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
-
-        navigationConf()
+        titleConf()
         setupActions()
         mainMenuView.setDataSource(dataSource: self)
         view = mainMenuView
-
         self.presenter.setVC(vc: self)
         self.presenter.update()
     }
@@ -28,53 +23,69 @@ final class MainMenuViewController: UIViewController {
     required init?(coder: NSCoder) {
         return nil
     }
+
+    func reload() {
+        titleConf()
+        let (weekSeqNum, dayDate) = presenter.getDayInfo()
+        mainMenuView.setWeekSeqNum(seqNum: weekSeqNum)
+        mainMenuView.setDate(date: dayDate)
+        mainMenuView.reload()
+    }
+
+    func pushViewController(vc: UIViewController) {
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }
 
 // MARK: - table view data source
+
 extension MainMenuViewController: MainMenuViewControllerProtocol {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let day = SchedulePosition(rawValue: section) else {
-            return 0
-        }
-        return presenter.getLessonsCnt(day: day) // а может
-        // оставлять пустые и писать в них только время?
+        return presenter.getLessonsCnt()
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let day = SchedulePosition(rawValue: indexPath.section) else {
-            return UITableViewCell()
-        } //? нормально такое возвращать при ошибке?
-        let lesson = presenter.getLesson(day: day, indexPath.row)
+        let lesson = presenter.getLesson(seqNum: indexPath.row + 1)
         let cell = tableView.dequeueReusableCell(withIdentifier: "LessonCell") as! LessonCell
-        cell.lesson = lesson
+        cell.lesson = lesson // if nil, some placeholder is created
         return cell
     }
+    // MARK: - animation
 
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
-    }
-    public func tableView(_ tableView: UITableView,
-                          titleForHeaderInSection section: Int) -> String? {
-        guard let day = SchedulePosition(rawValue: section) else {
-            return nil
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell,
+                   forRowAt indexPath: IndexPath) {
+        let direction = presenter.getTransitionDirection()
+        switch (direction) {
+            case -1:
+                print("-1")
+            case +1:
+                print("1")
+            case 0:
+                print("0")
+            default:
+                return
         }
-        return "test"
     }
 }
 
 private extension MainMenuViewController {
     func setupActions() {
-        //        mainMenuView.setSeeFullScheduleAction(self.presenter.navigateToFullSchedule)
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemSymbol: .gear),
                 style: .plain, target: self, action: #selector(groupSelectButtonTapped))
+        mainMenuView.setupNextDayAction(presenter.getToNextDay)
+        mainMenuView.setupPreviousDayAction(presenter.getToPreviousDay)
     }
 
-    func navigationConf() {
-        navigationItem.title = "Расписание"
-        navigationItem.title.font = UIFont.systemFont(ofSize: 30, weight: .bold)
+    func titleConf() {
+        if let group = presenter.getSelectedGroup() {
+            navigationItem.title = group.name
+        } else {
+            navigationItem.title = R.string.localizable.main_menu_title()
+        }
     }
-
 }
+
+// MARK: -  actions
 
 private extension MainMenuViewController {
     @objc func groupSelectButtonTapped() {
