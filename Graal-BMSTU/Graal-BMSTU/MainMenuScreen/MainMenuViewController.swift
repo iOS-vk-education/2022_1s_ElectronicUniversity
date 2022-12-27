@@ -5,10 +5,6 @@
 import UIKit
 import RswiftResources
 
-enum SchedulePosition: Int {
-    case today = 0, nextDay
-}
-
 final class MainMenuViewController: UIViewController {
     private let presenter: MainMenuPresenter
     private var mainMenuView = MainMenuView(frame: .zero)

@@ -11,6 +11,7 @@ protocol AuthService {
     func authenticate(login: String, password: String) -> User?
     func getUserData() -> User?
     func logout()
+    func changeGroup(to: Group)
 }
 
 class AuthServiceMockup: AuthService {
@@ -45,6 +46,25 @@ class AuthServiceMockup: AuthService {
     func logout() {
         UserDefaults.standard.removeObject(forKey: AuthServiceMockup.userVaultKey)
         NotificationCenter.default.post(name: NSNotification.Name("selectedgroup.changeoccurred"), object: nil)
+    }
+
+    func changeGroup(to: Group) {
+        let defaults = UserDefaults.standard
+        let decoder = JSONDecoder()
+        let savedPersonData = defaults.object(forKey: AuthServiceMockup.userVaultKey) as? Data
+        var user: User?
+        if let savedPersonData = savedPersonData {
+            guard let tmp = try? decoder.decode(User.self, from: savedPersonData) else { return }
+            user = tmp
+        } else {
+            user = User(name: nil, familyName: nil, group:nil)
+        }
+        user?.group = to
+        let encoder = JSONEncoder()
+        if let encoded = try? encoder.encode(user) {
+            defaults.set(encoded, forKey: AuthServiceMockup.userVaultKey)
+        }
+        AppCoordinator.setNotFirstLaunch()
     }
 }
 //let user = User(name: validCredentials.0, familyName: "Tikhonenko")
