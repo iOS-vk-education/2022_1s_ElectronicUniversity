@@ -88,11 +88,14 @@ private extension MainMenuViewController {
     }
 }
 
-// MARK: - buttons actions
+// MARK: -  actions
 
 private extension MainMenuViewController {
     @objc func groupSelectButtonTapped() {
-        self.presenter.navigateToGroupSelection()
+        let tmp = UIViewController()
+        tmp.view.backgroundColor = .systemYellow
+        //         NotificationCenter.default.post(name: NSNotification.Name("selectedgroup.changeoccurred"), object: nil)        NotificationCenter.default.post(name: NSNotification.Name("selectedgroup.changeoccurred"), object: nil)
+        self.navigationController?.pushViewController(tmp, animated: true)
     }
 }
 

@@ -35,6 +35,7 @@ final class ProfilePresenterImpl: ProfilePresenter {
         } else {
             vc?.showAuthError(description: "Incorrect input")
         }
+        NotificationCenter.default.post(name: NSNotification.Name("selectedgroup.changeoccurred"), object: nil)
     }
 
     func skipAuthentication() {

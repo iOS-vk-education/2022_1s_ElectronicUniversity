@@ -44,6 +44,7 @@ class AuthServiceMockup: AuthService {
 
     func logout() {
         UserDefaults.standard.removeObject(forKey: AuthServiceMockup.userVaultKey)
+        NotificationCenter.default.post(name: NSNotification.Name("selectedgroup.changeoccurred"), object: nil)
     }
 }
 //let user = User(name: validCredentials.0, familyName: "Tikhonenko")

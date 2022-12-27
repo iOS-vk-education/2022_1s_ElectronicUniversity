@@ -22,6 +22,7 @@ final class MainMenuPresenterImpl: MainMenuPresenter {
         self.dataService = dataService
         self.authService = authService
         self.update()
+        NotificationCenter.default.addObserver(self, selector: #selector(groupChangeOccurred), name: NSNotification.Name("selectedgroup.changeoccurred"), object: nil)
     }
 
     func setVC(vc: MainMenuViewControllerProtocol) {
@@ -96,5 +97,9 @@ private extension MainMenuPresenterImpl {
         } else {
             self.daysLessons = nil
         }
+    }
+
+    @objc func groupChangeOccurred() {
+        self.update()
     }
 }
